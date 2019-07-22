@@ -32,6 +32,9 @@ export class SupplierComponent implements OnInit {
   private currentId;
   private errorMessage;
 
+  private cashOJ
+  private appleOJ
+
   supplierID = new FormControl('', Validators.required);
   firstName = new FormControl('', Validators.required);
   lastName = new FormControl('', Validators.required);
@@ -55,13 +58,50 @@ export class SupplierComponent implements OnInit {
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.serviceSupplier.getAll()
+    return this.serviceSupplier.getAllSuppliers()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
       result.forEach(participant => {
         tempList.push(participant);
       });
+
+    })
+    .then(() => {
+
+      //get asset
+      for (let participant of tempList) {
+
+        // get cash
+        var splitted_cashID = participant.cash.split("#",2)
+        var cashID = String(splitted_cashID[1]);
+
+        // call service to get the cash
+        this.serviceSupplier.getCash(cashID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update participant
+          if(result.value){
+            participant.cash = result.value;
+          }
+        });
+
+        // get apple
+        var splitted_appleID = participant.apple.split("#",2)
+        var appleID = String(splitted_appleID[1]);
+
+        // call service to get the cash
+        this.serviceSupplier.getApple(appleID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          // update participant
+          if(result.value){
+            participant.apple = result.value;
+          }
+        });
+      }
       this.allParticipants = tempList;
     })
     .catch((error) => {
@@ -100,25 +140,16 @@ export class SupplierComponent implements OnInit {
   }
 
   addParticipant(form: any): Promise<any> {
-    this.participant = {
-      $class: 'org.diet.network.Supplier',
-      'supplierID': this.supplierID.value,
-      'firstName': this.firstName.value,
-      'lastName': this.lastName.value,
-      'cash': this.cash.value,
-      'apple': this.apple.value
-    };
 
-    this.myForm.setValue({
-      'supplierID': null,
-      'firstName': null,
-      'lastName': null,
-      'cash': null,
-      'apple': null
-    });
+    // this.myForm.setValue({
+    //   'supplierID': null,
+    //   'firstName': null,
+    //   'lastName': null,
+    //   'cash': null,
+    //   'apple': null
+    // });
 
-    return this.serviceSupplier.addParticipant(this.participant)
-    .toPromise()
+    return this.createAllAssetsMarket()
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
@@ -128,7 +159,7 @@ export class SupplierComponent implements OnInit {
         'cash': null,
         'apple': null
       });
-      this.loadAll(); 
+      // this.loadAll(); 
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -139,6 +170,56 @@ export class SupplierComponent implements OnInit {
     });
   }
 
+  //create other assets associated with the user
+  createAllAssetsMarket(): Promise<any>{
+        
+    //create cash
+    this.cashOJ = {
+      $class: "org.diet.network.Cash",
+          "cashID":"CA_" + this.supplierID.value,
+          "currency":'Pound',
+          "value":this.cash.value,
+          "ownerID":this.supplierID.value,
+          "ownerEntity":'Supplier'
+    };
+
+    this.appleOJ = {
+      $class: "org.diet.network.Apples",
+          "appleID":"AP_" + this.supplierID.value,
+          "value":this.apple.value,
+          "ownerID":this.supplierID.value,
+          "ownerEntity":'Supplier'
+    };
+
+    this.participant = {
+      $class: 'org.diet.network.Supplier',
+      'supplierID': this.supplierID.value,
+      'firstName': this.firstName.value,
+      'lastName': this.lastName.value,
+      'cash': "CA_" + this.supplierID.value,
+      'apple': "AP_" + this.supplierID.value
+    };
+
+    //add Cash
+    return this.serviceSupplier.addCash(this.cashOJ)
+    .toPromise()
+    .then(() => {
+      
+      //add apple
+      this.serviceSupplier.addApple(this.appleOJ)
+      .toPromise()
+      .then(() => {
+
+        //add market
+        this.serviceSupplier.addParticipant(this.participant)
+        .toPromise()
+        .then(() => {
+            //reload
+            this.loadAll()
+        });
+      });
+    });
+  }
 
    updateParticipant(form: any): Promise<any> {
     this.participant = {

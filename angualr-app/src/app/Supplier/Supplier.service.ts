@@ -16,35 +16,82 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { Supplier } from '../org.diet.network';
+
+import { Cash } from '../org.diet.network';
+import { Apples } from '../org.diet.network';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
 @Injectable()
 export class SupplierService {
 
-  private NAMESPACE = 'Supplier';
+  private SUPPLIER: string = 'Supplier';
+  private CASH: string = 'Cash';
+  private APPLES: string = 'Apples';
 
-  constructor(private dataService: DataService<Supplier>) {
+  constructor(private dataService: DataService<Supplier>, private cashService: DataService<Cash>, private appleService: DataService<Apples>) {
   };
 
-  public getAll(): Observable<Supplier[]> {
-    return this.dataService.getAll(this.NAMESPACE);
+  public getAllSuppliers(): Observable<Supplier[]> {
+    return this.dataService.getAll(this.SUPPLIER);
   }
 
   public getparticipant(id: any): Observable<Supplier> {
-    return this.dataService.getSingle(this.NAMESPACE, id);
+    return this.dataService.getSingle(this.SUPPLIER, id);
   }
 
   public addParticipant(itemToAdd: any): Observable<Supplier> {
-    return this.dataService.add(this.NAMESPACE, itemToAdd);
+    return this.dataService.add(this.SUPPLIER, itemToAdd);
   }
 
   public updateParticipant(id: any, itemToUpdate: any): Observable<Supplier> {
-    return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
+    return this.dataService.update(this.SUPPLIER, id, itemToUpdate);
   }
 
   public deleteParticipant(id: any): Observable<Supplier> {
-    return this.dataService.delete(this.NAMESPACE, id);
+    return this.dataService.delete(this.SUPPLIER, id);
   }
+
+    // get cash
+    public getAllCash(): Observable<Cash[]> {
+      return this.cashService.getAll(this.CASH);
+    }
+  
+    public getCash(id: any): Observable<Cash> {
+      return this.cashService.getSingle(this.CASH, id);
+    }
+  
+    public addCash(itemToAdd: any): Observable<Cash> {
+      return this.cashService.add(this.CASH, itemToAdd);
+    }
+  
+    public updateCash(id: any, itemToUpdate: any): Observable<Cash> {
+      return this.cashService.update(this.CASH, id, itemToUpdate);
+    }
+  
+    public deleteCash(id: any): Observable<Cash> {
+      return this.cashService.delete(this.CASH, id);
+    }
+  
+    // get apple
+    public getAllApples(): Observable<Apples[]> {
+      return this.appleService.getAll(this.APPLES);
+    }
+  
+    public getApple(id: any): Observable<Apples> {
+      return this.appleService.getSingle(this.APPLES, id);
+    }
+  
+    public addApple(itemToAdd: any): Observable<Apples> {
+      return this.appleService.add(this.APPLES, itemToAdd);
+    }
+  
+    public updateApple(id: any, itemToUpdate: any): Observable<Apples> {
+      return this.appleService.update(this.APPLES, id, itemToUpdate);
+    }
+  
+    public deleteApple(id: any): Observable<Apples> {
+      return this.appleService.delete(this.APPLES, id);
+    }
 
 }
