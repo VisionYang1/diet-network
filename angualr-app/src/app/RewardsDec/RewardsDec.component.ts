@@ -59,6 +59,7 @@ export class RewardsDecComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.successTransaction = false;
     this.loadAll();
   }
 
