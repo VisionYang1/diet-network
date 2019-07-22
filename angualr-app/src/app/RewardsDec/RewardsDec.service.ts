@@ -42,7 +42,7 @@ export class RewardsDecService {
   }
 
   // get user by id
-  public getUser(id: any): Observable<User[]> {
+  public getUser(id: any): Observable<User> {
     return this.userService.getSingle(this.USER, id);
   }
 
