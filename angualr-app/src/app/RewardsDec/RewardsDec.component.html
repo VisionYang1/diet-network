@@ -72,6 +72,11 @@
         <strong>Error:</strong> {{errorMessage}}
     </div>
 
+    <div *ngIf="successTransaction" class="alert alert-success" role="alert">
+        <strong>Succee Transaction!</strong>
+        <p><strong>Transaction ID:</strong> {{transactionID}}</p>
+    </div>
+
   <div class="row">
     <div class="col-md-12">
         <h1 class="transaction-title" id='transactionName'>RewardsDec</h1>

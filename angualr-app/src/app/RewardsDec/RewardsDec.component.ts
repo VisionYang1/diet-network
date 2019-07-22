@@ -29,6 +29,7 @@ export class RewardsDecComponent implements OnInit {
 
   private allUsers;
 
+  private successTransaction;
   private transactionID;
 
   private user;
@@ -37,6 +38,8 @@ export class RewardsDecComponent implements OnInit {
   private Transaction;
   private currentId;
   private errorMessage;
+
+  private rewardsRate = 1;
 
   // rewardsRate = new FormControl('', Validators.required);
   // rewardsDec = new FormControl('', Validators.required);
@@ -163,8 +166,8 @@ export class RewardsDecComponent implements OnInit {
         return true;
       }
     })
-    .then((result) => {
-      if(result){
+    .then((checkReward) => {
+      if(checkReward){
 
         this.serviceRewardsDec.addTransaction(this.Transaction)
         .toPromise()
@@ -173,15 +176,19 @@ export class RewardsDecComponent implements OnInit {
           this.transactionID = result.transactionId;
           console.log(result)
         })
+        .catch((error) => {
+          if (error === 'Server error') {
+            this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+          } else {
+            this.errorMessage = error;
+          }
+        })
+        .then(() => {
+          this.successTransaction = true;
+        })
       }
     })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else {
-        this.errorMessage = error;
-      }
-    });
+
   }
 
   updateTransaction(form: any): Promise<any> {

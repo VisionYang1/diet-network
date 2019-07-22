@@ -25,7 +25,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class RewardsDecService {
 
-  private NAMESPACE = 'RewardsDec';
+  private REWARDSDEC: string = 'RewardsDec';
   private USER: string = 'User';
   private REWARDS: string = 'Rewards';
 
@@ -33,7 +33,7 @@ export class RewardsDecService {
   };
 
   public getAll(): Observable<RewardsDec[]> {
-      return this.dataService.getAll(this.NAMESPACE);
+      return this.dataService.getAll(this.REWARDSDEC);
   }
 
   // get all users
@@ -52,19 +52,19 @@ export class RewardsDecService {
   }
 
   public getTransaction(id: any): Observable<RewardsDec> {
-    return this.dataService.getSingle(this.NAMESPACE, id);
+    return this.dataService.getSingle(this.REWARDSDEC, id);
   }
 
   public addTransaction(itemToAdd: any): Observable<RewardsDec> {
-    return this.dataService.add(this.NAMESPACE, itemToAdd);
+    return this.dataService.add(this.REWARDSDEC, itemToAdd);
   }
 
   public updateTransaction(id: any, itemToUpdate: any): Observable<RewardsDec> {
-    return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
+    return this.dataService.update(this.REWARDSDEC, id, itemToUpdate);
   }
 
   public deleteTransaction(id: any): Observable<RewardsDec> {
-    return this.dataService.delete(this.NAMESPACE, id);
+    return this.dataService.delete(this.REWARDSDEC, id);
   }
 
 }
