@@ -61,8 +61,14 @@
 </div>
 
 <div class="container col-md-6">
+
     <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
         <strong>Error:</strong> {{errorMessage}}
+    </div>
+
+    <div *ngIf="successTransaction" class="alert alert-danger" role="alert">
+        <strong>Succee Transaction!</strong>
+        <strong>Transaction ID:</strong> {{transactionID}}
     </div>
 
   <div class="row">
