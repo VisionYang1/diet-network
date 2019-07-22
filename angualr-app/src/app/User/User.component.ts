@@ -87,6 +87,8 @@ export class UserComponent implements OnInit {
           //update user
           if(result.value){
             participant.cash = result.value;
+          }else{
+            participant.cash = result.value;
           }
         });
 
@@ -102,6 +104,8 @@ export class UserComponent implements OnInit {
           //update user
           if(result.value){
             participant.apple = result.value;
+          }else{
+            participant.cash = result.value;
           }
         });
 
@@ -117,6 +121,8 @@ export class UserComponent implements OnInit {
           // update user
           if(result.value){
             participant.reward = result.value;
+          }else{
+            participant.cash = result.value;
           }
         });
       }

@@ -83,6 +83,8 @@ export class MarketComponent implements OnInit {
           //update participant
           if(result.value){
             participant.cash = result.value;
+          }else{
+            participant.cash = result.value;
           }
         });
 
@@ -98,6 +100,8 @@ export class MarketComponent implements OnInit {
           // update participant
           if(result.value){
             participant.apple = result.value;
+          }else{
+            participant.cash = result.value;
           }
         });
       }
