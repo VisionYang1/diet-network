@@ -105,7 +105,7 @@ export class UserComponent implements OnInit {
           if(result.value){
             participant.apple = result.value;
           }else{
-            participant.cash = result.value;
+            participant.apple = result.value;
           }
         });
 
@@ -122,7 +122,7 @@ export class UserComponent implements OnInit {
           if(result.value){
             participant.reward = result.value;
           }else{
-            participant.cash = result.value;
+            participant.reward = result.value;
           }
         });
       }

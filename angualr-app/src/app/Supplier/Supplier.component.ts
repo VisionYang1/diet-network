@@ -102,7 +102,7 @@ export class SupplierComponent implements OnInit {
           if(result.value){
             participant.apple = result.value;
           }else{
-            participant.cash = result.value;
+            participant.apple = result.value;
           }
         });
       }
