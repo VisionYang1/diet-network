@@ -27,37 +27,111 @@ export class CashToApplesComponent implements OnInit {
 
   myForm: FormGroup;
 
+  private applesPerCash = 1;
+  private appleRate = (1 / this.applesPerCash).toFixed(3);
+
+  private appleWeightValue;
+  private totalCash;
+
+  private marketIsBuyer = false;
+
   private allTransactions;
   private Transaction;
   private currentId;
   private errorMessage;
+  private successTransaction;
 
-  cashRate = new FormControl('', Validators.required);
+  private allBuyers;
+  private allSellers;
+  private allMarkets;
+
+  private market;
+  private user;
+  private supplier;
+  private transactionID;
+
+  private cashNum;
+  private buyerCashAsset;
+  private buyerAppleAsset;
+  private sellerCashAsset;
+  private sellerAppleAsset;
+
+  action = new FormControl('', Validators.required);
+  formBuyerID = new FormControl('', Validators.required);
+  formSellerID = new FormControl('', Validators.required);
   cashValue = new FormControl('', Validators.required);
-  appleInc = new FormControl('', Validators.required);
-  appleDec = new FormControl('', Validators.required);
-  cashInc = new FormControl('', Validators.required);
-  cashDec = new FormControl('', Validators.required);
-  transactionId = new FormControl('', Validators.required);
-  timestamp = new FormControl('', Validators.required);
+  appleWeight = new FormControl('', Validators.required);
 
 
   constructor(private serviceCashToApples: CashToApplesService, fb: FormBuilder) {
     this.myForm = fb.group({
-      cashRate: this.cashRate,
+      action: this.action,
+      formBuyerID: this.formBuyerID,
+      formSellerID: this.formSellerID,
       cashValue: this.cashValue,
-      appleInc: this.appleInc,
-      appleDec: this.appleDec,
-      cashInc: this.cashInc,
-      cashDec: this.cashDec,
-      transactionId: this.transactionId,
-      timestamp: this.timestamp
+      appleWeight: this.appleWeight
+
+      // cashRate: this.cashRate,
+      // cashValue: this.cashValue,
+      // appleInc: this.appleInc,
+      // appleDec: this.appleDec,
+      // cashInc: this.cashInc,
+      // cashDec: this.cashDec,
+      // transactionId: this.transactionId,
+      // timestamp: this.timestamp
     });
   };
 
   ngOnInit(): void {
-    this.loadAll();
-  }
+
+    // this.myForm.get('action').value == "fromMarket";
+  
+    this.loadAllUsers();
+    this.loadAllMarkets();
+  
+  
+    this.myForm.get('action').valueChanges.subscribe(res=>{
+        if (res=='fromMarket')
+        {
+          this.marketIsBuyer = false;
+          this.allBuyers = null;
+          this.allSellers = null;
+          this.loadAllUsers()
+          this.loadAllMarkets();
+        }
+    
+        if (res=='fromSupplier')
+        {
+          this.marketIsBuyer = true;
+          this.allBuyers = null;
+          this.allSellers = null;
+          this.loadAllMarkets()
+          this.loadAllSuppliers();
+        }
+    });
+  
+      this.successTransaction = false;
+      // if(this.action.value == "fromMarket") {
+      //   this.loadAllUsers()
+      //   .then(() => {
+      //     this.loadAllMarkets();
+      //   });
+      // }
+  
+      // if(this.action.value == "fromSupplier") {
+      //   this.loadAllMarkets()
+      //   .then(() => {
+      //     this.loadAllSuppliers();
+      //   });
+      // }
+  
+      // this.action.value == "fromMarket";
+  
+      // this.loadAllUsers()
+      // .then(() => {
+      //   this.loadAllMarkets();
+      // });
+    }
 
   loadAll(): Promise<any> {
     const tempList = [];
@@ -77,6 +151,129 @@ export class CashToApplesComponent implements OnInit {
         this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
       } else {
         this.errorMessage = error;
+      }
+    });
+  }
+
+  // get all users
+  loadAllUsers(): Promise<any> {
+
+    //retrieve all users in the tempList array
+    let tempList = [];
+
+    // call serviceTransaction to get all users 
+    return this.serviceCashToApples.getAllUsers()
+    .toPromise()
+    .then((result) => {
+      this.errorMessage = null;
+
+      // add user into tempList
+      result.forEach(user => {
+        // if(user == "userID"){
+        //   let buyerID = user;
+        //   tempList.push(buyerID);
+        // }
+        tempList.push(user)
+        console.log(user)
+      });
+
+      tempList.forEach(buyer => {
+        buyer.buyerID = buyer.userID;
+        delete buyer.userID;
+      });
+
+      this.allBuyers = tempList;
+      console.log("users:"+this.allBuyers)
+    })
+    .catch((error) => {
+      if(error == 'Server error'){
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if(error == '404 - Not Found'){
+      this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else{
+          this.errorMessage = error;
+      }
+    });
+  }
+
+  loadAllMarkets(): Promise<any> {
+    
+    //retrieve all users in the tempList array
+    let tempList = [];
+
+    // call serviceTransaction to get all users 
+    return this.serviceCashToApples.getAllMarkets()
+    .toPromise()
+    .then((result) => {
+      this.errorMessage = null;
+
+      // add user into tempList
+      result.forEach(market => {
+        tempList.push(market)
+      });
+
+      if(this.marketIsBuyer){
+        tempList.forEach(buyer => {
+          buyer.buyerID = buyer.marketID;
+          delete buyer.marketID;
+        });
+        this.allBuyers = tempList;
+      }else{
+        tempList.forEach(seller => {
+          seller.sellerID = seller.marketID;
+          delete seller.marketID;
+        });
+        this.allSellers = tempList;
+      }
+    })
+    .catch((error) => {
+      if(error == 'Server error'){
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if(error == '404 - Not Found'){
+      this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else{
+          this.errorMessage = error;
+      }
+    });
+  }
+
+  loadAllSuppliers(): Promise<any> {
+
+    //retrieve all users in the tempList array
+    let tempList = [];
+
+    // call serviceTransaction to get all users 
+    return this.serviceCashToApples.getAllSuppliers()
+    .toPromise()
+    .then((result) => {
+      this.errorMessage = null;
+
+      // add user into tempList
+      result.forEach(supplier => {
+        tempList.push(supplier)
+      });
+
+      tempList.forEach(seller => {
+        seller.sellerID = seller.supplierID;
+        delete seller.supplierID;
+      });
+
+      this.allSellers = tempList;
+      console.log("suppliers:"+this.allSellers)
+    })
+    .catch((error) => {
+      if(error == 'Server error'){
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if(error == '404 - Not Found'){
+      this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else{
+          this.errorMessage = error;
       }
     });
   }
@@ -107,64 +304,185 @@ export class CashToApplesComponent implements OnInit {
   }
 
   addTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'org.diet.network.CashToApples',
-      'cashRate': this.cashRate.value,
-      'cashValue': this.cashValue.value,
-      'appleInc': this.appleInc.value,
-      'appleDec': this.appleDec.value,
-      'cashInc': this.cashInc.value,
-      'cashDec': this.cashDec.value,
-      'transactionId': this.transactionId.value,
-      'timestamp': this.timestamp.value
-    };
 
-    this.myForm.setValue({
-      'cashRate': null,
-      'cashValue': null,
-      'appleInc': null,
-      'appleDec': null,
-      'cashInc': null,
-      'cashDec': null,
-      'transactionId': null,
-      'timestamp': null
-    });
+    // get all markets
+    // for (let market of this.allMarkets) {
+    //   if(market.marketID == this.formSellerID.value){
+    //     this.market = market;
+    //   }
+    // }
 
-    return this.serviceCashToApples.addTransaction(this.Transaction)
-    .toPromise()
-    .then(() => {
-      this.errorMessage = null;
-      this.myForm.setValue({
-        'cashRate': null,
-        'cashValue': null,
-        'appleInc': null,
-        'appleDec': null,
-        'cashInc': null,
-        'cashDec': null,
-        'transactionId': null,
-        'timestamp': null
-      });
-    })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else {
-        this.errorMessage = error;
+    if(this.marketIsBuyer){
+      for (let buyer of this.allBuyers) {
+        if(buyer.buyerID == this.formBuyerID.value){
+          this.market = buyer;
+        }
       }
-    });
+    }else{
+      for (let seller of this.allSellers) {
+        if(seller.sellerID == this.formSellerID.value){
+          this.market = seller;
+        }
+      }
+    }
+
+    // get all users
+    for (let buyer of this.allBuyers) {
+      if(buyer.buyerID == this.formBuyerID.value) {
+        this.user = buyer;
+      }
+    }
+
+    // get all suppliers
+    for (let seller of this.allSellers) {
+      if(seller.sellerID == this.formSellerID.value) {
+        this.supplier = seller;
+      }
+    }
+
+  if(this.action.value == 'fromMarket') {
+
+    // this.cashNum = this.cashValue.value;
+    this.appleWeightValue = this.appleWeight.value;
+    this.buyerCashAsset = this.user.cash;
+    this.sellerCashAsset = this.market.cash;
+    this.buyerAppleAsset = this.user.apple;
+    this.sellerAppleAsset = this.market.apple;
+  }
+  else if (this.action.value == 'fromSupplier') {
+
+    // this.cashNum = this.cashValue.value;
+    this.appleWeightValue = this.appleWeight.value;
+    this.buyerCashAsset = this.market.cash;
+    this.sellerCashAsset = this.supplier.cash;
+    this.buyerAppleAsset = this.market.apple;
+    this.sellerAppleAsset = this.supplier.apple;
   }
 
+  // find out how much the seller owns according to cashID and appleID
+  var splitted_cashID = this.buyerCashAsset.split("#", 2);
+  var cashID = String(splitted_cashID[1]);
+
+  var splitted_appleID = this.sellerAppleAsset.split("#", 2);
+  var appleID = String(splitted_appleID[1]);
+
+  //calculate the total cash according to the apple weight
+  this.totalCash = (this.appleWeightValue / this.applesPerCash);
+  
+
+  //create transaction object
+  this.Transaction = {
+    $class: "org.diet.network.CashToApples",
+    'cashRate': this.applesPerCash,
+    'cashValue': this.totalCash,
+    'appleInc': this.buyerAppleAsset,
+    'appleDec': this.sellerAppleAsset,
+    'cashInc': this.sellerCashAsset,
+    'cashDec': this.buyerCashAsset
+  };
+
+  // this.Transaction = {
+  //   $class: 'org.diet.network.CashToApples',
+  //   'cashRate': this.cashRate.value,
+  //   'cashValue': this.cashValue.value,
+  //   'appleInc': this.appleInc.value,
+  //   'appleDec': this.appleDec.value,
+  //   'cashInc': this.cashInc.value,
+  //   'cashDec': this.cashDec.value,
+  //   'transactionId': this.transactionId.value,
+  //   'timestamp': this.timestamp.value
+  // };
+
+  // this.myForm.setValue({
+  //   'cashRate': null,
+  //   'cashValue': null,
+  //   'appleInc': null,
+  //   'appleDec': null,
+  //   'cashInc': null,
+  //   'cashDec': null,
+  //   'transactionId': null,
+  //   'timestamp': null
+  // });
+
+  return this.serviceCashToApples.getCash(cashID)
+  .toPromise()
+  .then((result) => {
+    this.errorMessage = null;
+    // this.myForm.setValue({
+    //   'cashRate': null,
+    //   'cashValue': null,
+    //   'appleInc': null,
+    //   'appleDec': null,
+    //   'cashInc': null,
+    //   'cashDec': null,
+    //   'transactionId': null,
+    //   'timestamp': null
+    // });
+
+    // check the buyer if enough cash
+    if(result.value) {
+      if ((result.value - this.totalCash) < 0) {
+        this.errorMessage = "Insufficient Cash!";
+        return false;
+      }
+      return true;
+    }
+  })
+  .then((checkCash) => {
+    // if positive on sufficient cash, then check if sufficent apple 
+    if(checkCash){
+      //call service to get apple 
+      this.serviceCashToApples.getApple(appleID)
+      .toPromise()
+      .then((result) => {
+        //check if enough apple
+        if(result.value){
+          if((result.value - this.appleWeightValue) < 0){
+            this.errorMessage = "Insufficient Apples!";
+            return false;
+          }
+          return true;
+        }
+      })
+      .then((checkApple) => {
+        // if positive on sufficient apple, then call transaction 
+        if(checkApple){
+          //call transaction
+          this.serviceCashToApples.addTransaction(this.Transaction)
+          .toPromise()
+          .then((result) => {
+            this.errorMessage = null;
+            this.transactionID = result.transactionId;
+            console.log(result)
+          })
+          .catch((error) => {
+            if (error === 'Server error') {
+              this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+            } else {
+              this.errorMessage = error;
+            }
+          })
+          .then(() => {
+            this.successTransaction = true;
+          })
+        }
+      })
+    }
+  })
+
+}
+
   updateTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'org.diet.network.CashToApples',
-      'cashRate': this.cashRate.value,
-      'cashValue': this.cashValue.value,
-      'appleInc': this.appleInc.value,
-      'appleDec': this.appleDec.value,
-      'cashInc': this.cashInc.value,
-      'cashDec': this.cashDec.value,
-      'timestamp': this.timestamp.value
-    };
+    // this.Transaction = {
+    //   $class: 'org.diet.network.CashToApples',
+    //   'cashRate': this.cashRate.value,
+    //   'cashValue': this.cashValue.value,
+    //   'appleInc': this.appleInc.value,
+    //   'appleDec': this.appleDec.value,
+    //   'cashInc': this.cashInc.value,
+    //   'cashDec': this.cashDec.value,
+    //   'timestamp': this.timestamp.value
+    // };
 
     return this.serviceCashToApples.updateTransaction(form.get('transactionId').value, this.Transaction)
     .toPromise()

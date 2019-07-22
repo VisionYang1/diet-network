@@ -16,36 +16,73 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { CashToApples } from '../org.diet.network';
+
+import { User } from '../org.diet.network';
+import { Market } from '../org.diet.network';
+import { Supplier } from '../org.diet.network';
+import { Cash } from '../org.diet.network';
+import { Apples } from '../org.diet.network';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
 @Injectable()
 export class CashToApplesService {
 
-  private NAMESPACE = 'CashToApples';
+  private CASH_TO_APPLES = 'CashToApples';
+  private USER: string = 'User';
+  private MARKET: string = 'Market';
+  private SUPPLIER: string = 'Supplier';
+  private CASH: string = 'Cash';
+  private APPLES: string = 'Apples';
 
-  constructor(private dataService: DataService<CashToApples>) {
+  constructor(private dataService: DataService<CashToApples>, private userService: DataService<User>, private marketService: DataService<Market>, private supplierService: DataService<Supplier>, private cashService: DataService<Cash>, private appleService: DataService<Apples>) {
   };
 
   public getAll(): Observable<CashToApples[]> {
-      return this.dataService.getAll(this.NAMESPACE);
-  }
+    return this.dataService.getAll(this.CASH_TO_APPLES);
+}
 
-  public getTransaction(id: any): Observable<CashToApples> {
-    return this.dataService.getSingle(this.NAMESPACE, id);
-  }
+// get all users
+public getAllUsers(): Observable<User[]> {
+  return this.userService.getAll(this.USER);
+}
 
-  public addTransaction(itemToAdd: any): Observable<CashToApples> {
-    return this.dataService.add(this.NAMESPACE, itemToAdd);
-  }
+// get all markets
+public getAllMarkets(): Observable<Market[]> {
+  return this.marketService.getAll(this.MARKET);
+}
 
-  public updateTransaction(id: any, itemToUpdate: any): Observable<CashToApples> {
-    return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
-  }
+// get all suppliers
+public getAllSuppliers(): Observable<Supplier[]> {
+  return this.supplierService.getAll(this.SUPPLIER);
+}
 
-  public deleteTransaction(id: any): Observable<CashToApples> {
-    return this.dataService.delete(this.NAMESPACE, id);
-  }
+// get cash by id
+public getCash(id: any): Observable<Cash> {
+  return this.cashService.getSingle(this.CASH, id);
+}
+
+// get apple by id
+public getApple(id: any): Observable<Apples> {
+  return this.appleService.getSingle(this.APPLES, id);
+}
+
+public getTransaction(id: any): Observable<CashToApples> {
+  return this.dataService.getSingle(this.CASH_TO_APPLES, id);
+}
+
+// add transaction
+public addTransaction(itemToAdd: any): Observable<CashToApples> {
+  return this.dataService.add(this.CASH_TO_APPLES, itemToAdd);
+}
+
+public updateTransaction(id: any, itemToUpdate: any): Observable<CashToApples> {
+  return this.dataService.update(this.CASH_TO_APPLES, id, itemToUpdate);
+}
+
+public deleteTransaction(id: any): Observable<CashToApples> {
+  return this.dataService.delete(this.CASH_TO_APPLES, id);
+}
 
 }
 

@@ -19,78 +19,37 @@
         <h4 class="modal-title" id="addTransactionModalLabel">Create Transaction</h4>
         <p class="modal-intro">Enter the required values below.</p>
       </div>
-      <form [formGroup]="myForm">
+      <form [formGroup]="myForm" *ngIf="myForm [formGroup]=myForm">
         <div class="modal-body">
 
+              <p><strong>Rate: {{applesPerCash}} kg / Pound </strong></p>
 
-          
+              <p>Action:         
+                <select name="actions" formControlName="action" ng-init="fromMarket">
+                  <option value="fromMarket">Get Apple from Market(Buyer:user,Seller:market)</option>
+                  <option value="fromSupplier">Get Apple from Supplier(Buyer:market,Seller:supplier)</option>
+                </select>
+              </p>
 
-            
               <div class="form-group text-left">
-                <label for="cashRate">cashRate</label>
+                <p>Buyer: 
+                  <select name="buyer" formControlName="formBuyerID">
+                    <option *ngFor="let buyer of allBuyers" value="{{buyer.buyerID}}">{{buyer.buyerID}}</option>
+                  </select>
+                </p>    
+                <p>Seller: 
+                  <select name="seller" formControlName="formSellerID">
+                    <option *ngFor="let seller of allSellers" value="{{seller.sellerID}}">{{seller.sellerID}}</option>
+                  </select>
+                </p> 
+              </div>
+
+              <div class="form-group text-left">
+                <label for="cashValue">Apple weight:</label>
                 
-                  <input formControlName="cashRate" type="number" step='any' class="form-control">
+                  <input formControlName="appleWeight" type="number" step='any' class="form-control">
                 
               </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="cashValue">cashValue</label>
-                
-                  <input formControlName="cashValue" type="number" step='any' class="form-control">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="appleInc">appleInc</label>
-                
-                    <textarea formControlName="appleInc" class="form-control" rows="3"></textarea>
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="appleDec">appleDec</label>
-                
-                    <textarea formControlName="appleDec" class="form-control" rows="3"></textarea>
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="cashInc">cashInc</label>
-                
-                    <textarea formControlName="cashInc" class="form-control" rows="3"></textarea>
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="cashDec">cashDec</label>
-                
-                    <textarea formControlName="cashDec" class="form-control" rows="3"></textarea>
-                
-              </div>
-            
-          
-
-            
-          
-
-            
-          
-
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
