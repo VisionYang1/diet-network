@@ -27,23 +27,27 @@ export class RewardsDecComponent implements OnInit {
 
   myForm: FormGroup;
 
+  private allUsers;
+
   private allTransactions;
   private Transaction;
   private currentId;
   private errorMessage;
 
-  rewardsRate = new FormControl('', Validators.required);
-  rewardsDec = new FormControl('', Validators.required);
-  transactionId = new FormControl('', Validators.required);
-  timestamp = new FormControl('', Validators.required);
-
+  // rewardsRate = new FormControl('', Validators.required);
+  // rewardsDec = new FormControl('', Validators.required);
+  // transactionId = new FormControl('', Validators.required);
+  // timestamp = new FormControl('', Validators.required);
+  formUserID = new FormControl('', Validators.required);
 
   constructor(private serviceRewardsDec: RewardsDecService, fb: FormBuilder) {
     this.myForm = fb.group({
-      rewardsRate: this.rewardsRate,
-      rewardsDec: this.rewardsDec,
-      transactionId: this.transactionId,
-      timestamp: this.timestamp
+      formUserID: this.formUserID
+
+      // rewardsRate: this.rewardsRate,
+      // rewardsDec: this.rewardsDec,
+      // transactionId: this.transactionId,
+      // timestamp: this.timestamp
     });
   };
 
@@ -52,15 +56,18 @@ export class RewardsDecComponent implements OnInit {
   }
 
   loadAll(): Promise<any> {
+
     const tempList = [];
-    return this.serviceRewardsDec.getAll()
+
+    return this.serviceRewardsDec.getAllUsers()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
-      result.forEach(transaction => {
-        tempList.push(transaction);
+      //get all users
+      result.forEach(user => {
+        tempList.push(user);
       });
-      this.allTransactions = tempList;
+      this.allUsers = tempList;
     })
     .catch((error) => {
       if (error === 'Server error') {

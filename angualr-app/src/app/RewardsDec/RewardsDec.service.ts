@@ -16,6 +16,8 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { RewardsDec } from '../org.diet.network';
+
+import { User } from '../org.diet.network';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
@@ -23,12 +25,18 @@ import 'rxjs/Rx';
 export class RewardsDecService {
 
   private NAMESPACE = 'RewardsDec';
+  private USER: string = 'User';
 
-  constructor(private dataService: DataService<RewardsDec>) {
+  constructor(private dataService: DataService<RewardsDec>, private userService: DataService<User>) {
   };
 
   public getAll(): Observable<RewardsDec[]> {
       return this.dataService.getAll(this.NAMESPACE);
+  }
+
+  // get all users
+  public getAllUsers(): Observable<User[]> {
+    return this.userService.getAll(this.USER);
   }
 
   public getTransaction(id: any): Observable<RewardsDec> {
