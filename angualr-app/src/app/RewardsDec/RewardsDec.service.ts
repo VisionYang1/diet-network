@@ -18,6 +18,7 @@ import { Observable } from 'rxjs/Observable';
 import { RewardsDec } from '../org.diet.network';
 
 import { User } from '../org.diet.network';
+import { Rewards } from '../org.diet.network';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
@@ -26,8 +27,9 @@ export class RewardsDecService {
 
   private NAMESPACE = 'RewardsDec';
   private USER: string = 'User';
+  private REWARDS: string = 'Rewards';
 
-  constructor(private dataService: DataService<RewardsDec>, private userService: DataService<User>) {
+  constructor(private dataService: DataService<RewardsDec>, private userService: DataService<User>, private rewardService: DataService<Rewards>) {
   };
 
   public getAll(): Observable<RewardsDec[]> {
@@ -37,6 +39,16 @@ export class RewardsDecService {
   // get all users
   public getAllUsers(): Observable<User[]> {
     return this.userService.getAll(this.USER);
+  }
+
+  // get user by id
+  public getUser(id: any): Observable<User[]> {
+    return this.userService.getSingle(this.USER, id);
+  }
+
+  // get reward by id
+  public getReward(id: any): Observable<Rewards> {
+    return this.rewardService.getSingle(this.REWARDS, id);
   }
 
   public getTransaction(id: any): Observable<RewardsDec> {

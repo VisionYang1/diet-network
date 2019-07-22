@@ -29,6 +29,10 @@ export class RewardsDecComponent implements OnInit {
 
   private allUsers;
 
+  private transactionID;
+
+  private user;
+
   private allTransactions;
   private Transaction;
   private currentId;
@@ -114,23 +118,60 @@ export class RewardsDecComponent implements OnInit {
     //   'timestamp': this.timestamp.value
     // };
 
-    this.myForm.setValue({
-      'rewardsRate': null,
-      'rewardsDec': null,
-      'transactionId': null,
-      'timestamp': null
-    });
+    // this.myForm.setValue({
+    //   'rewardsRate': null,
+    //   'rewardsDec': null,
+    //   'transactionId': null,
+    //   'timestamp': null
+    // });
 
-    return this.serviceRewardsDec.addTransaction(this.Transaction)
+    //get the given user
+    for(let user of this.allUsers){
+      if(user.userID == this.formUserID.value){
+        this.user = user;
+      }
+    }
+
+    var splitted_rewardID = this.user.reward.split("#", 2);
+    var rewardID = String(splitted_rewardID[1]);
+
+    this.Transaction = {
+      $class: 'org.diet.network.RewardsDec',
+      'rewardsRate': 1,
+      'rewardsDec': rewardID
+    }
+
+    return this.serviceRewardsDec.getReward(rewardID)
     .toPromise()
-    .then(() => {
+    .then((result) => {
       this.errorMessage = null;
-      this.myForm.setValue({
-        'rewardsRate': null,
-        'rewardsDec': null,
-        'transactionId': null,
-        'timestamp': null
-      });
+      // this.myForm.setValue({
+      //   'rewardsRate': null,
+      //   'rewardsDec': null,
+      //   'transactionId': null,
+      //   'timestamp': null
+      // });
+
+      // check if enough reward
+      if(result.value){
+        if((result.value - 1) < 0){
+          this.errorMessage = "Insufficient Reward!";
+          return false;
+        }
+        return true;
+      }
+    })
+    .then((result) => {
+      if(result){
+
+        this.serviceRewardsDec.addTransaction(this.Transaction)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          this.transactionID = result.transactionId;
+          console.log(result)
+        })
+      }
     })
     .catch((error) => {
       if (error === 'Server error') {
