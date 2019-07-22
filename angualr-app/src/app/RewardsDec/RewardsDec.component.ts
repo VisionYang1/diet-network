@@ -143,7 +143,7 @@ export class RewardsDecComponent implements OnInit {
 
     this.Transaction = {
       $class: 'org.diet.network.RewardsDec',
-      'rewardsRate': 1,
+      'rewardsRate': this.rewardsRate,
       'rewardsDec': this.user.reward
     }
 
@@ -160,7 +160,7 @@ export class RewardsDecComponent implements OnInit {
 
       // check if enough reward
       if(result.value){
-        if((result.value - 1) < 0){
+        if((result.value - this.rewardsRate) < 0){
           this.errorMessage = "Insufficient Reward!";
           return false;
         }
@@ -184,8 +184,10 @@ export class RewardsDecComponent implements OnInit {
             this.errorMessage = error;
           }
         })
-        .then(() => {
-          this.successTransaction = true;
+        .then((result) => {
+          if(result){
+            this.successTransaction = true;
+          }
         })
       }
     })
