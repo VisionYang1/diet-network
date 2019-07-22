@@ -106,13 +106,13 @@ export class RewardsDecComponent implements OnInit {
   }
 
   addTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'org.diet.network.RewardsDec',
-      'rewardsRate': this.rewardsRate.value,
-      'rewardsDec': this.rewardsDec.value,
-      'transactionId': this.transactionId.value,
-      'timestamp': this.timestamp.value
-    };
+    // this.Transaction = {
+    //   $class: 'org.diet.network.RewardsDec',
+    //   'rewardsRate': this.rewardsRate.value,
+    //   'rewardsDec': this.rewardsDec.value,
+    //   'transactionId': this.transactionId.value,
+    //   'timestamp': this.timestamp.value
+    // };
 
     this.myForm.setValue({
       'rewardsRate': null,
@@ -142,12 +142,12 @@ export class RewardsDecComponent implements OnInit {
   }
 
   updateTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'org.diet.network.RewardsDec',
-      'rewardsRate': this.rewardsRate.value,
-      'rewardsDec': this.rewardsDec.value,
-      'timestamp': this.timestamp.value
-    };
+    // this.Transaction = {
+    //   $class: 'org.diet.network.RewardsDec',
+    //   'rewardsRate': this.rewardsRate.value,
+    //   'rewardsDec': this.rewardsDec.value,
+    //   'timestamp': this.timestamp.value
+    // };
 
     return this.serviceRewardsDec.updateTransaction(form.get('transactionId').value, this.Transaction)
     .toPromise()
