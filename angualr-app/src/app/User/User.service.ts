@@ -16,35 +16,107 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../org.diet.network';
+
+import { Cash } from '../org.diet.network';
+import { Apples } from '../org.diet.network';
+import { Rewards } from '../org.diet.network';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
 @Injectable()
 export class UserService {
 
-  private NAMESPACE = 'User';
+  private USER: string = 'User';
+  private CASH: string = 'Cash';
+  private APPLES: string = 'Apples';
+  private REWARDS: string = 'Rewards';
 
-  constructor(private dataService: DataService<User>) {
+  constructor(private dataService: DataService<User>, private cashService: DataService<Cash>, private appleService: DataService<Apples>, private rewardService: DataService<Rewards>) {
   };
 
-  public getAll(): Observable<User[]> {
-    return this.dataService.getAll(this.NAMESPACE);
+  // operations of User
+  public getAllUsers(): Observable<User[]> {
+    return this.dataService.getAll(this.USER);
   }
 
-  public getparticipant(id: any): Observable<User> {
-    return this.dataService.getSingle(this.NAMESPACE, id);
+  public getUser(id: any): Observable<User> {
+    return this.dataService.getSingle(this.USER, id);
   }
 
-  public addParticipant(itemToAdd: any): Observable<User> {
-    return this.dataService.add(this.NAMESPACE, itemToAdd);
+  public addUser(itemToAdd: any): Observable<User> {
+    return this.dataService.add(this.USER, itemToAdd);
   }
 
-  public updateParticipant(id: any, itemToUpdate: any): Observable<User> {
-    return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
+  public updateUser(id: any, itemToUpdate: any): Observable<User> {
+    return this.dataService.update(this.USER, id, itemToUpdate);
   }
 
-  public deleteParticipant(id: any): Observable<User> {
-    return this.dataService.delete(this.NAMESPACE, id);
+  public deleteUser(id: any): Observable<User> {
+    return this.dataService.delete(this.USER, id);
+  }
+
+
+  // opearations of Cash
+  public getAllCash(): Observable<Cash[]> {
+    return this.cashService.getAll(this.CASH);
+  }
+
+  public getCash(id: any): Observable<Cash> {
+    return this.cashService.getSingle(this.CASH, id);
+  }
+
+  public addCash(itemToAdd: any): Observable<Cash> {
+    return this.cashService.add(this.CASH, itemToAdd);
+  }
+
+  public updateCash(id: any, itemToUpdate: any): Observable<Cash> {
+    return this.cashService.update(this.CASH, id, itemToUpdate);
+  }
+
+  public deleteCash(id: any): Observable<Cash> {
+    return this.cashService.delete(this.CASH, id);
+  }
+
+  // opearations of Apples
+  public getAllApples(): Observable<Apples[]> {
+    return this.appleService.getAll(this.APPLES);
+  }
+
+  public getApple(id: any): Observable<Apples> {
+    return this.appleService.getSingle(this.APPLES, id);
+  }
+
+  public addApple(itemToAdd: any): Observable<Apples> {
+    return this.appleService.add(this.APPLES, itemToAdd);
+  }
+
+  public updateApple(id: any, itemToUpdate: any): Observable<Apples> {
+    return this.appleService.update(this.APPLES, id, itemToUpdate);
+  }
+
+  public deleteApple(id: any): Observable<Apples> {
+    return this.appleService.delete(this.APPLES, id);
+  }
+
+  // opearations of Rewards
+  public getAllRewards(): Observable<Rewards[]> {
+    return this.rewardService.getAll(this.REWARDS);
+  }
+
+  public getReward(id: any): Observable<Rewards> {
+    return this.rewardService.getSingle(this.REWARDS, id);
+  }
+
+  public addReward(itemToAdd: any): Observable<Rewards> {
+    return this.rewardService.add(this.REWARDS, itemToAdd);
+  }
+
+  public updateReward(id: any, itemToUpdate: any): Observable<Rewards> {
+    return this.rewardService.update(this.REWARDS, id, itemToUpdate);
+  }
+
+  public deleteReward(id: any): Observable<Rewards> {
+    return this.rewardService.delete(this.REWARDS, id);
   }
 
 }

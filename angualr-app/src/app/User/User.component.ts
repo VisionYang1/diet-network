@@ -32,6 +32,10 @@ export class UserComponent implements OnInit {
   private currentId;
   private errorMessage;
 
+  private cashOJ
+  private appleOJ
+  private rewardOJ
+
   userID = new FormControl('', Validators.required);
   firstName = new FormControl('', Validators.required);
   lastName = new FormControl('', Validators.required);
@@ -57,13 +61,66 @@ export class UserComponent implements OnInit {
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.serviceUser.getAll()
+    return this.serviceUser.getAllUsers()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
       result.forEach(participant => {
         tempList.push(participant);
       });
+
+    })
+    .then(() => {
+
+      //get the other assets
+      for (let participant of tempList) {
+        
+        // get cash
+        var splitted_cashID = participant.cash.split("#",2);
+        var cashID = String(splitted_cashID[1]);
+
+        // call service to get the cash asset
+        this.serviceUser.getCash(cashID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update user
+          if(result.value){
+            participant.cash = result.value;
+          }
+        });
+
+        // get apple
+        var splitted_appleID = participant.apple.split("#",2);
+        var appleID = String(splitted_appleID[1]);
+
+        // call service to get the apple asset
+        this.serviceUser.getApple(appleID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update user
+          if(result.value){
+            participant.apple = result.value;
+          }
+        });
+
+        // get reward
+        var splitted_rewardID = participant.reward.split("#",2);
+        var rewardID = String(splitted_rewardID[1]);
+
+        // call service to get the reward asset
+        this.serviceUser.getReward(rewardID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          // update user
+          if(result.value){
+            participant.reward = result.value;
+          }
+        });
+      }
+
       this.allParticipants = tempList;
     })
     .catch((error) => {
@@ -102,27 +159,30 @@ export class UserComponent implements OnInit {
   }
 
   addParticipant(form: any): Promise<any> {
+
     this.participant = {
       $class: 'org.diet.network.User',
       'userID': this.userID.value,
       'firstName': this.firstName.value,
       'lastName': this.lastName.value,
-      'cash': this.cash.value,
-      'apple': this.apple.value,
-      'reward': this.reward.value
+      'cash': "CA_" + this.userID.value,
+      'apple': "AP_" + this.userID.value,
+      'reward': "RW_" + this.userID.value,
     };
 
-    this.myForm.setValue({
-      'userID': null,
-      'firstName': null,
-      'lastName': null,
-      'cash': null,
-      'apple': null,
-      'reward': null
-    });
+    // this.myForm.setValue({
+    //   'userID': null,
+    //   'firstName': null,
+    //   'lastName': null,
+    //   'cash': null,
+    //   'apple': null,
+    //   'reward': null
+    // });
 
-    return this.serviceUser.addParticipant(this.participant)
-    .toPromise()
+
+
+    //create all assests associated with user
+    return this.createAllAssetsUser()
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
@@ -133,7 +193,7 @@ export class UserComponent implements OnInit {
         'apple': null,
         'reward': null
       });
-      this.loadAll(); 
+      // this.loadAll(); 
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -144,6 +204,61 @@ export class UserComponent implements OnInit {
     });
   }
 
+  //create other assets associated with the user
+  createAllAssetsUser(): Promise<any>{
+    
+    //create cash
+    this.cashOJ = {
+      $class: "org.diet.network.Cash",
+          "cashID":"CA_" + this.userID.value,
+          "currency":'Pound',
+          "value":this.cash.value,
+          "ownerID":this.userID.value,
+          "ownerEntity":'User'
+    };
+
+    this.appleOJ = {
+      $class: "org.diet.network.Apples",
+          "appleID":"AP_" + this.userID.value,
+          "value":this.apple.value,
+          "ownerID":this.userID.value,
+          "ownerEntity":'User'
+    };
+
+    this.rewardOJ = {
+      $class: "org.diet.network.Rewards",
+          "rewardID":"RW_" + this.userID.value,
+          "value":this.reward.value,
+          "ownerID":this.userID.value,
+          "ownerEntity":'User'
+    };
+
+    //add Cash
+    return this.serviceUser.addCash(this.cashOJ)
+    .toPromise()
+    .then(() => {
+      
+      //add apple
+      this.serviceUser.addApple(this.appleOJ)
+      .toPromise()
+      .then(() => {
+
+        //add Reward
+        this.serviceUser.addReward(this.rewardOJ)
+        .toPromise()
+        .then(() => {
+
+          //add User
+          this.serviceUser.addUser(this.participant)
+          .toPromise()
+          .then(() => {
+            //reload
+            this.loadAll()
+          });
+        });
+      });
+    });
+  }
 
    updateParticipant(form: any): Promise<any> {
     this.participant = {
@@ -155,7 +270,7 @@ export class UserComponent implements OnInit {
       'reward': this.reward.value
     };
 
-    return this.serviceUser.updateParticipant(form.get('userID').value, this.participant)
+    return this.serviceUser.updateUser(form.get('userID').value, this.participant)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -175,7 +290,7 @@ export class UserComponent implements OnInit {
 
   deleteParticipant(): Promise<any> {
 
-    return this.serviceUser.deleteParticipant(this.currentId)
+    return this.serviceUser.deleteUser(this.currentId)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -198,7 +313,7 @@ export class UserComponent implements OnInit {
 
   getForm(id: any): Promise<any> {
 
-    return this.serviceUser.getparticipant(id)
+    return this.serviceUser.getUser(id)
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
