@@ -138,7 +138,7 @@ export class RewardsDecComponent implements OnInit {
     this.Transaction = {
       $class: 'org.diet.network.RewardsDec',
       'rewardsRate': 1,
-      'rewardsDec': rewardID
+      'rewardsDec': this.user.reward
     }
 
     return this.serviceRewardsDec.getReward(rewardID)
