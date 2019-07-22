@@ -32,6 +32,9 @@ export class MarketComponent implements OnInit {
   private currentId;
   private errorMessage;
 
+  private cashOJ
+  private appleOJ
+
   marketID = new FormControl('', Validators.required);
   firstName = new FormControl('', Validators.required);
   lastName = new FormControl('', Validators.required);
@@ -55,13 +58,50 @@ export class MarketComponent implements OnInit {
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.serviceMarket.getAll()
+    return this.serviceMarket.getAllMarket()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
       result.forEach(participant => {
         tempList.push(participant);
       });
+    })
+    .then(() => {
+
+      //get asset
+      for (let participant of tempList) {
+
+        // get cash
+        var splitted_cashID = participant.cash.split("#",2)
+        var cashID = String(splitted_cashID[1]);
+
+        // call service to get the cash
+        this.serviceMarket.getCash(cashID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update participant
+          if(result.value){
+            participant.cash = result.value;
+          }
+        });
+
+        // get apple
+        var splitted_appleID = participant.apple.split("#",2)
+        var appleID = String(splitted_appleID[1]);
+
+        // call service to get the cash
+        this.serviceMarket.getApple(appleID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          // update participant
+          if(result.value){
+            participant.apple = result.value;
+          }
+        });
+      }
+
       this.allParticipants = tempList;
     })
     .catch((error) => {
@@ -100,25 +140,17 @@ export class MarketComponent implements OnInit {
   }
 
   addParticipant(form: any): Promise<any> {
-    this.participant = {
-      $class: 'org.diet.network.Market',
-      'marketID': this.marketID.value,
-      'firstName': this.firstName.value,
-      'lastName': this.lastName.value,
-      'cash': this.cash.value,
-      'apple': this.apple.value
-    };
 
-    this.myForm.setValue({
-      'marketID': null,
-      'firstName': null,
-      'lastName': null,
-      'cash': null,
-      'apple': null
-    });
 
-    return this.serviceMarket.addParticipant(this.participant)
-    .toPromise()
+    // this.myForm.setValue({
+    //   'marketID': null,
+    //   'firstName': null,
+    //   'lastName': null,
+    //   'cash': null,
+    //   'apple': null
+    // });
+
+    return this.createAllAssetsMarket()
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
@@ -128,7 +160,7 @@ export class MarketComponent implements OnInit {
         'cash': null,
         'apple': null
       });
-      this.loadAll(); 
+      // this.loadAll(); 
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -139,6 +171,56 @@ export class MarketComponent implements OnInit {
     });
   }
 
+  //create other assets associated with the user
+  createAllAssetsMarket(): Promise<any>{
+      
+    //create cash
+    this.cashOJ = {
+      $class: "org.diet.network.Cash",
+          "cashID":"CA_" + this.marketID.value,
+          "currency":'Pound',
+          "value":this.cash.value,
+          "ownerID":this.marketID.value,
+          "ownerEntity":'Market'
+    };
+
+    this.appleOJ = {
+      $class: "org.diet.network.Apples",
+          "appleID":"AP_" + this.marketID.value,
+          "value":this.apple.value,
+          "ownerID":this.marketID.value,
+          "ownerEntity":'Market'
+    };
+
+    this.participant = {
+      $class: 'org.diet.network.Market',
+      'marketID': this.marketID.value,
+      'firstName': this.firstName.value,
+      'lastName': this.lastName.value,
+      'cash': "CA_" + this.marketID.value,
+      'apple': "AP_" + this.marketID.value
+    };
+
+    //add Cash
+    return this.serviceMarket.addCash(this.cashOJ)
+    .toPromise()
+    .then(() => {
+      
+      //add apple
+      this.serviceMarket.addApple(this.appleOJ)
+      .toPromise()
+      .then(() => {
+
+        //add market
+        this.serviceMarket.addMarket(this.participant)
+        .toPromise()
+        .then(() => {
+            //reload
+            this.loadAll()
+        });
+      });
+    });
+  }
 
    updateParticipant(form: any): Promise<any> {
     this.participant = {
@@ -149,7 +231,7 @@ export class MarketComponent implements OnInit {
       'apple': this.apple.value
     };
 
-    return this.serviceMarket.updateParticipant(form.get('marketID').value, this.participant)
+    return this.serviceMarket.updateMarket(form.get('marketID').value, this.participant)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -169,7 +251,7 @@ export class MarketComponent implements OnInit {
 
   deleteParticipant(): Promise<any> {
 
-    return this.serviceMarket.deleteParticipant(this.currentId)
+    return this.serviceMarket.deleteMarket(this.currentId)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -192,7 +274,7 @@ export class MarketComponent implements OnInit {
 
   getForm(id: any): Promise<any> {
 
-    return this.serviceMarket.getparticipant(id)
+    return this.serviceMarket.getMarket(id)
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
