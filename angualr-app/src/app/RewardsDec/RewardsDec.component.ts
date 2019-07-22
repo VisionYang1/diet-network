@@ -135,6 +135,8 @@ export class RewardsDecComponent implements OnInit {
     var splitted_rewardID = this.user.reward.split("#", 2);
     var rewardID = String(splitted_rewardID[1]);
 
+    console.log("id:"+this.user.reward);
+
     this.Transaction = {
       $class: 'org.diet.network.RewardsDec',
       'rewardsRate': 1,
