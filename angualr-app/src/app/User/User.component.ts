@@ -18,8 +18,8 @@ import { UserService } from './User.service';
 // import { Chart } from 'angular-highcharts';
 import 'rxjs/add/operator/toPromise';
 
-var Highcharts = require('highcharts');
-require('highcharts/modules/exporting')(Highcharts);
+// var Highcharts = require('highcharts');
+// require('highcharts/modules/exporting')(Highcharts);
 
 @Component({
   selector: 'app-user',
