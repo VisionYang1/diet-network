@@ -21,7 +21,7 @@ import { DataService } from './data.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
-// import { ChartModule } from 'angular-highcharts';
+import { ChartModule } from 'angular-highcharts';
 
 import { CashComponent } from './Cash/Cash.component';
 import { ApplesComponent } from './Apples/Apples.component';
@@ -55,8 +55,8 @@ import { RewardsIncComponent } from './RewardsInc/RewardsInc.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
-    // ChartModule
+    AppRoutingModule,
+    ChartModule
   ],
   providers: [
     DataService
