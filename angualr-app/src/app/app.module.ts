@@ -33,6 +33,7 @@ import { CashToApplesComponent } from './CashToApples/CashToApples.component';
 import { RewardsDecComponent } from './RewardsDec/RewardsDec.component';
 import { RewardsIncComponent } from './RewardsInc/RewardsInc.component';
 
+
   @NgModule({
   declarations: [
     AppComponent,
