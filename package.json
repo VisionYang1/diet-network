@@ -33,7 +33,4 @@
     "mkdirp": "latest",
     "mocha": "latest"
   },
-  "dependencies": {
-    "highcharts": "^7.1.2"
-  }
 }
