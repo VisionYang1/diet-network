@@ -79,7 +79,7 @@ export class UserComponent implements OnInit {
       {
 
       }
-  });
+    });
 
     Highcharts.chart('container', {
       chart: {
@@ -474,7 +474,7 @@ export class UserComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
-      'selectTime': 'perDay',
+      'selectTime': null,
       'userID': null,
       'firstName': null,
       'lastName': null,

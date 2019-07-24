@@ -285,13 +285,6 @@ export class CashToApplesComponent implements OnInit {
 
   addTransaction(form: any): Promise<any> {
 
-    // get all markets
-    // for (let market of this.allMarkets) {
-    //   if(market.marketID == this.formSellerID.value){
-    //     this.market = market;
-    //   }
-    // }
-
     if(this.marketIsBuyer){
       for (let buyer of this.allBuyers) {
         if(buyer.buyerID == this.formBuyerID.value){
@@ -361,44 +354,10 @@ export class CashToApplesComponent implements OnInit {
     'cashDec': this.buyerCashAsset
   };
 
-  // this.Transaction = {
-  //   $class: 'org.diet.network.CashToApples',
-  //   'cashRate': this.cashRate.value,
-  //   'cashValue': this.cashValue.value,
-  //   'appleInc': this.appleInc.value,
-  //   'appleDec': this.appleDec.value,
-  //   'cashInc': this.cashInc.value,
-  //   'cashDec': this.cashDec.value,
-  //   'transactionId': this.transactionId.value,
-  //   'timestamp': this.timestamp.value
-  // };
-
-  // this.myForm.setValue({
-  //   'cashRate': null,
-  //   'cashValue': null,
-  //   'appleInc': null,
-  //   'appleDec': null,
-  //   'cashInc': null,
-  //   'cashDec': null,
-  //   'transactionId': null,
-  //   'timestamp': null
-  // });
-
   return this.serviceCashToApples.getCash(cashID)
   .toPromise()
   .then((result) => {
     this.errorMessage = null;
-    // this.myForm.setValue({
-    //   'cashRate': null,
-    //   'cashValue': null,
-    //   'appleInc': null,
-    //   'appleDec': null,
-    //   'cashInc': null,
-    //   'cashDec': null,
-    //   'transactionId': null,
-    //   'timestamp': null
-    // });
-
     // check the buyer if enough cash
     if(result.value) {
       if ((result.value - this.totalCash) < 0) {
