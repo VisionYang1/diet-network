@@ -463,7 +463,8 @@ export class UserComponent implements OnInit {
       'lastName': null,
       'cash': null,
       'apple': null,
-      'reward': null
+      'reward': null,
+      'selectTime': "perDay"
     });
   }
 }
