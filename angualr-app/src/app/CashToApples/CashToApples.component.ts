@@ -111,26 +111,6 @@ export class CashToApplesComponent implements OnInit {
     });
   
       this.successTransaction = false;
-      // if(this.action.value == "fromMarket") {
-      //   this.loadAllUsers()
-      //   .then(() => {
-      //     this.loadAllMarkets();
-      //   });
-      // }
-  
-      // if(this.action.value == "fromSupplier") {
-      //   this.loadAllMarkets()
-      //   .then(() => {
-      //     this.loadAllSuppliers();
-      //   });
-      // }
-  
-      // this.action.value == "fromMarket";
-  
-      // this.loadAllUsers()
-      // .then(() => {
-      //   this.loadAllMarkets();
-      // });
     }
 
   loadAll(): Promise<any> {
@@ -610,7 +590,8 @@ export class CashToApplesComponent implements OnInit {
       'cashInc': null,
       'cashDec': null,
       'transactionId': null,
-      'timestamp': null
+      'timestamp': null,
+      'action': 'fromMarket'
     });
   }
 }

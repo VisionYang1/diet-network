@@ -65,6 +65,22 @@ export class UserComponent implements OnInit {
 
     this.myForm.get('selectTime').setValue("perDay");
 
+    this.myForm.get('selectTime').valueChanges.subscribe(res=>{
+      if (res=='perDay')
+      {
+
+      }
+  
+      if (res=='perWeek')
+      {
+
+      }
+      if (res=='perMonth')
+      {
+
+      }
+  });
+
     Highcharts.chart('container', {
       chart: {
         type: 'column'
