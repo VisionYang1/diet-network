@@ -83,6 +83,9 @@ export class UserComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+
+    this.myForm.get('action').setValue("perDay");
+
     Highcharts.chart('container', {
       chart: {
         type: 'column'
