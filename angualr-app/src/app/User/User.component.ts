@@ -46,12 +46,12 @@ export class UserComponent implements OnInit {
   cash = new FormControl('', Validators.required);
   apple = new FormControl('', Validators.required);
   reward = new FormControl('', Validators.required);
-  action = new FormControl('', Validators.required);
+  selectTime = new FormControl('', Validators.required);
 
 
   constructor(public serviceUser: UserService, fb: FormBuilder) {
     this.myForm = fb.group({
-      action: this.action,
+      selectTime: this.selectTime,
       userID: this.userID,
       firstName: this.firstName,
       lastName: this.lastName,
@@ -59,7 +59,7 @@ export class UserComponent implements OnInit {
       apple: this.apple,
       reward: this.reward
     });
-    this.myForm.get('action').setValue("perDay");
+    this.myForm.control['selectTime'].setValue("perDay");
   };
 
   // name = 'Angular 5';
