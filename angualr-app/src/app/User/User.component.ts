@@ -153,6 +153,7 @@ export class UserComponent implements OnInit {
   }
 
   loadAll(): Promise<any> {
+    this.myForm.get('action').setValue("perDay");
     const tempList = [];
     return this.serviceUser.getAllUsers()
     .toPromise()
