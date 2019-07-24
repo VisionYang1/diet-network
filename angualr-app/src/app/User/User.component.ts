@@ -68,19 +68,25 @@ export class UserComponent implements OnInit {
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
       if (res=='perDay')
       {
-
+        let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+        this.loadGraph(perDay);
       }
   
       if (res=='perWeek')
       {
-
+        let perWeek = ['First Week', 'Second Week', 'Thrid Week', 'Fourth Week'];
+        this.loadGraph(perWeek);
       }
       if (res=='perMonth')
       {
-
+        let perMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        this.loadGraph(perMonth);
       }
     });
+    this.loadAll();
+  }
 
+  loadGraph(time): void {
     Highcharts.chart('container', {
       chart: {
         type: 'column'
@@ -92,20 +98,7 @@ export class UserComponent implements OnInit {
         text: ''
       },
       xAxis: {
-        categories: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec'
-        ],
+        categories: time,
         crosshair: true
       },
       yAxis: {
@@ -146,7 +139,6 @@ export class UserComponent implements OnInit {
     
       }]
     });
-    this.loadAll();
   }
 
   loadAll(): Promise<any> {
@@ -476,7 +468,7 @@ export class UserComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
-      'selectTime': null,
+      'selectTime': 'perDay',
       'userID': null,
       'firstName': null,
       'lastName': null,
