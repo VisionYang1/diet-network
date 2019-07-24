@@ -46,11 +46,12 @@ export class UserComponent implements OnInit {
   cash = new FormControl('', Validators.required);
   apple = new FormControl('', Validators.required);
   reward = new FormControl('', Validators.required);
-
+  selectTime = new FormControl('', Validators.required);
 
 
   constructor(public serviceUser: UserService, fb: FormBuilder) {
     this.myForm = fb.group({
+      selectTime: this.selectTime,
       userID: this.userID,
       firstName: this.firstName,
       lastName: this.lastName,
@@ -60,28 +61,10 @@ export class UserComponent implements OnInit {
     });
   };
 
-  // name = 'Angular 5';
-  // chart = new Chart({
-  //     chart: {
-  //       type: 'line'
-  //     },
-  //     title: {
-  //       text: 'Linechart'
-  //     },
-  //     credits: {
-  //       enabled: false
-  //     },
-  //     series: [{
-  //       name: 'Line 1',
-  //       data: [1, 2, 3]
-  //     }]
-  //   });
-  // // add point to chart serie
-  // add() {
-  //   this.chart.addPoint(Math.floor(Math.random() * 10));
-  // }
-
   ngOnInit(): void {
+
+    this.myForm.get('selectTime').setValue("perDay");
+
     Highcharts.chart('container', {
       chart: {
         type: 'column'
