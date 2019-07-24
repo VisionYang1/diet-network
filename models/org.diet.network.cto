@@ -72,6 +72,7 @@ asset Rewards identified by rewardID {
 }
 
 transaction CashToApples {
+    o String buyerID
     o Double cashRate       
     o Double cashValue    
     --> Apples appleInc
