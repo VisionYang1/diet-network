@@ -59,6 +59,7 @@ export class UserComponent implements OnInit {
       apple: this.apple,
       reward: this.reward
     });
+    this.myForm.get('actions').setValue("perDay");
   };
 
   // name = 'Angular 5';
@@ -83,9 +84,6 @@ export class UserComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-
-    this.myForm.get('action').setValue("perDay");
-
     Highcharts.chart('container', {
       chart: {
         type: 'column'
