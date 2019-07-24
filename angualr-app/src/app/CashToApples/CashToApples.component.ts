@@ -584,8 +584,8 @@ export class CashToApplesComponent implements OnInit {
   resetForm(): void {
     this.myForm.setValue({
       'action': 'fromMarket',
-      'formBuyerID': 'buyer.buyerID[0]',
-      'formSellerID': 'seller.sellerID[0]',
+      'formBuyerID': null,
+      'formSellerID': null,
       'cashValue': null,
       'appleWeight': null
     });
