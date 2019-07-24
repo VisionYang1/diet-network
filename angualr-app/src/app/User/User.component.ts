@@ -256,6 +256,7 @@ export class UserComponent implements OnInit {
 
   addParticipant(form: any): Promise<any> {
 
+
     this.participant = {
       $class: 'org.diet.network.User',
       'userID': this.userID.value,
@@ -282,6 +283,7 @@ export class UserComponent implements OnInit {
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
+        'selectTime': null,
         'userID': null,
         'firstName': null,
         'lastName': null,
