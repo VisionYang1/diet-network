@@ -49,6 +49,7 @@ export class CashToApplesComponent implements OnInit {
   private user;
   private supplier;
   private transactionID;
+  private transactionBuyerID;
 
   private cashNum;
   private buyerCashAsset;
@@ -316,6 +317,7 @@ export class CashToApplesComponent implements OnInit {
   if(this.action.value == 'fromMarket') {
 
     // this.cashNum = this.cashValue.value;
+    this.transactionBuyerID = this.user.userID;
     this.appleWeightValue = this.appleWeight.value;
     this.buyerCashAsset = this.user.cash;
     this.sellerCashAsset = this.market.cash;
@@ -325,6 +327,7 @@ export class CashToApplesComponent implements OnInit {
   else if (this.action.value == 'fromSupplier') {
 
     // this.cashNum = this.cashValue.value;
+    this.transactionBuyerID = this.market.marketID;
     this.appleWeightValue = this.appleWeight.value;
     this.buyerCashAsset = this.market.cash;
     this.sellerCashAsset = this.supplier.cash;
@@ -346,6 +349,7 @@ export class CashToApplesComponent implements OnInit {
   //create transaction object
   this.Transaction = {
     $class: "org.diet.network.CashToApples",
+    'buyerID': this.transactionBuyerID,
     'cashRate': this.applesPerCash,
     'cashValue': this.totalCash,
     'appleInc': this.buyerAppleAsset,
