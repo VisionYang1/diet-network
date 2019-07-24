@@ -46,10 +46,12 @@ export class UserComponent implements OnInit {
   cash = new FormControl('', Validators.required);
   apple = new FormControl('', Validators.required);
   reward = new FormControl('', Validators.required);
+  action = new FormControl('', Validators.required);
 
 
   constructor(public serviceUser: UserService, fb: FormBuilder) {
     this.myForm = fb.group({
+      action: this.action,
       userID: this.userID,
       firstName: this.firstName,
       lastName: this.lastName,
