@@ -335,6 +335,8 @@ export class CashToApplesComponent implements OnInit {
     this.sellerAppleAsset = this.supplier.apple;
   }
 
+  console.log("buyerID:" + this.transactionBuyerID);
+
   // find out how much the seller owns according to cashID and appleID
   var splitted_cashID = this.buyerCashAsset.split("#", 2);
   var cashID = String(splitted_cashID[1]);
