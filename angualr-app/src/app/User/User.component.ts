@@ -474,13 +474,13 @@ export class UserComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
+      'selectTime': 'perDay',
       'userID': null,
       'firstName': null,
       'lastName': null,
       'cash': null,
       'apple': null,
-      'reward': null,
-      'selectTime': "perDay"
+      'reward': null
     });
   }
 }
