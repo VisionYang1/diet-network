@@ -69,30 +69,34 @@ export class UserComponent implements OnInit {
       if (res=='perDay')
       {
         let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-        this.loadGraph(perDay);
+        let day = "Daliy";
+        this.loadGraph(day, perDay);
       }
   
       if (res=='perWeek')
       {
         let perWeek = ['First Week', 'Second Week', 'Thrid Week', 'Fourth Week'];
-        this.loadGraph(perWeek);
+        let week = "Weekly";
+        this.loadGraph(week, perWeek);
       }
       if (res=='perMonth')
       {
         let perMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        this.loadGraph(perMonth);
+        let month = "Monthly";
+        this.loadGraph(month, perMonth);
       }
     });
+
     this.loadAll();
   }
 
-  loadGraph(time): void {
+  loadGraph(title,time): void {
     Highcharts.chart('container', {
       chart: {
         type: 'column'
       },
       title: {
-        text: 'Monthly Average Intake of Fruit and Vegetable'
+        text: title + ' Average Intake of Fruit and Vegetable'
       },
       subtitle: {
         text: ''
