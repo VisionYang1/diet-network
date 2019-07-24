@@ -63,7 +63,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.myForm.get('selectTime').setValue("perDay");
+    // this.myForm.get('selectTime').setValue("perDay");
 
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
       if (res=='perDay')
