@@ -59,7 +59,7 @@ export class UserComponent implements OnInit {
       apple: this.apple,
       reward: this.reward
     });
-    this.myForm.control['selectTime'].setValue("perDay");
+    this.myForm.get('selectTime').setValue("perDay");
   };
 
   // name = 'Angular 5';
