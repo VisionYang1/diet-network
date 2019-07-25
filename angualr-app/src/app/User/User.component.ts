@@ -135,7 +135,7 @@ export class UserComponent implements OnInit {
         let day = "Daliy";
         this.loadGraph(day, perDay);
         this.loadTransaction();
-        var Dates = new Date().getWeek(30);
+        var Dates = new Date().getWeek();
         console.log("week:" + Dates);
         console.log(new Date());
       }
