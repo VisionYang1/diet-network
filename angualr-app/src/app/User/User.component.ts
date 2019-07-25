@@ -243,7 +243,7 @@ export class UserComponent implements OnInit {
         tempList.push(transaction);
       });
 
-      console.log("all transaction : " + tempList);
+      console.log("all transaction : " + tempList[0]);
     })
     .catch((error) => {
       if(error == 'Server error'){
