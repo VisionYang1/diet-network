@@ -96,6 +96,7 @@ export class UserComponent implements OnInit {
   private errorMessage;
 
   private dayArray;
+  private dayArray2;
   private weekArray;
   private monthArray;
 
@@ -224,27 +225,32 @@ export class UserComponent implements OnInit {
         case "Tue":
           this.dayArray = this.getRangeDate(-1,this.dayArray, "more");
           this.dayArray.splice(1,1);
-          this.dayArray = this.getRangeDate(5,this.dayArray, "more");
+          this.dayArray2 = this.getRangeDate(5,this.dayArray2, "more");
+          this.dayArray.concat(this.dayArray2);
           break;
         case "Wed":
           this.dayArray = this.getRangeDate(-2,this.dayArray, "more");
           this.dayArray.splice(2,1);
-          this.dayArray = this.getRangeDate(4,this.dayArray, "more");
+          this.dayArray2 = this.getRangeDate(4,this.dayArray2, "more");
+          this.dayArray.concat(this.dayArray2);
             break;
         case "Thu":
           this.dayArray = this.getRangeDate(-3,this.dayArray, "more");
           this.dayArray.splice(3,1);
-          this.dayArray = this.getRangeDate(3,this.dayArray, "more");
+          this.dayArray2 = this.getRangeDate(3,this.dayArray2, "more");
+          this.dayArray.concat(this.dayArray2);
             break;
         case "Fri":
           this.dayArray = this.getRangeDate(-4,this.dayArray, "more");
           this.dayArray.splice(4,1);
-          this.dayArray = this.getRangeDate(2,this.dayArray, "more");
+          this.dayArray2 = this.getRangeDate(2,this.dayArray2, "more");
+          this.dayArray.concat(this.dayArray2);
             break;
         case "Sat":
           this.dayArray = this.getRangeDate(-5,this.dayArray, "more");
           this.dayArray.splice(5,1);
-          this.dayArray = this.getRangeDate(1,this.dayArray, "more");
+          this.dayArray2 = this.getRangeDate(1,this.dayArray2, "more");
+          this.dayArray.concat(this.dayArray2);
             break;
         case "Sun":
           this.dayArray = this.getRangeDate(-6,this.dayArray, "more");
