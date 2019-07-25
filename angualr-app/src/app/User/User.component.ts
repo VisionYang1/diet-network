@@ -243,7 +243,8 @@ export class UserComponent implements OnInit {
         tempList.push(transaction);
       });
       this.getRangeDate(-6, "more");
-      console.log("all transaction : " + tempList[0].appleInc);
+      let time = tempList[0].timestamp.split("T", 2);
+      console.log("all transaction : " + time[0]);
     })
     .catch((error) => {
       if(error == 'Server error'){
