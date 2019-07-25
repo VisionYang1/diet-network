@@ -71,6 +71,7 @@ export class UserComponent implements OnInit {
         let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
         let day = "Daliy";
         this.loadGraph(day, perDay);
+        this.loadTransaction();
       }
   
       if (res=='perWeek')
@@ -223,6 +224,38 @@ export class UserComponent implements OnInit {
         this.errorMessage = error;
       }
     });
+  }
+
+
+  loadTransaction(): Promise<any> {
+
+    //retrieve all users in the tempList array
+    let tempList = [];
+
+    // call transaction
+    return this.serviceUser.getAllTransactions()
+    .toPromise()
+    .then((allTransactions) => {
+      
+      this.errorMessage = null;
+
+      allTransactions.forEach(transaction => {
+        tempList.push(transaction);
+      });
+
+      console.log("all transaction : " + tempList);
+    })
+    .catch((error) => {
+      if(error == 'Server error'){
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if(error == '404 - Not Found'){
+      this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else{
+          this.errorMessage = error;
+      }
+  });
   }
 
 	/**

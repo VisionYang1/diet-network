@@ -20,6 +20,7 @@ import { User } from '../org.diet.network';
 import { Cash } from '../org.diet.network';
 import { Apples } from '../org.diet.network';
 import { Rewards } from '../org.diet.network';
+import { CashToApples } from '../org.diet.network';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
@@ -30,8 +31,9 @@ export class UserService {
   private CASH: string = 'Cash';
   private APPLES: string = 'Apples';
   private REWARDS: string = 'Rewards';
+  private CASH_TO_APPLES = 'CashToApples';
 
-  constructor(private dataService: DataService<User>, private cashService: DataService<Cash>, private appleService: DataService<Apples>, private rewardService: DataService<Rewards>) {
+  constructor(private dataService: DataService<User>, private cashService: DataService<Cash>, private appleService: DataService<Apples>, private rewardService: DataService<Rewards>, private transactionService: DataService<CashToApples>) {
   };
 
   // operations of User
@@ -117,6 +119,11 @@ export class UserService {
 
   public deleteReward(id: any): Observable<Rewards> {
     return this.rewardService.delete(this.REWARDS, id);
+  }
+
+  // get all transaction
+  public getAllTransactions(): Observable<CashToApples[]> {
+    return this.transactionService.getAll(this.CASH_TO_APPLES);
   }
 
 }
