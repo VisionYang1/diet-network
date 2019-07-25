@@ -242,10 +242,10 @@ export class UserComponent implements OnInit {
             break;
         case "Fri":
           this.dayArray = this.getRangeDate(-4,this.dayArray, "more");
-          this.dayArray.splice(4,1);
+          // this.dayArray.splice(4,1);
           this.dayArray2 = this.getRangeDate(2,this.dayArray2, "more");
           console.log("dayAr2:" + this.dayArray2);
-          this.dayArray.concat(this.dayArray2);
+          this.dayArray = this.dayArray.concat(this.dayArray2);
             break;
         case "Sat":
           this.dayArray = this.getRangeDate(-5,this.dayArray, "more");
