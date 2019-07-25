@@ -138,7 +138,7 @@ export class UserComponent implements OnInit {
         console.log("week:" + Dates);
         var today = new Date().toString();
         console.log("today:" + today.slice(0, 3));
-        this.loadGraphDate();
+        this.loadGraphDate(today.slice(0, 3));
         console.log(this.dayArray);
       }
   
