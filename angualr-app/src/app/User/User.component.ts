@@ -138,6 +138,8 @@ export class UserComponent implements OnInit {
         console.log("week:" + Dates);
         var today = new Date().toString();
         console.log("today:" + today.slice(0, 3));
+        this.loadGraphDate();
+        console.log(this.dayArray);
       }
   
       if (res=='perWeek')
@@ -217,12 +219,41 @@ export class UserComponent implements OnInit {
       let today = new Date().toString();
       switch(today){
         case "Mon":
-          
+          this.getRangeDate(6, this.dayArray, "more");
+          break;
+        case "Tue":
+          this.getRangeDate(-1,this.dayArray, "more");
+          this.dayArray.splice(1,1);
+          this.getRangeDate(5,this.dayArray, "more");
+          break;
+        case "Wed":
+            this.getRangeDate(-2,this.dayArray, "more");
+            this.dayArray.splice(2,1);
+            this.getRangeDate(4,this.dayArray, "more");
+            break;
+        case "Thu":
+            this.getRangeDate(-3,this.dayArray, "more");
+            this.dayArray.splice(3,1);
+            this.getRangeDate(3,this.dayArray, "more");
+            break;
+        case "Fri":
+            this.getRangeDate(-4,this.dayArray, "more");
+            this.dayArray.splice(4,1);
+            this.getRangeDate(2,this.dayArray, "more");
+            break;
+        case "Sat":
+            this.getRangeDate(-5,this.dayArray, "more");
+            this.dayArray.splice(5,1);
+            this.getRangeDate(1,this.dayArray, "more");
+            break;
+        case "Sun":
+            this.getRangeDate(-6,this.dayArray, "more");
+            break;
       }
     }
   }
 
-  getRangeDate( range: number, type?: string ) {
+  getRangeDate( range: number, arr: Array<any>, type?: string) {
 
     const formatDate = ( time: any ) => {
       // 格式化日期，获取今天的日期
@@ -246,11 +277,13 @@ export class UserComponent implements OnInit {
           if ( range < 0 ) {
             for ( let i = Math.abs( range ); i >= 0; i-- ) {
               resultArr.push( formatDate( new Date().getTime() + ( -1000 * 3600 * 24 * i ) ) );
+              arr = resultArr;
               console.log( resultArr );
             }
           } else {
             for ( let i = 1; i <= range; i++ ) {
               resultArr.push( formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * i ) ) );
+              arr = resultArr;
               console.log( resultArr );
             }
           }
