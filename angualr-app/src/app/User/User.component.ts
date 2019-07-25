@@ -279,12 +279,14 @@ export class UserComponent implements OnInit {
               resultArr.push( formatDate( new Date().getTime() + ( -1000 * 3600 * 24 * i ) ) );
               arr = resultArr;
               console.log( resultArr );
+              console.log( arr );
             }
           } else {
             for ( let i = 1; i <= range; i++ ) {
               resultArr.push( formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * i ) ) );
               arr = resultArr;
               console.log( resultArr );
+              console.log( arr );
             }
           }
 
