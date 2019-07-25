@@ -20,50 +20,56 @@ import 'rxjs/add/operator/toPromise';
 
 declare global {
   interface Date {
-      getWeek (start?: number) : [Date, Date]
-      // getWeek ()
+      // getWeek (start?: number) : [Date, Date]
+      getWeek ()
   }
 }
 
 
-Date.prototype.getWeek = function(start)
-{
-    start = start || 0;
-    var today = new Date(this.setHours(0, 0, 0, 0));
-    var day = today.getDay() - start;
-    var date = today.getDate() - day;
+// Date.prototype.getWeek = function(start)
+// {
+//     start = start || 0;
+//     var today = new Date(this.setHours(0, 0, 0, 0));
+//     var day = today.getDay() - start;
+//     var date = today.getDate() - day;
 
-    var StartDate = new Date(today.setDate(date));
-    var EndDate = new Date(today.setDate(date + 6));
-    return [StartDate, EndDate];
-}
+//     var StartDate = new Date(today.setDate(date));
+//     var EndDate = new Date(today.setDate(date + 6));
+//     return [StartDate, EndDate];
+// }
 
 /** 
  * Get the ISO week date week number 
  */  
-// Date.prototype.getWeek = function () {  
-//   // Create a copy of this date object  
-//   var target  = new Date(this.valueOf());  
+Date.prototype.getWeek = function () {  
+  // Create a copy of this date object  
+  var target  = new Date(this.valueOf());  
+  console.log("target:" + target);
 
-//   // ISO week date weeks start on monday  
-//   // so correct the day number  
-//   var dayNr   = (this.getDay() + 6) % 7;  
+  // ISO week date weeks start on monday  
+  // so correct the day number  
+  var dayNr   = (this.getDay() + 6) % 7;  
+  console.log("dayNr:" + dayNr);
 
-//   // ISO 8601 states that week 1 is the week  
-//   // with the first thursday of that year.  
-//   // Set the target date to the thursday in the target week  
-//   target.setDate(target.getDate() - dayNr + 3);  
+  // ISO 8601 states that week 1 is the week  
+  // with the first thursday of that year.  
+  // Set the target date to the thursday in the target week  
+  target.setDate(target.getDate() - dayNr + 3);  
+  var a = target.getDate() - dayNr + 3;
+  console.log("setDate:" + a);
 
-//   // Store the millisecond value of the target date  
-//   var firstThursday = target.valueOf();  
+  // Store the millisecond value of the target date  
+  var firstThursday = target.valueOf();  
+  console.log("firstThursday:" + firstThursday);
 
-//   // Set the target to the first thursday of the year  
-//   // First set the target to january first  
-//   target.setMonth(0, 1);  
-//   // Not a thursday? Correct the date to the next thursday  
-//   if (target.getDay() != 4) {  
-//     target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);  
-//   }  
+  // Set the target to the first thursday of the year  
+  // First set the target to january first  
+  target.setMonth(0, 1);  
+  console.log("target:" + target);
+  // Not a thursday? Correct the date to the next thursday  
+  if (target.getDay() != 4) {  
+    target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);  
+  }  
 
 //   // The weeknumber is the number of weeks between the   
 //   // first thursday of the year and the thursday in the target week  
