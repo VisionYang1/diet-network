@@ -219,35 +219,35 @@ export class UserComponent implements OnInit {
       let today = new Date().toString();
       switch(today.slice(0,3)){
         case "Mon":
-          this.getRangeDate(6, this.dayArray, "more");
+          this.dayArray = this.getRangeDate(6, this.dayArray, "more");
           break;
         case "Tue":
-          this.getRangeDate(-1,this.dayArray, "more");
+          this.dayArray = this.getRangeDate(-1,this.dayArray, "more");
           this.dayArray.splice(1,1);
-          this.getRangeDate(5,this.dayArray, "more");
+          this.dayArray = this.getRangeDate(5,this.dayArray, "more");
           break;
         case "Wed":
-            this.getRangeDate(-2,this.dayArray, "more");
-            this.dayArray.splice(2,1);
-            this.getRangeDate(4,this.dayArray, "more");
+          this.dayArray = this.getRangeDate(-2,this.dayArray, "more");
+          this.dayArray.splice(2,1);
+          this.dayArray = this.getRangeDate(4,this.dayArray, "more");
             break;
         case "Thu":
-            this.getRangeDate(-3,this.dayArray, "more");
-            this.dayArray.splice(3,1);
-            this.getRangeDate(3,this.dayArray, "more");
+          this.dayArray = this.getRangeDate(-3,this.dayArray, "more");
+          this.dayArray.splice(3,1);
+          this.dayArray = this.getRangeDate(3,this.dayArray, "more");
             break;
         case "Fri":
-            this.getRangeDate(-4,this.dayArray, "more");
-            this.dayArray.splice(4,1);
-            this.getRangeDate(2,this.dayArray, "more");
+          this.dayArray = this.getRangeDate(-4,this.dayArray, "more");
+          this.dayArray.splice(4,1);
+          this.dayArray = this.getRangeDate(2,this.dayArray, "more");
             break;
         case "Sat":
-            this.getRangeDate(-5,this.dayArray, "more");
-            this.dayArray.splice(5,1);
-            this.getRangeDate(1,this.dayArray, "more");
+          this.dayArray = this.getRangeDate(-5,this.dayArray, "more");
+          this.dayArray.splice(5,1);
+          this.dayArray = this.getRangeDate(1,this.dayArray, "more");
             break;
         case "Sun":
-            this.getRangeDate(-6,this.dayArray, "more");
+          this.dayArray = this.getRangeDate(-6,this.dayArray, "more");
             break;
       }
     }
@@ -289,7 +289,7 @@ export class UserComponent implements OnInit {
               console.log( arr );
             }
           }
-
+          return arr;
         }
       } else {
         changeDate = formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * range ) );
