@@ -139,7 +139,7 @@ export class UserComponent implements OnInit {
         var today = new Date().toString();
         console.log("today:" + today.slice(0, 3));
         this.loadGraphDate("day");
-        console.log(this.dayArray);
+        console.log("all day:" + this.dayArray);
       }
   
       if (res=='perWeek')
