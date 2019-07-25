@@ -18,6 +18,25 @@ import { UserService } from './User.service';
 // import { Chart } from 'angular-highcharts';
 import 'rxjs/add/operator/toPromise';
 
+declare global {
+  interface Date {
+      getWeek (start?: number) : [Date, Date]
+  }
+}
+
+
+Date.prototype.getWeek = function(start)
+{
+    start = start || 0;
+    var today = new Date(this.setHours(0, 0, 0, 0));
+    var day = today.getDay() - start;
+    var date = today.getDate() - day;
+
+    var StartDate = new Date(today.setDate(date));
+    var EndDate = new Date(today.setDate(date + 6));
+    return [StartDate, EndDate];
+}
+
 let Highcharts = require('highcharts');
 require('highcharts/modules/exporting')(Highcharts);
 
@@ -65,34 +84,34 @@ export class UserComponent implements OnInit {
     });
   };
 
-  getWeek(dt){
-    var calc=function(o){
-      if(o.dtmin.getDay()!=1){
-        if(o.dtmin.getDay()<=4 && o.dtmin.getDay()!=0)o.w+=1;
-        o.dtmin.setDate((o.dtmin.getDay()==0)? 2 : 1+(7-o.dtmin.getDay())+1);
-      }
-      o.w+=Math.ceil((((o.dtmax.getTime()-o.dtmin.getTime())/(24*60*60*1000))+1)/7);
-    },getNbDaysInAMonth=function(year,month){
-      var nbdays=31;
-      for(var i=0;i<=3;i++){
-        nbdays=nbdays-i;
-        var dtInst;
-        if((dtInst=new Date(year,month-1,nbdays)) && dtInst.getDate()==nbdays && (dtInst.getMonth()+1)==month  && dtInst.getFullYear()==year)
-          break;
-      }
-      return nbdays;
-    };
-    if(dt.getMonth()+1==1 && dt.getDate()>=1 && dt.getDate()<=3 && (dt.getDay()>=5 || dt.getDay()==0)){
-      var pyData={"dtmin":new Date(dt.getFullYear()-1,0,1,0,0,0,0),"dtmax":new Date(dt.getFullYear()-1,11,getNbDaysInAMonth(dt.getFullYear()-1,12),0,0,0,0),"w":0};
-      calc(pyData);
-      return pyData.w;
-    }else{
-      var ayData={"dtmin":new Date(dt.getFullYear(),0,1,0,0,0,0),"dtmax":new Date(dt.getFullYear(),dt.getMonth(),dt.getDate(),0,0,0,0),"w":0},
-        nd12m=getNbDaysInAMonth(dt.getFullYear(),12);
-      if(dt.getMonth()==12 && dt.getDay()!=0 && dt.getDay()<=3 && nd12m-dt.getDate()<=3-dt.getDay())ayData.w=1;else calc(ayData);
-      return ayData.w;
-    }
-  }
+  // getWeek(dt){
+  //   var calc=function(o){
+  //     if(o.dtmin.getDay()!=1){
+  //       if(o.dtmin.getDay()<=4 && o.dtmin.getDay()!=0)o.w+=1;
+  //       o.dtmin.setDate((o.dtmin.getDay()==0)? 2 : 1+(7-o.dtmin.getDay())+1);
+  //     }
+  //     o.w+=Math.ceil((((o.dtmax.getTime()-o.dtmin.getTime())/(24*60*60*1000))+1)/7);
+  //   },getNbDaysInAMonth=function(year,month){
+  //     var nbdays=31;
+  //     for(var i=0;i<=3;i++){
+  //       nbdays=nbdays-i;
+  //       var dtInst;
+  //       if((dtInst=new Date(year,month-1,nbdays)) && dtInst.getDate()==nbdays && (dtInst.getMonth()+1)==month  && dtInst.getFullYear()==year)
+  //         break;
+  //     }
+  //     return nbdays;
+  //   };
+  //   if(dt.getMonth()+1==1 && dt.getDate()>=1 && dt.getDate()<=3 && (dt.getDay()>=5 || dt.getDay()==0)){
+  //     var pyData={"dtmin":new Date(dt.getFullYear()-1,0,1,0,0,0,0),"dtmax":new Date(dt.getFullYear()-1,11,getNbDaysInAMonth(dt.getFullYear()-1,12),0,0,0,0),"w":0};
+  //     calc(pyData);
+  //     return pyData.w;
+  //   }else{
+  //     var ayData={"dtmin":new Date(dt.getFullYear(),0,1,0,0,0,0),"dtmax":new Date(dt.getFullYear(),dt.getMonth(),dt.getDate(),0,0,0,0),"w":0},
+  //       nd12m=getNbDaysInAMonth(dt.getFullYear(),12);
+  //     if(dt.getMonth()==12 && dt.getDay()!=0 && dt.getDay()<=3 && nd12m-dt.getDate()<=3-dt.getDay())ayData.w=1;else calc(ayData);
+  //     return ayData.w;
+  //   }
+  // }
 
   ngOnInit(): void {
 
@@ -105,7 +124,8 @@ export class UserComponent implements OnInit {
         let day = "Daliy";
         this.loadGraph(day, perDay);
         this.loadTransaction();
-        console.log(this.getWeek(new Date().getTime()))
+        var Dates = new Date().getWeek();
+        console.log("week:" + Dates);
       }
   
       if (res=='perWeek')
