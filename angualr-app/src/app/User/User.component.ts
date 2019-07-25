@@ -95,8 +95,8 @@ export class UserComponent implements OnInit {
   private currentId;
   private errorMessage;
 
-  private dayArray;
-  private dayArray2;
+  private dayArray: Array<any> = [];
+  private dayArray2: Array<any> = [];
   private weekArray;
   private monthArray;
 
