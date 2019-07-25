@@ -20,61 +20,61 @@ import 'rxjs/add/operator/toPromise';
 
 declare global {
   interface Date {
-      // getWeek (start?: number) : [Date, Date]
-      getWeek ()
+      getWeek (start?: number) : [Date, Date]
+      // getWeek ()
   }
 }
 
 
-// Date.prototype.getWeek = function(start)
-// {
-//     start = start || 0;
-//     var today = new Date(this.setHours(0, 0, 0, 0));
-//     var day = today.getDay() - start;
-//     var date = today.getDate() - day;
+Date.prototype.getWeek = function(start)
+{
+    start = start || 0;
+    var today = new Date(this.setHours(0, 0, 0, 0));
+    var day = today.getDay() - start;
+    var date = today.getDate() - day;
 
-//     var StartDate = new Date(today.setDate(date));
-//     var EndDate = new Date(today.setDate(date + 6));
-//     return [StartDate, EndDate];
-// }
+    var StartDate = new Date(today.setDate(date));
+    var EndDate = new Date(today.setDate(date + 6));
+    return [StartDate, EndDate];
+}
 
 /** 
  * Get the ISO week date week number 
  */  
-Date.prototype.getWeek = function () {  
-  // Create a copy of this date object  
-  var target  = new Date(this.valueOf());  
-  console.log("target:" + target);
+// Date.prototype.getWeek = function () {  
+//   // Create a copy of this date object  
+//   var target  = new Date(this.valueOf());  
+//   console.log("target:" + target);
 
-  // ISO week date weeks start on monday  
-  // so correct the day number  
-  var dayNr   = (this.getDay() + 6) % 7;  
-  console.log("dayNr:" + dayNr);
+//   // ISO week date weeks start on monday  
+//   // so correct the day number  
+//   var dayNr   = (this.getDay() + 6) % 7;  
+//   console.log("dayNr:" + dayNr);
 
-  // ISO 8601 states that week 1 is the week  
-  // with the first thursday of that year.  
-  // Set the target date to the thursday in the target week  
-  target.setDate(target.getDate() - dayNr + 3);  
-  var a = target.getDate() - dayNr + 3;
-  console.log("setDate:" + a);
+//   // ISO 8601 states that week 1 is the week  
+//   // with the first thursday of that year.  
+//   // Set the target date to the thursday in the target week  
+//   target.setDate(target.getDate() - dayNr + 3);  
+//   var a = target.getDate() - dayNr + 3;
+//   console.log("setDate:" + a);
 
-  // Store the millisecond value of the target date  
-  var firstThursday = target.valueOf();  
-  console.log("firstThursday:" + firstThursday);
+//   // Store the millisecond value of the target date  
+//   var firstThursday = target.valueOf();  
+//   console.log("firstThursday:" + firstThursday);
 
-  // Set the target to the first thursday of the year  
-  // First set the target to january first  
-  target.setMonth(0, 1);  
-  console.log("target:" + target);
-  // Not a thursday? Correct the date to the next thursday  
-  if (target.getDay() != 4) {  
-    target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);  
-  }  
+//   // Set the target to the first thursday of the year  
+//   // First set the target to january first  
+//   target.setMonth(0, 1);  
+//   console.log("target:" + target);
+//   // Not a thursday? Correct the date to the next thursday  
+//   if (target.getDay() != 4) {  
+//     target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);  
+//   }  
 
-  // The weeknumber is the number of weeks between the   
-  // first thursday of the year and the thursday in the target week  
-  // return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 = 7 * 24 * 3600 * 1000  
-}  
+//   // The weeknumber is the number of weeks between the   
+//   // first thursday of the year and the thursday in the target week  
+//   // return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 = 7 * 24 * 3600 * 1000  
+// }  
 
 let Highcharts = require('highcharts');
 require('highcharts/modules/exporting')(Highcharts);
@@ -126,8 +126,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.myForm.get('selectTime').setValue("perDay");
-
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
       if (res=='perDay')
       {
@@ -137,7 +135,8 @@ export class UserComponent implements OnInit {
         this.loadTransaction();
         var Dates = new Date().getWeek();
         console.log("week:" + Dates);
-        console.log(new Date());
+        var today = new Date().toString();
+        console.log("today:" + today.slice(0, 2));
       }
   
       if (res=='perWeek')
@@ -197,7 +196,7 @@ export class UserComponent implements OnInit {
         data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
     
       }, {
-        name: 'New Vegetable',
+        name: 'Vegetable',
         data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
     
       }, {
@@ -210,6 +209,51 @@ export class UserComponent implements OnInit {
     
       }]
     });
+  }
+
+  loadGraphDate(): any {
+
+  }
+
+  getRangeDate( range: number, type?: string ) {
+
+    const formatDate = ( time: any ) => {
+      // 格式化日期，获取今天的日期
+      const Dates = new Date( time );
+      const year: number = Dates.getFullYear();
+      const month: any = ( Dates.getMonth() + 1 ) < 10 ? '0' + ( Dates.getMonth() + 1 ) : ( Dates.getMonth() + 1 );
+      const day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate();
+      return year + '-' + month + '-' + day;
+    };
+
+    const now = formatDate( new Date().getTime() ); // 当前时间
+    const resultArr: Array<any> = [];
+    let changeDate: string;
+    if ( range ) {
+      if ( type ) {
+        if ( type === 'one' ) {
+          changeDate = formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * range ) );
+          console.log( changeDate );
+        }
+        if ( type === 'more' ) {
+          if ( range < 0 ) {
+            for ( let i = Math.abs( range ); i >= 0; i-- ) {
+              resultArr.push( formatDate( new Date().getTime() + ( -1000 * 3600 * 24 * i ) ) );
+              console.log( resultArr );
+            }
+          } else {
+            for ( let i = 1; i <= range; i++ ) {
+              resultArr.push( formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * i ) ) );
+              console.log( resultArr );
+            }
+          }
+
+        }
+      } else {
+        changeDate = formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * range ) );
+        console.log( changeDate );
+      }
+    }
   }
 
   loadAll(): Promise<any> {
@@ -443,46 +487,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  getRangeDate( range: number, type?: string ) {
 
-    const formatDate = ( time: any ) => {
-      // 格式化日期，获取今天的日期
-      const Dates = new Date( time );
-      const year: number = Dates.getFullYear();
-      const month: any = ( Dates.getMonth() + 1 ) < 10 ? '0' + ( Dates.getMonth() + 1 ) : ( Dates.getMonth() + 1 );
-      const day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate();
-      return year + '-' + month + '-' + day;
-    };
-
-    const now = formatDate( new Date().getTime() ); // 当前时间
-    const resultArr: Array<any> = [];
-    let changeDate: string;
-    if ( range ) {
-      if ( type ) {
-        if ( type === 'one' ) {
-          changeDate = formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * range ) );
-          console.log( changeDate );
-        }
-        if ( type === 'more' ) {
-          if ( range < 0 ) {
-            for ( let i = Math.abs( range ); i >= 0; i-- ) {
-              resultArr.push( formatDate( new Date().getTime() + ( -1000 * 3600 * 24 * i ) ) );
-              console.log( resultArr );
-            }
-          } else {
-            for ( let i = 1; i <= range; i++ ) {
-              resultArr.push( formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * i ) ) );
-              console.log( resultArr );
-            }
-          }
-
-        }
-      } else {
-        changeDate = formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * range ) );
-        console.log( changeDate );
-      }
-    }
-  }
 
    updateParticipant(form: any): Promise<any> {
     this.participant = {
