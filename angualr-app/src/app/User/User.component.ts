@@ -392,7 +392,7 @@ export class UserComponent implements OnInit {
       allTransactions.forEach(transaction => {
         tempList.push(transaction);
       });
-      this.getRangeDate(-6, "more");
+      // this.getRangeDate(-6, "more");
       let time = tempList[0].timestamp.split("T", 2);
       console.log("all transaction : " + time[0]);
     })
