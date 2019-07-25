@@ -138,7 +138,7 @@ export class UserComponent implements OnInit {
         console.log("week:" + Dates);
         var today = new Date().toString();
         console.log("today:" + today.slice(0, 3));
-        this.loadGraphDate(today.slice(0, 3));
+        this.loadGraphDate("day");
         console.log(this.dayArray);
       }
   
@@ -217,7 +217,7 @@ export class UserComponent implements OnInit {
   loadGraphDate(type?:string): any {
     if(type == "day"){
       let today = new Date().toString();
-      switch(today){
+      switch(today.slice(0,3)){
         case "Mon":
           this.getRangeDate(6, this.dayArray, "more");
           break;
