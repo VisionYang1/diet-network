@@ -71,10 +71,10 @@ Date.prototype.getWeek = function () {
     target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);  
   }  
 
-//   // The weeknumber is the number of weeks between the   
-//   // first thursday of the year and the thursday in the target week  
-//   return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 = 7 * 24 * 3600 * 1000  
-// }  
+  // The weeknumber is the number of weeks between the   
+  // first thursday of the year and the thursday in the target week  
+  // return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 = 7 * 24 * 3600 * 1000  
+}  
 
 let Highcharts = require('highcharts');
 require('highcharts/modules/exporting')(Highcharts);
