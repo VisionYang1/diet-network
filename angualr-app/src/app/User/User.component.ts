@@ -243,7 +243,7 @@ export class UserComponent implements OnInit {
         tempList.push(transaction);
       });
 
-      console.log("all transaction : " + tempList[0].buyerID);
+      console.log("all transaction : " + tempList[0].appleInc);
     })
     .catch((error) => {
       if(error == 'Server error'){
