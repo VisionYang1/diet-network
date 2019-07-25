@@ -30,6 +30,7 @@ Date.prototype.getWeek = function(start)
 {
     start = start || 0;
     var today = new Date(this.setHours(0, 0, 0, 0));
+    console.log("today.getDay():" + today.getDay());
     var day = today.getDay() - start;
     var date = today.getDate() - day;
 
@@ -136,7 +137,7 @@ export class UserComponent implements OnInit {
         var Dates = new Date().getWeek();
         console.log("week:" + Dates);
         var today = new Date().toString();
-        console.log("today:" + today.slice(0, 2));
+        console.log("today:" + today.slice(0, 3));
       }
   
       if (res=='perWeek')
@@ -211,8 +212,14 @@ export class UserComponent implements OnInit {
     });
   }
 
-  loadGraphDate(): any {
-
+  loadGraphDate(type?:string): any {
+    if(type == "day"){
+      let today = new Date().toString();
+      switch(today){
+        case "Mon":
+          
+      }
+    }
   }
 
   getRangeDate( range: number, type?: string ) {
