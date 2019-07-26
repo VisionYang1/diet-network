@@ -32,6 +32,16 @@ export class UserComponent implements OnInit {
   private currentId;
   private errorMessage;
 
+  private dayArray: Array<any> = [];
+  private dayArray2: Array<any> = [];
+  private weekArray;
+  private monthArray;
+
+  private cashOJ;
+  private fruitOJ;
+  private vegetableOJ;
+  private rewardOJ;
+
   userID = new FormControl('', Validators.required);
   firstName = new FormControl('', Validators.required);
   lastName = new FormControl('', Validators.required);
@@ -59,7 +69,7 @@ export class UserComponent implements OnInit {
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.serviceUser.getAll()
+    return this.serviceUser.getAllUsers()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
@@ -67,6 +77,81 @@ export class UserComponent implements OnInit {
         tempList.push(participant);
       });
       this.allParticipants = tempList;
+    })
+    .then(() => {
+
+      //get the other assets
+      for (let participant of tempList) {
+        
+        // get cash
+        var splitted_cashID = participant.cash.split("#",2);
+        var cashID = String(splitted_cashID[1]);
+
+        // call service to get the cash asset
+        this.serviceUser.getCash(cashID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update user
+          if(result.value){
+            participant.cash = result.value;
+          }else{
+            participant.cash = result.value;
+          }
+        });
+
+        // get fruit
+        var splitted_fruitID = participant.fruit.split("#",2);
+        var fruitID = String(splitted_fruitID[1]);
+
+        // call service to get the apple asset
+        this.serviceUser.getFruit(fruitID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update user
+          if(result.value){
+            participant.fruit = result.value;
+          }else{
+            participant.fruit = result.value;
+          }
+        });
+
+        // get vegetable
+        var splitted_vegetableID = participant.vegetable.split("#",2);
+        var vegetableID = String(splitted_vegetableID[1]);
+
+        // call service to get the apple asset
+        this.serviceUser.getVegetable(vegetableID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update user
+          if(result.value){
+            participant.vegetable = result.value;
+          }else{
+            participant.vegetable = result.value;
+          }
+        });
+
+        // get reward
+        var splitted_rewardID = participant.reward.split("#",2);
+        var rewardID = String(splitted_rewardID[1]);
+
+        // call service to get the reward asset
+        this.serviceUser.getReward(rewardID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          // update user
+          if(result.value){
+            participant.reward = result.value;
+          }else{
+            participant.reward = result.value;
+          }
+        });
+      }
+
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -104,41 +189,33 @@ export class UserComponent implements OnInit {
   }
 
   addParticipant(form: any): Promise<any> {
+
     this.participant = {
       $class: 'org.diet.network.User',
       'userID': this.userID.value,
       'firstName': this.firstName.value,
       'lastName': this.lastName.value,
-      'fruit': this.fruit.value,
-      'vegetable': this.vegetable.value,
-      'cash': this.cash.value,
-      'reward': this.reward.value
+      'cash': "CA_" + this.userID.value,
+      'fruit': "FR_" + this.userID.value,
+      'vegetable': "VE_" + this.userID.value,
+      'reward': "RW_" + this.userID.value
     };
 
-    this.myForm.setValue({
-      'userID': null,
-      'firstName': null,
-      'lastName': null,
-      'fruit': null,
-      'vegetable': null,
-      'cash': null,
-      'reward': null
-    });
-
-    return this.serviceUser.addParticipant(this.participant)
-    .toPromise()
+    //create all assests associated with user
+    return this.createAllAssetsUser()
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
+        'selectTime': null,
         'userID': null,
         'firstName': null,
         'lastName': null,
+        'cash': null,
         'fruit': null,
         'vegetable': null,
-        'cash': null,
         'reward': null
       });
-      this.loadAll(); 
+      // this.loadAll(); 
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -149,6 +226,75 @@ export class UserComponent implements OnInit {
     });
   }
 
+  //create other assets associated with the user
+  createAllAssetsUser(): Promise<any>{
+    
+    //create cash
+    this.cashOJ = {
+      $class: "org.diet.network.Cash",
+          "cashID":"CA_" + this.userID.value,
+          "currency":'Pound',
+          "value":this.cash.value,
+          "ownerID":this.userID.value,
+          "ownerEntity":'User'
+    };
+
+    this.fruitOJ = {
+      $class: "org.diet.network.Fruit",
+          "fruitID":"FR_" + this.userID.value,
+          "value":this.fruit.value,
+          "ownerID":this.userID.value,
+          "ownerEntity":'User'
+    };
+
+    this.vegetableOJ = {
+      $class: "org.diet.network.Vegetable",
+          "vegetableID":"VE_" + this.userID.value,
+          "value":this.vegetable.value,
+          "ownerID":this.userID.value,
+          "ownerEntity":'User'
+    };
+
+    this.rewardOJ = {
+      $class: "org.diet.network.Rewards",
+          "rewardID":"RW_" + this.userID.value,
+          "value":this.reward.value,
+          "ownerID":this.userID.value,
+          "ownerEntity":'User'
+    };
+
+    //add Cash
+    return this.serviceUser.addCash(this.cashOJ)
+    .toPromise()
+    .then(() => {
+      
+      //add fruit
+      this.serviceUser.addFruit(this.fruitOJ)
+      .toPromise()
+      .then(() => {
+
+        //add Reward
+        this.serviceUser.addReward(this.rewardOJ)
+        .toPromise()
+        .then(() => {
+
+          //add vegetable
+          this.serviceUser.addVegetable(this.vegetableOJ)
+          .toPromise()
+          .then(() => {
+
+            //add user 
+            this.serviceUser.addUser(this.participant)
+            .toPromise()
+            .then(() => {
+              //reload
+              this.loadAll();
+            })
+          });
+        });
+      });
+    });
+  }
 
    updateParticipant(form: any): Promise<any> {
     this.participant = {
@@ -161,7 +307,7 @@ export class UserComponent implements OnInit {
       'reward': this.reward.value
     };
 
-    return this.serviceUser.updateParticipant(form.get('userID').value, this.participant)
+    return this.serviceUser.updateUser(form.get('userID').value, this.participant)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -181,7 +327,7 @@ export class UserComponent implements OnInit {
 
   deleteParticipant(): Promise<any> {
 
-    return this.serviceUser.deleteParticipant(this.currentId)
+    return this.serviceUser.deleteUser(this.currentId)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -204,7 +350,7 @@ export class UserComponent implements OnInit {
 
   getForm(id: any): Promise<any> {
 
-    return this.serviceUser.getparticipant(id)
+    return this.serviceUser.getUser(id)
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
