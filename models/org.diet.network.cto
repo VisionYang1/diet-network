@@ -22,6 +22,8 @@ participant User identified by userID {
   o String userID
   o String firstName
   o String lastName
+  --> Fruit fruit
+  --> Vegetable	vegetable
   --> Cash cash
   --> Rewards reward
 }
@@ -30,6 +32,8 @@ participant Market identified by marketID {
   o String marketID
   o String firstName
   o String lastName
+  --> Fruit fruit
+  --> Vegetable	vegetable
   --> Cash cash
 }
 
@@ -37,6 +41,8 @@ participant Supplier identified by supplierID {
   o String supplierID
   o String firstName
   o String lastName
+  --> Fruit fruit
+  --> Vegetable	vegetable
   --> Cash cash
 }
 
@@ -47,11 +53,11 @@ enum OwnerEntity {
 }
 
 asset Cash identified by cashID {
-    o String cashID
-    o String currency
-    o Double value
-    o String ownerID
-    o OwnerEntity ownerEntity
+  o String cashID
+  o String currency
+  o Double value
+  o String ownerID
+  o OwnerEntity ownerEntity
 }
 
 asset Fruit identified by fruitID {
@@ -75,35 +81,42 @@ asset Rewards identified by rewardID {
   o OwnerEntity ownerEntity
 }
 
+transaction CreateNewFruit {
+  o String fruitID
+  o String fruitName
+  o Double value
+  o String ownerID
+  o OwnerEntity ownerEntity
+}
+
 transaction CashToFruit {
-    o String buyerID
-    o Double fruitValue
-    o Double cashRate
-    o Double cashValue
-    --> Fruit fruitInc
-    --> Fruit fruitDec
-    --> Cash cashInc
-    --> Cash cashDec
+  o String buyerID
+  o Double fruitValue
+  o Double cashRate
+  o Double cashValue
+  --> Fruit fruitInc
+  --> Fruit fruitDec
+  --> Cash cashInc
+  --> Cash cashDec
 }
 
 transaction CashToVegetable {
-    o String buyerID
-    o Double vegetableValue
-    o Double cashRate
-    o Double cashValue
-    --> Vegetable vegetableInc
-    --> Vegetable vegetableDec
-    --> Cash cashInc
-    --> Cash cashDec
+  o String buyerID
+  o Double vegetableValue
+  o Double cashRate
+  o Double cashValue
+  --> Vegetable vegetableInc
+  --> Vegetable vegetableDec
+  --> Cash cashInc
+  --> Cash cashDec
 }
 
 transaction RewardsDec {
-    o Double rewardsRate
-    --> Rewards rewardsDec
+  o Double rewardsRate
+  --> Rewards rewardsDec
 }
 
 transaction RewardsInc {
-    o Double rewardsRate
-    --> Rewards rewardsDec
+  o Double rewardsRate
+  --> Rewards rewardsDec
 }
-
