@@ -146,7 +146,7 @@ export class UserComponent implements OnInit {
         //get fruit data
         console.log("get user");
         // let user = this.currentId;
-        console.log("myForm, user ID:" + this.myForm.userID);
+        console.log("myForm, user ID:" + this.myForm.userID.value);
         this.getFruit(this.myForm);
 
         //load graph according to fruit data
