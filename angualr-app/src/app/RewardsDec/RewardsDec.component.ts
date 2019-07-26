@@ -60,19 +60,23 @@ export class RewardsDecComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.successTransaction = false;
     this.loadAll();
   }
 
   loadAll(): Promise<any> {
+
     const tempList = [];
-    return this.serviceRewardsDec.getAll()
+
+    return this.serviceRewardsDec.getAllUsers()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
-      result.forEach(transaction => {
-        tempList.push(transaction);
+      //get all users
+      result.forEach(user => {
+        tempList.push(user);
       });
-      this.allTransactions = tempList;
+      this.allUsers = tempList;
     })
     .catch((error) => {
       if (error === 'Server error') {
