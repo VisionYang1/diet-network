@@ -32,6 +32,10 @@ export class MarketComponent implements OnInit {
   private currentId;
   private errorMessage;
 
+  private cashOJ;
+  private fruitOJ;
+  private vegetableOJ;
+
   marketID = new FormControl('', Validators.required);
   firstName = new FormControl('', Validators.required);
   lastName = new FormControl('', Validators.required);
@@ -57,13 +61,72 @@ export class MarketComponent implements OnInit {
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.serviceMarket.getAll()
+    return this.serviceMarket.getAllMarkets()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
       result.forEach(participant => {
         tempList.push(participant);
       });
+    })
+    .then(() => {
+
+      //get asset
+      for (let participant of tempList) {
+
+        // get cash
+        var splitted_cashID = participant.cash.split("#",2)
+        var cashID = String(splitted_cashID[1]);
+
+        // call service to get the cash
+        this.serviceMarket.getCash(cashID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update participant
+          if(result.value){
+            participant.cash = result.value;
+          }else{
+            participant.cash = result.value;
+          }
+        });
+
+        // get fruit
+        var splitted_fruitID = participant.fruit.split("#",2);
+        var fruitID = String(splitted_fruitID[1]);
+
+        // call service to get the apple asset
+        this.serviceMarket.getFruit(fruitID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update user
+          if(result.value){
+            participant.fruit = result.value;
+          }else{
+            participant.fruit = result.value;
+          }
+        });
+
+        // get vegetable
+        var splitted_vegetableID = participant.vegetable.split("#",2);
+        var vegetableID = String(splitted_vegetableID[1]);
+
+        // call service to get the apple asset
+        this.serviceMarket.getVegetable(vegetableID)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          //update user
+          if(result.value){
+            participant.vegetable = result.value;
+          }else{
+            participant.vegetable = result.value;
+          }
+        });
+
+      }
+
       this.allParticipants = tempList;
     })
     .catch((error) => {
@@ -102,38 +165,20 @@ export class MarketComponent implements OnInit {
   }
 
   addParticipant(form: any): Promise<any> {
-    this.participant = {
-      $class: 'org.diet.network.Market',
-      'marketID': this.marketID.value,
-      'firstName': this.firstName.value,
-      'lastName': this.lastName.value,
-      'fruit': this.fruit.value,
-      'vegetable': this.vegetable.value,
-      'cash': this.cash.value
-    };
 
-    this.myForm.setValue({
-      'marketID': null,
-      'firstName': null,
-      'lastName': null,
-      'fruit': null,
-      'vegetable': null,
-      'cash': null
-    });
 
-    return this.serviceMarket.addParticipant(this.participant)
-    .toPromise()
+    return this.createAllAssetsMarket()
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
         'marketID': null,
         'firstName': null,
         'lastName': null,
+        'cash': null,
         'fruit': null,
-        'vegetable': null,
-        'cash': null
+        'vegetable': null
       });
-      this.loadAll(); 
+      // this.loadAll(); 
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -144,7 +189,71 @@ export class MarketComponent implements OnInit {
     });
   }
 
+  //create other assets associated with the user
+  createAllAssetsMarket(): Promise<any>{
+    
+    //create cash
+    this.cashOJ = {
+      $class: "org.diet.network.Cash",
+          "cashID":"CA_" + this.marketID.value,
+          "currency":'Pound',
+          "value":this.cash.value,
+          "ownerID":this.marketID.value,
+          "ownerEntity":'User'
+    };
 
+    this.fruitOJ = {
+      $class: "org.diet.network.Fruit",
+          "fruitID":"FR_" + this.marketID.value,
+          "value":this.fruit.value,
+          "ownerID":this.marketID.value,
+          "ownerEntity":'User'
+    };
+
+    this.vegetableOJ = {
+      $class: "org.diet.network.Vegetable",
+          "vegetableID":"VE_" + this.marketID.value,
+          "value":this.vegetable.value,
+          "ownerID":this.marketID.value,
+          "ownerEntity":'User'
+    };
+
+    this.participant = {
+      $class: 'org.diet.network.Market',
+      'marketID': this.marketID.value,
+      'firstName': this.firstName.value,
+      'lastName': this.lastName.value,
+      'cash': "CA_" + this.marketID.value,
+      'fruit': "FR_" + this.marketID.value,
+      'vegetable': "VE_" + this.marketID.value
+    };
+
+    //add Cash
+    return this.serviceMarket.addCash(this.cashOJ)
+    .toPromise()
+    .then(() => {
+      
+      //add fruit
+      this.serviceMarket.addFruit(this.fruitOJ)
+      .toPromise()
+      .then(() => {
+
+        //add vegetable
+        this.serviceMarket.addVegetable(this.vegetableOJ)
+        .toPromise()
+        .then(() => {
+
+          this.serviceMarket.addMarket(this.participant)
+          .toPromise()
+          .then(() => {
+            //reload
+            this.loadAll();
+          })
+        });
+      });
+    });
+  }
+  
    updateParticipant(form: any): Promise<any> {
     this.participant = {
       $class: 'org.diet.network.Market',
@@ -155,7 +264,7 @@ export class MarketComponent implements OnInit {
       'cash': this.cash.value
     };
 
-    return this.serviceMarket.updateParticipant(form.get('marketID').value, this.participant)
+    return this.serviceMarket.updateMarket(form.get('marketID').value, this.participant)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -175,7 +284,7 @@ export class MarketComponent implements OnInit {
 
   deleteParticipant(): Promise<any> {
 
-    return this.serviceMarket.deleteParticipant(this.currentId)
+    return this.serviceMarket.deleteMarket(this.currentId)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -198,7 +307,7 @@ export class MarketComponent implements OnInit {
 
   getForm(id: any): Promise<any> {
 
-    return this.serviceMarket.getparticipant(id)
+    return this.serviceMarket.getMarket(id)
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
