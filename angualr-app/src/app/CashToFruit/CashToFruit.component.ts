@@ -511,6 +511,7 @@ export class CashToFruitComponent implements OnInit {
     .then((result) => {
       this.errorMessage = null;
       const formObject = {
+        'action': 'fromMarket',
         'buyerID': null,
         'fruitValue': null,
         'cashRate': null,
@@ -599,6 +600,7 @@ export class CashToFruitComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
+      'action': 'fromMarket',
       'buyerID': null,
       'fruitValue': null,
       'cashRate': null,
