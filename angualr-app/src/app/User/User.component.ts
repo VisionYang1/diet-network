@@ -144,7 +144,7 @@ export class UserComponent implements OnInit {
         console.log("all day:" + this.dayArray);
 
         //get fruit data
-        console.log("myForm, user ID:" + this.myForm.get('userID').value);
+        console.log("myForm, user ID:" + this.myForm.get('userID').value.userID);
         this.getFruit(this.myForm);
 
         //load graph according to fruit data
