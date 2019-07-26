@@ -125,23 +125,23 @@ export class UserService {
 
   // opearations of Vegetable
   public getAllVegetable(): Observable<Vegetable[]> {
-    return this.fruitService.getAll(this.VEGETABLE);
+    return this.vegetableService.getAll(this.VEGETABLE);
   }
 
   public getVegetable(id: any): Observable<Vegetable> {
-    return this.fruitService.getSingle(this.VEGETABLE, id);
+    return this.vegetableService.getSingle(this.VEGETABLE, id);
   }
 
   public addVegetable(itemToAdd: any): Observable<Vegetable> {
-    return this.fruitService.add(this.VEGETABLE, itemToAdd);
+    return this.vegetableService.add(this.VEGETABLE, itemToAdd);
   }
 
   public updateVegetable(id: any, itemToUpdate: any): Observable<Vegetable> {
-    return this.fruitService.update(this.VEGETABLE, id, itemToUpdate);
+    return this.vegetableService.update(this.VEGETABLE, id, itemToUpdate);
   }
 
   public deleteVegetable(id: any): Observable<Vegetable> {
-    return this.fruitService.delete(this.VEGETABLE, id);
+    return this.vegetableService.delete(this.VEGETABLE, id);
   }
 
   // get all fruit transaction
