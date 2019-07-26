@@ -359,13 +359,13 @@ export class CashToVegetableComponent implements OnInit {
     this.totalCash = (this.vegetableWeightValue / this.vegetablePerCash);
 
     this.Transaction = {
-      $class: 'org.diet.network.CashToFruit',
+      $class: 'org.diet.network.CashToVegetable',
       'buyerID': this.transactionBuyerID,
-      'fruitValue': this.vegetableWeightValue,
+      'vegetableValue': this.vegetableWeightValue,
       'cashRate': this.vegetablePerCash,
       'cashValue': this.totalCash,
-      'fruitInc': this.buyerVegetableAsset,
-      'fruitDec': this.sellerVegetableAsset,
+      'vegetableInc': this.buyerVegetableAsset,
+      'vegetableDec': this.sellerVegetableAsset,
       'cashInc': this.sellerCashAsset,
       'cashDec': this.buyerCashAsset
     };
@@ -383,7 +383,7 @@ export class CashToVegetableComponent implements OnInit {
     //   'timestamp': null
     // });
 
-    return this.sellerCashAsset.getCash(cashID)
+    return this.serviceCashToVegetable.getCash(cashID)
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
