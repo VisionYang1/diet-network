@@ -144,7 +144,8 @@ export class UserComponent implements OnInit {
         console.log("all day:" + this.dayArray);
 
         //get fruit data
-        console.log("myForm, user ID:" + this.myForm.get('userID').value.userID);
+        let user = this.myForm.get('userID').value;
+        console.log("myForm, user ID:" + user[0].userID);
         this.getFruit(this.myForm);
 
         //load graph according to fruit data
@@ -418,6 +419,9 @@ export class UserComponent implements OnInit {
       }
 
       // this.getRangeDate(-6, "more");
+      // console.log("all transaction : " + tempList[0].appleInc);
+      // let time = tempList[0].timestamp.split("T", 2);
+      // console.log("all transaction : " + time[0]);
     })
     .catch((error) => {
       if(error == 'Server error'){
