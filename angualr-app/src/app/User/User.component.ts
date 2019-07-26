@@ -566,6 +566,8 @@ export class UserComponent implements OnInit {
       'reward': this.reward.value
     };
 
+    console.log("updateUser:" + form.get('userID').value);
+
     return this.serviceUser.updateUser(form.get('userID').value, this.participant)
     .toPromise()
     .then(() => {
