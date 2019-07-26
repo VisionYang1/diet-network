@@ -87,7 +87,7 @@ export class CashToFruitService {
   }
 
   // get vegetable by id
-  public getVegetable(id: any): Observable<Fruit> {
+  public getVegetable(id: any): Observable<Vegetable> {
     return this.vegetableService.getSingle(this.VEGETABLE, id);
   }
 }
