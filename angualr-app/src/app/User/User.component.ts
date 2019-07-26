@@ -145,8 +145,8 @@ export class UserComponent implements OnInit {
 
         //get fruit data
         console.log("get user");
-        let user = this.myForm.get('userID').value;
-        console.log("myForm, user ID:" + user.userID);
+        // let user = this.currentId;
+        console.log("myForm, user ID:" + this.myForm.userID);
         this.getFruit(this.myForm);
 
         //load graph according to fruit data
@@ -663,6 +663,7 @@ export class UserComponent implements OnInit {
       }
 
       this.myForm.setValue(formObject);
+      console.log("getform user ID:" + this.myForm.get('userID').value);
     })
     .catch((error) => {
       if (error === 'Server error') {
