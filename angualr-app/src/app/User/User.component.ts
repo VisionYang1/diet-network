@@ -618,7 +618,7 @@ export class UserComponent implements OnInit {
     .then((result) => {
       this.errorMessage = null;
       const formObject = {
-        'selectTime': 'perDay',
+        'selectTime': null,
         'userID': null,
         'firstName': null,
         'lastName': null,
