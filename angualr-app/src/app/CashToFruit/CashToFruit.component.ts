@@ -412,11 +412,11 @@ export class CashToFruitComponent implements OnInit {
     .then((checkCash) => {
       // if positive on sufficient cash, then check if sufficent apple 
       if(checkCash){
-        //call service to get apple 
+        //call service to get fruit 
         this.serviceCashToFruit.getFruit(fruitID)
         .toPromise()
         .then((result) => {
-          //check if enough apple
+          //check if enough fruit
           if(result.value){
             if((result.value - this.fruitWeightValue) < 0){
               this.errorMessage = "Insufficient Apples!";
