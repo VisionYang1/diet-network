@@ -206,7 +206,6 @@ export class UserComponent implements OnInit {
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
-        'selectTime': null,
         'userID': null,
         'firstName': null,
         'lastName': null,
