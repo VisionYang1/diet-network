@@ -23,25 +23,31 @@
         <div class="modal-body">
 
 
-          
+            <p><strong>Reward Rate: {{rewardsRate}} / times </strong></p>
 
             
-              <div class="form-group text-left">
+              <!-- <div class="form-group text-left">
                 <label for="rewardsRate">rewardsRate</label>
                 
                   <input formControlName="rewardsRate" type="number" step='any' class="form-control">
                 
-              </div>
-            
-          
-
+              </div> -->
             
               <div class="form-group text-left">
+                  <p>User: 
+                    <select name="buyer" formControlName="formUserID">
+                      <option *ngFor="let user of allUsers" value="{{user.userID}}">{{user.userID}}</option>
+                    </select>
+                  </p>
+                </div>
+
+            
+              <!-- <div class="form-group text-left">
                 <label for="rewardsDec">rewardsDec</label>
                 
                     <textarea formControlName="rewardsDec" class="form-control" rows="3"></textarea>
                 
-              </div>
+              </div> -->
             
           
 
@@ -65,6 +71,11 @@
     <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
         <strong>Error:</strong> {{errorMessage}}
     </div>
+
+    <div *ngIf="successTransaction" class="alert alert-success" role="alert">
+      <strong>Succee Transaction!</strong>
+      <p><strong>Transaction ID:</strong> {{transactionID}}</p>
+  </div>
 
   <div class="row">
     <div class="col-md-12">

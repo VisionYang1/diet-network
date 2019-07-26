@@ -16,36 +16,56 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { RewardsDec } from '../org.diet.network';
+
+import { User } from '../org.diet.network';
+import { Rewards } from '../org.diet.network';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
 @Injectable()
 export class RewardsDecService {
 
-  private NAMESPACE = 'RewardsDec';
+  private REWARDSDEC: string = 'RewardsDec';
+  private USER: string = 'User';
+  private REWARDS: string = 'Rewards';
 
-  constructor(private dataService: DataService<RewardsDec>) {
+  constructor(private dataService: DataService<RewardsDec>, private userService: DataService<User>, private rewardService: DataService<Rewards>) {
   };
 
   public getAll(): Observable<RewardsDec[]> {
-      return this.dataService.getAll(this.NAMESPACE);
-  }
+    return this.dataService.getAll(this.REWARDSDEC);
+}
 
-  public getTransaction(id: any): Observable<RewardsDec> {
-    return this.dataService.getSingle(this.NAMESPACE, id);
-  }
+// get all users
+public getAllUsers(): Observable<User[]> {
+  return this.userService.getAll(this.USER);
+}
 
-  public addTransaction(itemToAdd: any): Observable<RewardsDec> {
-    return this.dataService.add(this.NAMESPACE, itemToAdd);
-  }
+// get user by id
+public getUser(id: any): Observable<User> {
+  return this.userService.getSingle(this.USER, id);
+}
 
-  public updateTransaction(id: any, itemToUpdate: any): Observable<RewardsDec> {
-    return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
-  }
+// get reward by id
+public getReward(id: any): Observable<Rewards> {
+  return this.rewardService.getSingle(this.REWARDS, id);
+}
 
-  public deleteTransaction(id: any): Observable<RewardsDec> {
-    return this.dataService.delete(this.NAMESPACE, id);
-  }
+public getTransaction(id: any): Observable<RewardsDec> {
+  return this.dataService.getSingle(this.REWARDSDEC, id);
+}
+
+public addTransaction(itemToAdd: any): Observable<RewardsDec> {
+  return this.dataService.add(this.REWARDSDEC, itemToAdd);
+}
+
+public updateTransaction(id: any, itemToUpdate: any): Observable<RewardsDec> {
+  return this.dataService.update(this.REWARDSDEC, id, itemToUpdate);
+}
+
+public deleteTransaction(id: any): Observable<RewardsDec> {
+  return this.dataService.delete(this.REWARDSDEC, id);
+}
 
 }
 
