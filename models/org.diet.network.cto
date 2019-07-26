@@ -23,7 +23,6 @@ participant User identified by userID {
   o String firstName
   o String lastName
   --> Cash cash
-  --> Apples apple
   --> Rewards reward
 }
 
@@ -32,7 +31,6 @@ participant Market identified by marketID {
   o String firstName
   o String lastName
   --> Cash cash
-  --> Apples apple
 }
 
 participant Supplier identified by supplierID {
@@ -40,7 +38,6 @@ participant Supplier identified by supplierID {
   o String firstName
   o String lastName
   --> Cash cash
-  --> Apples apple
 }
 
 enum OwnerEntity {
@@ -57,8 +54,15 @@ asset Cash identified by cashID {
     o OwnerEntity ownerEntity
 }
 
-asset Apples identified by appleID {
-  o String appleID
+asset Fruit identified by fruitID {
+  o String fruitID
+  o Double value
+  o String ownerID
+  o OwnerEntity ownerEntity
+}
+
+asset Vegetable identified by vegetableID {
+  o String vegetableID
   o Double value
   o String ownerID
   o OwnerEntity ownerEntity
@@ -71,12 +75,32 @@ asset Rewards identified by rewardID {
   o OwnerEntity ownerEntity
 }
 
-transaction CashToApples {
+transaction CreateNewFruit {
+  o String fruitID
+  o String fruitName
+  o Double value
+  o String ownerID
+  o OwnerEntity ownerEntity
+}
+
+transaction CashToFruit {
     o String buyerID
-    o Double cashRate       
-    o Double cashValue    
-    --> Apples appleInc
-    --> Apples appleDec
+    o Double fruitValue
+    o Double cashRate
+    o Double cashValue
+    --> Fruit fruitInc
+    --> Fruit fruitDec
+    --> Cash cashInc
+    --> Cash cashDec
+}
+
+transaction CashToVegetable {
+    o String buyerID
+    o Double vegetableValue
+    o Double cashRate
+    o Double cashValue
+    --> Vegetable vegetableInc
+    --> Vegetable vegetableDec
     --> Cash cashInc
     --> Cash cashDec
 }
@@ -90,3 +114,4 @@ transaction RewardsInc {
     o Double rewardsRate
     --> Rewards rewardsDec
 }
+

@@ -13,25 +13,20 @@
  */
 
 'use strict';
-/**
- * Write your transction processor functions here
- */
+
 
 /**
  * Sample transaction
- * @param {org.diet.network.CashToApples} UpdateValues
+ * @param {org.diet.network.CashToFruit} UpdateValues
  * @transaction
  */
-function CashToApples(UpdateValues) {
-
-    //determine change in cash value from the rate
-    var appleWeightValue = (UpdateValues.cashRate * UpdateValues.cashValue);
+function CashToFruit(UpdateValues) {
 
     //update values of the assets
     UpdateValues.cashInc.value = UpdateValues.cashInc.value + UpdateValues.cashValue;
     UpdateValues.cashDec.value = UpdateValues.cashDec.value - UpdateValues.cashValue;
-    UpdateValues.appleInc.value = UpdateValues.appleInc.value + appleWeightValue;
-    UpdateValues.appleDec.value = UpdateValues.appleDec.value - appleWeightValue;
+    UpdateValues.fruitInc.value = UpdateValues.fruitInc.value + UpdateValues.fruitValue;
+    UpdateValues.fruitDec.value = UpdateValues.fruitDec.value - UpdateValues.fruitValue;
 
     //get asset registry for cash and apple, and update on the ledger
     return getAssetRegistry('org.diet.network.Cash')
@@ -39,14 +34,46 @@ function CashToApples(UpdateValues) {
             return assetRegistry.updateAll([UpdateValues.cashInc,UpdateValues.cashDec]);
         })                
         .then(function () {
-            return  getAssetRegistry('org.diet.network.Apples')
+            return  getAssetRegistry('org.diet.network.Fruit')
             .then(function (assetRegistry) {
-                return assetRegistry.updateAll([UpdateValues.appleInc,UpdateValues.appleDec]);
+                return assetRegistry.updateAll([UpdateValues.fruitInc,UpdateValues.fruitDec]);
             });            
         });        
    
 }
 
+/**
+ * Sample transaction
+ * @param {org.diet.network.CashToFruit} UpdateValues
+ * @transaction
+ */
+function CashToVegetable(UpdateValues) {
+
+    //update values of the assets
+    UpdateValues.cashInc.value = UpdateValues.cashInc.value + UpdateValues.cashValue;
+    UpdateValues.cashDec.value = UpdateValues.cashDec.value - UpdateValues.cashValue;
+    UpdateValues.vegetableInc.value = UpdateValues.vegetableInc.value + UpdateValues.vegetableValue;
+    UpdateValues.vegetableDec.value = UpdateValues.vegetableDec.value - UpdateValues.vegetableValue;
+
+    //get asset registry for cash and apple, and update on the ledger
+    return getAssetRegistry('org.diet.network.Cash')
+        .then(function (assetRegistry) {
+            return assetRegistry.updateAll([UpdateValues.cashInc,UpdateValues.cashDec]);
+        })                
+        .then(function () {
+            return  getAssetRegistry('org.diet.network.Vegetable')
+            .then(function (assetRegistry) {
+                return assetRegistry.updateAll([UpdateValues.vegetableInc,UpdateValues.vegetableDec]);
+            });            
+        });        
+   
+}
+
+/**
+ * Sample transaction
+ * @param {org.diet.network.RewardsInc} UpdateValues
+ * @transaction
+ */
 function RewardsInc(UpdateValues) {
 
     UpdateValues.rewardsInc.value = UpdateValues.rewardsInc.value + UpdateValues.rewardsRate;
@@ -58,6 +85,11 @@ function RewardsInc(UpdateValues) {
 	})
 }
 
+/**
+ * Sample transaction
+ * @param {org.diet.network.RewardsDec} UpdateValues
+ * @transaction
+ */
 function RewardsDec(UpdateValues) {
 
     UpdateValues.rewardsDec.value = UpdateValues.rewardsDec.value - UpdateValues.rewardsRate;
@@ -68,3 +100,5 @@ function RewardsDec(UpdateValues) {
 	    return assetRegistry.updateAll([UpdateValues.rewardsDec]);
 	})
 }
+
+
