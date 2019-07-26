@@ -171,12 +171,12 @@ export class SupplierComponent implements OnInit {
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
-        'marketID': null,
+        'supplierID': null,
         'firstName': null,
         'lastName': null,
-        'cash': null,
         'fruit': null,
-        'vegetable': null
+        'vegetable': null,
+        'cash': null
       });
       // this.loadAll(); 
     })
@@ -220,7 +220,7 @@ export class SupplierComponent implements OnInit {
 
     this.participant = {
       $class: 'org.diet.network.Supplier',
-      'marketID': this.supplierID.value,
+      'supplierID': this.supplierID.value,
       'firstName': this.firstName.value,
       'lastName': this.lastName.value,
       'cash': "CA_" + this.supplierID.value,
