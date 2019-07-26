@@ -44,7 +44,7 @@ function CashToFruit(UpdateValues) {
 
 /**
  * Sample transaction
- * @param {org.diet.network.CashToFruit} UpdateValues
+ * @param {org.diet.network.CashToVegetable} UpdateValues
  * @transaction
  */
 function CashToVegetable(UpdateValues) {
