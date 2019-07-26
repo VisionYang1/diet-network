@@ -601,16 +601,10 @@ export class CashToFruitComponent implements OnInit {
   resetForm(): void {
     this.myForm.setValue({
       'action': 'fromMarket',
-      'buyerID': null,
-      'fruitValue': null,
-      'cashRate': null,
+      'formBuyerID': null,
+      'formSellerID': null,
       'cashValue': null,
-      'fruitInc': null,
-      'fruitDec': null,
-      'cashInc': null,
-      'cashDec': null,
-      'transactionId': null,
-      'timestamp': null
+      'appleWeight': null
     });
   }
 }
