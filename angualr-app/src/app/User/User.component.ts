@@ -425,7 +425,7 @@ export class UserComponent implements OnInit {
       // this.getRangeDate(-6, "more");
       console.log("all transaction : " + tempList[0].appleInc);
       // let time = tempList[0].timestamp.split("T", 2);
-      console.log("all transaction : " + userAllTransaction);
+      console.log("all transaction : " + userAllTransaction[0].appleInc);
     })
     .catch((error) => {
       if(error == 'Server error'){
