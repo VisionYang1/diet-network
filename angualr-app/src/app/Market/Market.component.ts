@@ -199,7 +199,7 @@ export class MarketComponent implements OnInit {
           "currency":'Pound',
           "value":this.cash.value,
           "ownerID":this.marketID.value,
-          "ownerEntity":'User'
+          "ownerEntity":'Market'
     };
 
     this.fruitOJ = {
@@ -207,7 +207,7 @@ export class MarketComponent implements OnInit {
           "fruitID":"FR_" + this.marketID.value,
           "value":this.fruit.value,
           "ownerID":this.marketID.value,
-          "ownerEntity":'User'
+          "ownerEntity":'Market'
     };
 
     this.vegetableOJ = {
@@ -215,7 +215,7 @@ export class MarketComponent implements OnInit {
           "vegetableID":"VE_" + this.marketID.value,
           "value":this.vegetable.value,
           "ownerID":this.marketID.value,
-          "ownerEntity":'User'
+          "ownerEntity":'Market'
     };
 
     this.participant = {
