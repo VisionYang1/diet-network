@@ -601,16 +601,10 @@ export class CashToVegetableComponent implements OnInit {
   resetForm(): void {
     this.myForm.setValue({
       'action': 'fromMarket',
-      'buyerID': null,
-      'vegetableValue': null,
-      'cashRate': null,
+      'formBuyerID': null,
+      'formSellerID': null,
       'cashValue': null,
-      'vegetableInc': null,
-      'vegetableDec': null,
-      'cashInc': null,
-      'cashDec': null,
-      'transactionId': null,
-      'timestamp': null
+      'vegetableWeight': null
     });
   }
 }
