@@ -81,14 +81,6 @@ asset Rewards identified by rewardID {
   o OwnerEntity ownerEntity
 }
 
-transaction CreateNewFruit {
-  o String fruitID
-  o String fruitName
-  o Double value
-  o String ownerID
-  o OwnerEntity ownerEntity
-}
-
 transaction CashToFruit {
   o String buyerID
   o Double fruitValue
