@@ -146,7 +146,7 @@ export class UserComponent implements OnInit {
         //get fruit data
         console.log("get user");
         // let user = this.currentId;
-        console.log("myForm, user ID:" + this.myForm.userID.value);
+
         this.getFruit(this.myForm);
 
         //load graph according to fruit data
@@ -396,6 +396,8 @@ export class UserComponent implements OnInit {
 
 
   getFruit(form: any): Promise<any> {
+
+    console.log("myForm, user ID:" + this.myForm.userID.value);
 
     //retrieve all users in the tempList array
     let tempList = [];
