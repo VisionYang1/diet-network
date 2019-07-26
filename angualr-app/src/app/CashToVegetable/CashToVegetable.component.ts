@@ -361,7 +361,7 @@ export class CashToVegetableComponent implements OnInit {
     this.Transaction = {
       $class: 'org.diet.network.CashToFruit',
       'buyerID': this.transactionBuyerID,
-      'fruitValue': this.vegetableWeight,
+      'fruitValue': this.vegetableWeightValue,
       'cashRate': this.vegetablePerCash,
       'cashValue': this.totalCash,
       'fruitInc': this.buyerVegetableAsset,
@@ -418,7 +418,7 @@ export class CashToVegetableComponent implements OnInit {
         .then((result) => {
           //check if enough vegetable
           if(result.value){
-            if((result.value - this.vegetableWeight) < 0){
+            if((result.value - this.vegetableWeightValue) < 0){
               this.errorMessage = "Insufficient Apples!";
               return false;
             }
