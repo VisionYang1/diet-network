@@ -144,6 +144,7 @@ export class UserComponent implements OnInit {
         console.log("all day:" + this.dayArray);
 
         //get fruit data
+        console.log("get user");
         let user = this.myForm.get('userID').value;
         console.log("myForm, user ID:" + user.userID);
         this.getFruit(this.myForm);
