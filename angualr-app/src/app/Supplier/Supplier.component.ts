@@ -165,38 +165,20 @@ export class SupplierComponent implements OnInit {
   }
 
   addParticipant(form: any): Promise<any> {
-    this.participant = {
-      $class: 'org.diet.network.Supplier',
-      'supplierID': this.supplierID.value,
-      'firstName': this.firstName.value,
-      'lastName': this.lastName.value,
-      'fruit': this.fruit.value,
-      'vegetable': this.vegetable.value,
-      'cash': this.cash.value
-    };
 
-    this.myForm.setValue({
-      'supplierID': null,
-      'firstName': null,
-      'lastName': null,
-      'fruit': null,
-      'vegetable': null,
-      'cash': null
-    });
 
-    return this.serviceSupplier.addSupplier(this.participant)
-    .toPromise()
+    return this.createAllAssetsSupplier()
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
-        'supplierID': null,
+        'marketID': null,
         'firstName': null,
         'lastName': null,
+        'cash': null,
         'fruit': null,
-        'vegetable': null,
-        'cash': null
+        'vegetable': null
       });
-      this.loadAll(); 
+      // this.loadAll(); 
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -208,7 +190,7 @@ export class SupplierComponent implements OnInit {
   }
 
   //create other assets associated with the user
-  createAllAssetsMarket(): Promise<any>{
+  createAllAssetsSupplier(): Promise<any>{
     
     //create cash
     this.cashOJ = {
