@@ -16,35 +16,104 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { Supplier } from '../org.diet.network';
+
+import { Cash } from '../org.diet.network';
+import { Fruit } from '../org.diet.network';
+import { Vegetable } from '../org.diet.network';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
 @Injectable()
 export class SupplierService {
 
-  private NAMESPACE = 'Supplier';
+  private SUPPLIER: string = 'Supplier';
+  private CASH: string = 'Cash';
+  private FRUIT: string = 'Fruit';
+  private VEGETABLE: string = 'Vegetable';
 
-  constructor(private dataService: DataService<Supplier>) {
+  constructor(private dataService: DataService<Supplier>, private cashService: DataService<Cash>, private fruitService: DataService<Fruit>, private vegetableService: DataService<Vegetable>) {
   };
 
-  public getAll(): Observable<Supplier[]> {
-    return this.dataService.getAll(this.NAMESPACE);
+  public getAllSuppliers(): Observable<Supplier[]> {
+    return this.dataService.getAll(this.SUPPLIER);
   }
 
-  public getparticipant(id: any): Observable<Supplier> {
-    return this.dataService.getSingle(this.NAMESPACE, id);
+  public getSupplier(id: any): Observable<Supplier> {
+    return this.dataService.getSingle(this.SUPPLIER, id);
   }
 
-  public addParticipant(itemToAdd: any): Observable<Supplier> {
-    return this.dataService.add(this.NAMESPACE, itemToAdd);
+  public addSupplier(itemToAdd: any): Observable<Supplier> {
+    return this.dataService.add(this.SUPPLIER, itemToAdd);
   }
 
-  public updateParticipant(id: any, itemToUpdate: any): Observable<Supplier> {
-    return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
+  public updateSupplier(id: any, itemToUpdate: any): Observable<Supplier> {
+    return this.dataService.update(this.SUPPLIER, id, itemToUpdate);
   }
 
-  public deleteParticipant(id: any): Observable<Supplier> {
-    return this.dataService.delete(this.NAMESPACE, id);
+  public deleteSupplier(id: any): Observable<Supplier> {
+    return this.dataService.delete(this.SUPPLIER, id);
   }
 
+  // opearations of Cash
+  public getAllCash(): Observable<Cash[]> {
+    return this.cashService.getAll(this.CASH);
+  }
+
+  public getCash(id: any): Observable<Cash> {
+    return this.cashService.getSingle(this.CASH, id);
+  }
+
+  public addCash(itemToAdd: any): Observable<Cash> {
+    return this.cashService.add(this.CASH, itemToAdd);
+  }
+
+  public updateCash(id: any, itemToUpdate: any): Observable<Cash> {
+    return this.cashService.update(this.CASH, id, itemToUpdate);
+  }
+
+  public deleteCash(id: any): Observable<Cash> {
+    return this.cashService.delete(this.CASH, id);
+  }
+
+  // opearations of Fruit
+  public getAllFruit(): Observable<Fruit[]> {
+    return this.fruitService.getAll(this.FRUIT);
+  }
+
+  public getFruit(id: any): Observable<Fruit> {
+    return this.fruitService.getSingle(this.FRUIT, id);
+  }
+
+  public addFruit(itemToAdd: any): Observable<Fruit> {
+    return this.fruitService.add(this.FRUIT, itemToAdd);
+  }
+
+  public updateFruit(id: any, itemToUpdate: any): Observable<Fruit> {
+    return this.fruitService.update(this.FRUIT, id, itemToUpdate);
+  }
+
+  public deleteFruit(id: any): Observable<Fruit> {
+    return this.fruitService.delete(this.FRUIT, id);
+  }
+
+    // opearations of Vegetable
+    public getAllVegetable(): Observable<Vegetable[]> {
+      return this.vegetableService.getAll(this.VEGETABLE);
+    }
+  
+    public getVegetable(id: any): Observable<Vegetable> {
+      return this.vegetableService.getSingle(this.VEGETABLE, id);
+    }
+  
+    public addVegetable(itemToAdd: any): Observable<Vegetable> {
+      return this.vegetableService.add(this.VEGETABLE, itemToAdd);
+    }
+  
+    public updateVegetable(id: any, itemToUpdate: any): Observable<Vegetable> {
+      return this.vegetableService.update(this.VEGETABLE, id, itemToUpdate);
+    }
+  
+    public deleteVegetable(id: any): Observable<Vegetable> {
+      return this.vegetableService.delete(this.VEGETABLE, id);
+    }
 }
