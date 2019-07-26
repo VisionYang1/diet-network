@@ -293,11 +293,7 @@ export class RewardsDecComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
-      'formUserID': null,
-      'rewardsRate': null,
-      'rewardsDec': null,
-      'transactionId': null,
-      'timestamp': null
+      'formUserID': null
     });
   }
 }
