@@ -329,7 +329,7 @@ export class CashToVegetableComponent implements OnInit {
 
       // this.cashNum = this.cashValue.value;
       this.transactionBuyerID = "org.diet.network.User#" + this.formBuyerID.value;
-      this.vegetableWeight = this.vegetableWeight.value;
+      this.vegetableWeightValue = this.vegetableWeight.value;
       this.buyerCashAsset = this.user.cash;
       this.sellerCashAsset = this.market.cash;
       this.buyerVegetableAsset = this.user.vegetable;
@@ -339,7 +339,7 @@ export class CashToVegetableComponent implements OnInit {
   
       // this.cashNum = this.cashValue.value;
       this.transactionBuyerID = "org.diet.network.Market#" + this.formBuyerID.value;
-      this.vegetableWeight = this.vegetableWeight.value;
+      this.vegetableWeightValue = this.vegetableWeight.value;
       this.buyerCashAsset = this.market.cash;
       this.sellerCashAsset = this.supplier.cash;
       this.buyerVegetableAsset = this.market.vegetable;
