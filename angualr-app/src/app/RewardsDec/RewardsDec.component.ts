@@ -184,10 +184,8 @@ export class RewardsDecComponent implements OnInit {
             this.errorMessage = error;
           }
         })
-        .then((result) => {
-          if(result){
-            this.successTransaction = true;
-          }
+        .then(() => {
+          this.successTransaction = true;
         })
       }
     })
