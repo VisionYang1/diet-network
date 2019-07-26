@@ -190,6 +190,49 @@ export class CashToVegetableComponent implements OnInit {
     });
   }
 
+  loadAllMarkets(): Promise<any> {
+    
+    //retrieve all users in the tempList array
+    let tempList = [];
+
+    // call serviceTransaction to get all users 
+    return this.serviceCashToVegetable.getAllMarkets()
+    .toPromise()
+    .then((result) => {
+      this.errorMessage = null;
+
+      // add user into tempList
+      result.forEach(market => {
+        tempList.push(market)
+      });
+
+      if(this.marketIsBuyer){
+        tempList.forEach(buyer => {
+          buyer.buyerID = buyer.marketID;
+          delete buyer.marketID;
+        });
+        this.allBuyers = tempList;
+      }else{
+        tempList.forEach(seller => {
+          seller.sellerID = seller.marketID;
+          delete seller.marketID;
+        });
+        this.allSellers = tempList;
+      }
+    })
+    .catch((error) => {
+      if(error == 'Server error'){
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if(error == '404 - Not Found'){
+      this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else{
+          this.errorMessage = error;
+      }
+    });
+  }
+
   loadAllSuppliers(): Promise<any> {
 
     //retrieve all users in the tempList array
