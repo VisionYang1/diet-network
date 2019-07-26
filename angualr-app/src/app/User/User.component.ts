@@ -133,14 +133,22 @@ export class UserComponent implements OnInit {
       {
         let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
         let day = "Daliy";
-        this.loadGraph(day, perDay);
-        this.loadTransaction();
+        // this.loadAllTransaction();
         var Dates = new Date().getWeek();
         console.log("week:" + Dates);
         var today = new Date().toString();
         console.log("today:" + today.slice(0, 3));
+
+        //get date of array
         this.loadGraphDate("day");
         console.log("all day:" + this.dayArray);
+
+        //get fruit data
+        console.log("myForm, user ID:" + this.myForm.get('userID').value);
+        this.getFruit(this.myForm);
+
+        //load graph according to fruit data
+        this.loadGraph(day, perDay);
       }
   
       if (res=='perWeek')
@@ -224,34 +232,33 @@ export class UserComponent implements OnInit {
           break;
         case "Tue":
           this.dayArray = this.getRangeDate(-1,this.dayArray, "more");
-          this.dayArray.splice(1,1);
+          // this.dayArray.splice(1,1);
           this.dayArray2 = this.getRangeDate(5,this.dayArray2, "more");
-          this.dayArray.concat(this.dayArray2);
+          this.dayArray = this.dayArray.concat(this.dayArray2);
           break;
         case "Wed":
           this.dayArray = this.getRangeDate(-2,this.dayArray, "more");
-          this.dayArray.splice(2,1);
+          // this.dayArray.splice(2,1);
           this.dayArray2 = this.getRangeDate(4,this.dayArray2, "more");
-          this.dayArray.concat(this.dayArray2);
+          this.dayArray = this.dayArray.concat(this.dayArray2);
             break;
         case "Thu":
           this.dayArray = this.getRangeDate(-3,this.dayArray, "more");
-          this.dayArray.splice(3,1);
+          // this.dayArray.splice(3,1);
           this.dayArray2 = this.getRangeDate(3,this.dayArray2, "more");
-          this.dayArray.concat(this.dayArray2);
+          this.dayArray = this.dayArray.concat(this.dayArray2);
             break;
         case "Fri":
           this.dayArray = this.getRangeDate(-4,this.dayArray, "more");
           // this.dayArray.splice(4,1);
           this.dayArray2 = this.getRangeDate(2,this.dayArray2, "more");
-          console.log("dayAr2:" + this.dayArray2);
           this.dayArray = this.dayArray.concat(this.dayArray2);
             break;
         case "Sat":
           this.dayArray = this.getRangeDate(-5,this.dayArray, "more");
-          this.dayArray.splice(5,1);
+          // this.dayArray.splice(5,1);
           this.dayArray2 = this.getRangeDate(1,this.dayArray2, "more");
-          this.dayArray.concat(this.dayArray2);
+          this.dayArray = this.dayArray.concat(this.dayArray2);
             break;
         case "Sun":
           this.dayArray = this.getRangeDate(-6,this.dayArray, "more");
@@ -386,10 +393,11 @@ export class UserComponent implements OnInit {
   }
 
 
-  loadTransaction(): Promise<any> {
+  getFruit(form: any): Promise<any> {
 
     //retrieve all users in the tempList array
     let tempList = [];
+    let userAllTransaction = [];
 
     // call transaction
     return this.serviceUser.getAllTransactions()
@@ -401,6 +409,14 @@ export class UserComponent implements OnInit {
       allTransactions.forEach(transaction => {
         tempList.push(transaction);
       });
+
+      // get the given user's transaction
+      for(let transaction of tempList){
+        if(transaction.appleInc){
+
+        }
+      }
+
       // this.getRangeDate(-6, "more");
     })
     .catch((error) => {
