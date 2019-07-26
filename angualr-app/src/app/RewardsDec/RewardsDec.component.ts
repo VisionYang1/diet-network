@@ -246,6 +246,7 @@ export class RewardsDecComponent implements OnInit {
     .then((result) => {
       this.errorMessage = null;
       const formObject = {
+        'formUserID': null,
         'rewardsRate': null,
         'rewardsDec': null,
         'transactionId': null,
@@ -292,6 +293,7 @@ export class RewardsDecComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
+      'formUserID': null,
       'rewardsRate': null,
       'rewardsDec': null,
       'transactionId': null,
