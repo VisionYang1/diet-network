@@ -415,15 +415,17 @@ export class UserComponent implements OnInit {
 
       // get the given user's transaction
       for(let transaction of tempList){
-        if(transaction.appleInc){
-
+        if(transaction.appleInc == "resource:org.diet.network.Apples#AP_1"){
+          userAllTransaction.push(transaction);
         }
       }
 
+
+
       // this.getRangeDate(-6, "more");
-      // console.log("all transaction : " + tempList[0].appleInc);
+      console.log("all transaction : " + tempList[0].appleInc);
       // let time = tempList[0].timestamp.split("T", 2);
-      // console.log("all transaction : " + time[0]);
+      console.log("all transaction : " + userAllTransaction);
     })
     .catch((error) => {
       if(error == 'Server error'){
