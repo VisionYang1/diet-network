@@ -604,7 +604,7 @@ export class CashToFruitComponent implements OnInit {
       'formBuyerID': null,
       'formSellerID': null,
       'cashValue': null,
-      'appleWeight': null
+      'fruitWeight': null
     });
   }
 }
