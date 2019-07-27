@@ -591,9 +591,9 @@ export class UserComponent implements OnInit {
       // load week data
       if(dateType == "week"){
         console.log("test if inside?");
-        for(let week of dateRange){
-          console.log("test week include:" + week);
-        }
+        dateRange.forEach(week => {
+          console.log("forEach is ok?" + week);
+        });
       }
     })
     .catch((error) => {
