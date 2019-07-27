@@ -195,12 +195,12 @@ export class UserComponent implements OnInit {
 
   private dayArray: Array<any> = [];
   private dayArray2: Array<any> = [];
-  // private weekOJ={
-  //   'first': null,
-  //   'second': null,
-  //   'thrid': null,
-  //   'fourth': null
-  // };
+  private weekOJ={
+    'first': null,
+    'second': null,
+    'thrid': null,
+    'fourth': null
+  };
   private monthArray;
 
   private dayFruitData;
@@ -250,33 +250,32 @@ export class UserComponent implements OnInit {
       {
         let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
         let day = "Daliy";
-        // this.loadAllTransaction();
-        var Dates = new Date().getWeek();
-        console.log("week:" + Dates);
 
         //get date of array
         this.loadGraphDate("day");
-        console.log("all day:" + this.dayArray);
+        // console.log("all day:" + this.dayArray);
 
-        //get fruit data
-        console.log("get user");
-        // let user = this.currentId;
-        console.log("myForm, user ID:" + this.myForm.get('userID').value);
-        this.getUserFruitTransaction(this.myForm, this.dayArray);
+        // console.log("myForm, user ID:" + this.myForm.get('userID').value);
+        
+        // get given day data
+        this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
 
         //load graph according to fruit data
         this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
 
-        console.log("outside first:" + Dates.first);
-        console.log("outside second:" + Dates.second);
-        console.log("outside third:" + Dates.third);
-        console.log("outside fourth:" + Dates.fourth);
       }
   
       if (res=='perWeek')
       {
         let perWeek = ['First Week', 'Second Week', 'Thrid Week', 'Fourth Week'];
         let week = "Weekly";
+
+        // get week date of array
+        this.loadGraphDate("week");
+
+        // get given day data
+        this.getUserFruitTransaction(this.myForm, this.weekOJ, "week");
+
         this.loadGraph(week, perWeek, this.weekFruitData, this.weekVegetableData);
       }
       if (res=='perMonth')
@@ -380,7 +379,7 @@ export class UserComponent implements OnInit {
       }
     }
     else if(type == "week"){
-
+      this.weekOJ = new Date().getWeek();
     }
     else if(type == "month"){
 
@@ -564,32 +563,37 @@ export class UserComponent implements OnInit {
 
       console.log("len :" + len);
 
-      let dayTotalData = [];
-      //get given day transaction
-      for(let day of dateRange){
-        //caculate per day all data
-        let perDayData = 0;
-        for(let fruitTransaction of userAllFruitTransaction){
-          console.log("test fruit transaction date inside day:" + fruitTransaction.timestamp.slice(0,10))
-          if(day == fruitTransaction.timestamp.slice(0,10)){
-            console.log("successful day if" + day);
-            perDayData = perDayData + fruitTransaction.fruitValue;
+      // load per day data
+      if(dateType == "day"){
+        let dayTotalData = [];
+        //get given day transaction
+        for(let day of dateRange){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let fruitTransaction of userAllFruitTransaction){
+            console.log("test fruit transaction date inside day:" + fruitTransaction.timestamp.slice(0,10))
+            if(day == fruitTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + day);
+              perDayData = perDayData + fruitTransaction.fruitValue;
+            }
           }
+          if(perDayData){
+            dayTotalData.push(perDayData);
+          }else{
+            dayTotalData.push(0);
+          }
+          // console.log("test day array:" + day);
         }
-        if(perDayData){
-          dayTotalData.push(perDayData);
-        }else{
-          dayTotalData.push(0);
-        }
-        // console.log("test day array:" + day);
+        this.dayFruitData = dayTotalData;
+        console.log("test day array data:" + dayTotalData);
       }
-      this.dayFruitData = dayTotalData;
-      console.log("test day array data:" + dayTotalData);
 
-      // this.getRangeDate(-6, "more");
-      // console.log("all transaction : " + tempList[0].appleInc);
-      // let time = tempList[0].timestamp.split("T", 2);
-      // console.log("all transaction : " + allFruitTransactions[0].appleInc);
+      // load week data
+      if(dateType == "week"){
+        for(let week of dateRange){
+          console.log("test week include:" + week);
+        }
+      }
     })
     .catch((error) => {
       if(error == 'Server error'){
