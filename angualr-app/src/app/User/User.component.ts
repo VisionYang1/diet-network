@@ -98,7 +98,17 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
+
+      let bigArr = [];
+      let smArr1 = [1,2,3,4];
+      let smArr2 = [5,6,7,8];
+      bigArr.push(smArr1);
+      bigArr.push(smArr2);
+      console.log("test arr" + bigArr);
+      
       if (res=='perDay')
       {
         let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -378,7 +388,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  getUserFruitTransaction(form: any, dateRange): Promise<any> {
+  getUserFruitTransaction(form: any, dateRange, dateType?: string): Promise<any> {
 
 
     //retrieve all users in the tempList array
