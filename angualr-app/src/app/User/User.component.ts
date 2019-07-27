@@ -241,23 +241,24 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    let day = "Daliy";
-
-    //get date of array
-    this.loadGraphDate("day");
-    // console.log("all day:" + this.dayArray);
-
-    // console.log("myForm, user ID:" + this.myForm.get('userID').value);
-    
-    // get given day data
-    this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
-
-    //load graph according to fruit data
-    this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
-
 
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
+
+      // let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      // let day = "Daliy";
+  
+      // //get date of array
+      // this.loadGraphDate("day");
+      // // console.log("all day:" + this.dayArray);
+  
+      // // console.log("myForm, user ID:" + this.myForm.get('userID').value);
+      
+      // // get given day data
+      // this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
+  
+      // //load graph according to fruit data
+      // this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
+  
 
       if (res=='perDay')
       {
@@ -871,6 +872,7 @@ export class UserComponent implements OnInit {
       }
 
       this.myForm.setValue(formObject);
+      this.loadGraph("", "", "", "");
     })
     .catch((error) => {
       if (error === 'Server error') {
