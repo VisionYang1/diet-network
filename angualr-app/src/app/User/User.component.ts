@@ -102,13 +102,16 @@ export class UserComponent implements OnInit {
 
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
 
-      let bigArr = [];
+      let bigArr = {
+        "a": null,
+        "b": null
+      };
       let smArr1 = [1,2,3,4];
       let smArr2 = [5,6,7,8];
-      bigArr.push(smArr1);
-      bigArr.push(smArr2);
-      console.log("test arr" + bigArr);
-      
+      bigArr.a = smArr1;
+      bigArr.b = smArr2;
+      console.log("test arr:s" + bigArr);
+
       if (res=='perDay')
       {
         let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
