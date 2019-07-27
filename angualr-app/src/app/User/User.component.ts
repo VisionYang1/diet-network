@@ -128,7 +128,7 @@ export class UserComponent implements OnInit {
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
 
       let date = new Date();
-      console.log(date.getWeek());
+      console.log("666:"+date.getWeek());
 
       if (res=='perDay')
       {
