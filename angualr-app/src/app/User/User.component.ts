@@ -245,11 +245,6 @@ export class UserComponent implements OnInit {
 
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
 
-      let date = new Date().getWeek();
-      console.log("outside first:" + date.first);
-      console.log("outside second:" + date.second);
-      console.log("outside third:" + date.third);
-      console.log("outside fourth:" + date.fourth);
 
       if (res=='perDay')
       {
@@ -258,8 +253,6 @@ export class UserComponent implements OnInit {
         // this.loadAllTransaction();
         var Dates = new Date().getWeek();
         console.log("week:" + Dates);
-        var today = new Date().toString();
-        console.log("today:" + today.slice(0, 3));
 
         //get date of array
         this.loadGraphDate("day");
@@ -273,6 +266,11 @@ export class UserComponent implements OnInit {
 
         //load graph according to fruit data
         this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
+
+        console.log("outside first:" + Dates.first);
+        console.log("outside second:" + Dates.second);
+        console.log("outside third:" + Dates.third);
+        console.log("outside fourth:" + Dates.fourth);
       }
   
       if (res=='perWeek')
