@@ -408,7 +408,7 @@ export class UserComponent implements OnInit {
 
           // }
         }
-        // console.log("test day array:" + day);
+        console.log("test day array:" + day);
       }
 
       // this.getRangeDate(-6, "more");
