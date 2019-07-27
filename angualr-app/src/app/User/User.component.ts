@@ -392,15 +392,19 @@ export class UserComponent implements OnInit {
         tempList.push(transaction);
       });
 
+      let len = 0;
       // get the given user's fruit transaction
       let userFruitID = "resource:org.diet.network.Fruit#FR_" + form.get('userID').value;
       console.log("user fruit id:" + userFruitID);
       for(let transaction of tempList){
         if(transaction.fruitInc == userFruitID){
-          console.log("test fruit transaction date:" + transaction.toString().slice(0,11))
+          len++;
+          // console.log("test fruit transaction date:" + transaction.toString().slice(0,11))
           userAllFruitTransaction.push(transaction);
         }
       }
+
+      console.log("len :" + len);
 
       //get given day transaction
       for(let day of dateRange){
