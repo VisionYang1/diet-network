@@ -48,7 +48,7 @@ Date.prototype.getWeek = function(start)
     };
 
     var today = new Date(this.setHours(0, 0, 0, 0));
-    console.log("today.getDay():" + today.getMonth());
+    console.log("today.getDay():" + today.getDate());
     var day = today.getDay() - start;
     var date = today.getDate() - day;
 
