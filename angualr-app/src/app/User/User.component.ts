@@ -110,7 +110,7 @@ export class UserComponent implements OnInit {
       let smArr2 = [5,6,7,8];
       bigArr.a = smArr1;
       bigArr.b = smArr2;
-      console.log("test arr:s" + bigArr.a);
+      console.log("test arr:" + bigArr.a);
 
       if (res=='perDay')
       {
