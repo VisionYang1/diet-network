@@ -24,11 +24,31 @@ declare global {
   }
 }
 
+// Date.prototype.getWeek = function(start)
+// {
+//     start = start || 0;
+//     var today = new Date(this.setHours(0, 0, 0, 0));
+//     console.log("today.getDay():" + today.getDay());
+//     var day = today.getDay() - start;
+//     var date = today.getDate() - day;
+
+//     var StartDate = new Date(today.setDate(date));
+//     var EndDate = new Date(today.setDate(date + 6));
+//     return [StartDate, EndDate];
+// }
+
 Date.prototype.getWeek = function(start)
 {
     start = start || 0;
+    let weekOJ={
+      'first': null,
+      'second': null,
+      'thrid': null,
+      'fourth': null
+    };
+
     var today = new Date(this.setHours(0, 0, 0, 0));
-    console.log("today.getDay():" + today.getDay());
+    console.log("today.getDay():" + today.getMonth());
     var day = today.getDay() - start;
     var date = today.getDate() - day;
 
@@ -57,7 +77,12 @@ export class UserComponent implements OnInit {
 
   private dayArray: Array<any> = [];
   private dayArray2: Array<any> = [];
-  private weekArray;
+  private weekOJ={
+    'first': null,
+    'second': null,
+    'thrid': null,
+    'fourth': null
+  };
   private monthArray;
 
   private dayFruitData;
@@ -102,15 +127,8 @@ export class UserComponent implements OnInit {
 
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
 
-      let bigArr = {
-        "a": null,
-        "b": null
-      };
-      let smArr1 = [1,2,3,4];
-      let smArr2 = [5,6,7,8];
-      bigArr.a = smArr1;
-      bigArr.b = smArr2;
-      console.log("test arr:" + bigArr.a);
+      let date = new Date();
+      date.getWeek();
 
       if (res=='perDay')
       {
