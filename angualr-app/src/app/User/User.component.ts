@@ -19,7 +19,7 @@ import 'rxjs/add/operator/toPromise';
 
 declare global {
   interface Date {
-      getWeek (start?: number) : [Date, Date]
+      getWeek ()
       // getWeek ()
   }
 }
@@ -37,9 +37,9 @@ declare global {
 //     return [StartDate, EndDate];
 // }
 
-Date.prototype.getWeek = function(start)
+Date.prototype.getWeek = function()
 {
-    start = start || 0;
+
     let weekOJ={
       'first': null,
       'second': null,
@@ -49,12 +49,124 @@ Date.prototype.getWeek = function(start)
 
     var today = new Date(this.setHours(0, 0, 0, 0));
     console.log("today.getDate():" + today.getFullYear());
+    var fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-";
+    var days = 1;
+    var judge = 1;
     var month = today.getMonth() + 1;
-    var date = today.getDate();
 
-    var StartDate = new Date(today.setDate(date));
-    var EndDate = new Date(today.setDate(date + 6));
-    return [StartDate, EndDate];
+    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
+      while(judge){
+        if(days <= 7 && days > 0){
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          weekOJ.first.push(fullMonthDays);
+          days++;
+        }
+        if(days <= 14 && days > 7){
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          weekOJ.second.push(fullMonthDays);
+          days++;
+        }
+        if(days <= 21 && days > 14){
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          weekOJ.thrid.push(fullMonthDays);
+          days++;
+        }
+        if(days > 21){
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          weekOJ.fourth.push(fullMonthDays);
+          days++;
+        }
+        if(days == 32){
+          judge == 0;
+        }
+      }
+    }
+
+    if(month == 4 || month == 6 || month == 9 || month == 11){
+      while(judge){
+        if(days <= 7 && days > 0){
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          weekOJ.first.push(fullMonthDays);
+          days++;
+        }
+        if(days <= 14 && days > 7){
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          weekOJ.second.push(fullMonthDays);
+          days++;
+        }
+        if(days <= 21 && days > 14){
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          weekOJ.thrid.push(fullMonthDays);
+          days++;
+        }
+        if(days > 21){
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          weekOJ.fourth.push(fullMonthDays);
+          days++;
+        }
+        if(days == 31){
+          judge == 0;
+        }
+      }
+    }
+
+    // judge February
+    if((today.getMonth() + 1) == 2){
+      if(((today.getFullYear()%4==0)&&(today.getFullYear()%100!=0))||(today.getFullYear()%400==0)){
+        while(judge){
+          if(days <= 7 && days > 0){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.first.push(fullMonthDays);
+            days++;
+          }
+          if(days <= 14 && days > 7){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.second.push(fullMonthDays);
+            days++;
+          }
+          if(days <= 21 && days > 14){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.thrid.push(fullMonthDays);
+            days++;
+          }
+          if(days <= 29 && days > 21){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.fourth.push(fullMonthDays);
+            days++;
+          }
+          if(days == 30){
+            judge == 0;
+          }
+        }
+      }else{
+        while(judge){
+          if(days <= 7 && days > 0){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.first.push(fullMonthDays);
+            days++;
+          }
+          if(days <= 14 && days > 7){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.second.push(fullMonthDays);
+            days++;
+          }
+          if(days <= 21 && days > 14){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.thrid.push(fullMonthDays);
+            days++;
+          }
+          if(days <= 28 && days > 21){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.fourth.push(fullMonthDays);
+            days++;
+          }
+          if(days == 29){
+            judge == 0;
+          }
+        }
+      }
+    }
+    return weekOJ;
 }
 
 let Highcharts = require('highcharts');
@@ -127,8 +239,11 @@ export class UserComponent implements OnInit {
 
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
 
-      let date = new Date();
-      console.log("666:"+date.getWeek());
+      let date = new Date().getWeek();
+      console.log("first:" + date.first);
+      console.log("second:" + date.second);
+      console.log("third:" + date.third);
+      console.log("fourth:" + date.fourth);
 
       if (res=='perDay')
       {
@@ -266,6 +381,10 @@ export class UserComponent implements OnInit {
     else if(type == "month"){
 
     }
+  }
+
+  getAllDaysInMonth(){
+    
   }
 
   getRangeDate( range: number, arr: Array<any>, type?: string) {
