@@ -406,16 +406,26 @@ export class UserComponent implements OnInit {
 
       console.log("len :" + len);
 
+      let dayTotalData = [];
       //get given day transaction
       for(let day of dateRange){
+        //caculate per day all data
+        let perDayData;
         for(let fruitTransaction of userAllFruitTransaction){
           console.log("test fruit transaction date inside day:" + fruitTransaction.timestamp.slice(0,10))
           if(day == fruitTransaction.timestamp.slice(0,10)){
             console.log("successful day if" + day);
+            perDayData = perDayData + fruitTransaction.fruitValue;
           }
         }
-        console.log("test day array:" + day);
+        if(perDayData){
+          dayTotalData.push(perDayData);
+        }else{
+          dayTotalData.push(0);
+        }
+        // console.log("test day array:" + day);
       }
+      console.log("test day array data:" + dayTotalData);
 
       // this.getRangeDate(-6, "more");
       // console.log("all transaction : " + tempList[0].appleInc);
