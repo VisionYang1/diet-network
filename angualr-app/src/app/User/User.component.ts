@@ -410,7 +410,7 @@ export class UserComponent implements OnInit {
       //get given day transaction
       for(let day of dateRange){
         //caculate per day all data
-        let perDayData;
+        let perDayData = 0;
         for(let fruitTransaction of userAllFruitTransaction){
           console.log("test fruit transaction date inside day:" + fruitTransaction.timestamp.slice(0,10))
           if(day == fruitTransaction.timestamp.slice(0,10)){
