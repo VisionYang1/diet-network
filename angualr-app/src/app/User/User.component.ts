@@ -595,6 +595,7 @@ export class UserComponent implements OnInit {
 
           //caculate per day all data
           let perDayData = 0;
+          let perWeek = 0;
           for(let fruitTransaction of userAllFruitTransaction){
             
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
@@ -602,8 +603,11 @@ export class UserComponent implements OnInit {
               perDayData = perDayData + fruitTransaction.fruitValue;
             }
           }
-          if(perDayData){
-            weekTotalData.push(perDayData);
+
+          perWeek = perWeek + perDayData;
+
+          if(perWeek){
+            weekTotalData.push(perWeek);
           }else{
             weekTotalData.push(0);
           }
@@ -613,6 +617,7 @@ export class UserComponent implements OnInit {
 
           //caculate per day all data
           let perDayData = 0;
+          let perWeek = 0;
           for(let fruitTransaction of userAllFruitTransaction){
             
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
@@ -620,8 +625,11 @@ export class UserComponent implements OnInit {
               perDayData = perDayData + fruitTransaction.fruitValue;
             }
           }
-          if(perDayData){
-            weekTotalData.push(perDayData);
+
+          perWeek = perWeek + perDayData;
+
+          if(perWeek){
+            weekTotalData.push(perWeek);
           }else{
             weekTotalData.push(0);
           }
@@ -631,6 +639,7 @@ export class UserComponent implements OnInit {
 
           //caculate per day all data
           let perDayData = 0;
+          let perWeek = 0;
           for(let fruitTransaction of userAllFruitTransaction){
             
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
@@ -638,8 +647,10 @@ export class UserComponent implements OnInit {
               perDayData = perDayData + fruitTransaction.fruitValue;
             }
           }
-          if(perDayData){
-            weekTotalData.push(perDayData);
+          perWeek = perWeek + perDayData;
+
+          if(perWeek){
+            weekTotalData.push(perWeek);
           }else{
             weekTotalData.push(0);
           }
@@ -649,6 +660,7 @@ export class UserComponent implements OnInit {
 
           //caculate per day all data
           let perDayData = 0;
+          let perWeek = 0;
           for(let fruitTransaction of userAllFruitTransaction){
             
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
@@ -656,8 +668,10 @@ export class UserComponent implements OnInit {
               perDayData = perDayData + fruitTransaction.fruitValue;
             }
           }
-          if(perDayData){
-            weekTotalData.push(perDayData);
+          perWeek = perWeek + perDayData;
+
+          if(perWeek){
+            weekTotalData.push(perWeek);
           }else{
             weekTotalData.push(0);
           }
