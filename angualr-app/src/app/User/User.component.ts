@@ -51,7 +51,7 @@ Date.prototype.getWeek = function()
     console.log("today.getDate():" + today.getFullYear());
     var fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-";
     var days = 1;
-    var judge = 1;
+    var judge = true;
     var month = today.getMonth() + 1;
 
     if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
@@ -77,7 +77,7 @@ Date.prototype.getWeek = function()
           days++;
         }
         if(days == 32){
-          judge == 0;
+          judge = false;
         }
       }
     }
@@ -105,7 +105,7 @@ Date.prototype.getWeek = function()
           days++;
         }
         if(days == 31){
-          judge == 0;
+          judge = false;
         }
       }
     }
@@ -135,7 +135,7 @@ Date.prototype.getWeek = function()
             days++;
           }
           if(days == 30){
-            judge == 0;
+            judge = false;
           }
         }
       }else{
@@ -161,7 +161,7 @@ Date.prototype.getWeek = function()
             days++;
           }
           if(days == 29){
-            judge == 0;
+            judge = false;
           }
         }
       }
