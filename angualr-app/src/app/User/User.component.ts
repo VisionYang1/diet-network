@@ -722,7 +722,7 @@ export class UserComponent implements OnInit {
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
-        'selectTime': null,
+        'selectTime': "perDay",
         'userID': null,
         'firstName': null,
         'lastName': null,
@@ -871,7 +871,7 @@ export class UserComponent implements OnInit {
     .then((result) => {
       this.errorMessage = null;
       const formObject = {
-        'selectTime': null,
+        'selectTime': "perDay",
         'userID': null,
         'firstName': null,
         'lastName': null,
@@ -940,7 +940,7 @@ export class UserComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
-      'selectTime': null,
+      'selectTime': "perDay",
       'userID': null,
       'firstName': null,
       'lastName': null,
