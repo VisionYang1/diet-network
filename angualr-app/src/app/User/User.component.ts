@@ -60,9 +60,13 @@ export class UserComponent implements OnInit {
   private weekArray;
   private monthArray;
 
-  private dayData;
-  private weekData;
-  private monthData;
+  private dayFruitData;
+  private weekFruitData;
+  private monthFruitData;
+
+  private dayVegetableData;
+  private weekVegetableData;
+  private monthVegetableData;
 
   private cashOJ;
   private fruitOJ;
@@ -116,27 +120,27 @@ export class UserComponent implements OnInit {
         this.getUserFruitTransaction(this.myForm, this.dayArray);
 
         //load graph according to fruit data
-        this.loadGraph(day, perDay, this.dayData);
+        this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
       }
   
       if (res=='perWeek')
       {
         let perWeek = ['First Week', 'Second Week', 'Thrid Week', 'Fourth Week'];
         let week = "Weekly";
-        this.loadGraph(week, perWeek, this.dayData);
+        this.loadGraph(week, perWeek, this.weekFruitData, this.weekVegetableData);
       }
       if (res=='perMonth')
       {
         let perMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         let month = "Monthly";
-        this.loadGraph(month, perMonth, this.dayData);
+        this.loadGraph(month, perMonth, this.monthFruitData, this.monthVegetableData);
       }
     });
 
     this.loadAll();
   }
 
-  loadGraph(title, time, data): void {
+  loadGraph(title, time, fruitData, vegetableData): void {
     Highcharts.chart('container', {
       chart: {
         type: 'column'
@@ -173,11 +177,11 @@ export class UserComponent implements OnInit {
       },
       series: [{
         name: 'Fruit',
-        data: data
+        data: fruitData
     
       }, {
         name: 'Vegetable',
-        data: data
+        data: vegetableData
     
       }]
     });
