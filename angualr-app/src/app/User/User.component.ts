@@ -670,7 +670,7 @@ export class UserComponent implements OnInit {
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
-        'selectTime': null,
+        'selectTime': "select",
         'userID': null,
         'firstName': null,
         'lastName': null,
@@ -819,7 +819,7 @@ export class UserComponent implements OnInit {
     .then((result) => {
       this.errorMessage = null;
       const formObject = {
-        'selectTime': null,
+        'selectTime': "select",
         'userID': null,
         'firstName': null,
         'lastName': null,
@@ -872,7 +872,6 @@ export class UserComponent implements OnInit {
       }
 
       this.myForm.setValue(formObject);
-      this.loadGraph("", "", "", "");
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -888,7 +887,7 @@ export class UserComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
-      'selectTime': null,
+      'selectTime': "select",
       'userID': null,
       'firstName': null,
       'lastName': null,
