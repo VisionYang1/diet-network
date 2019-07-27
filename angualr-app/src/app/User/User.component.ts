@@ -590,10 +590,11 @@ export class UserComponent implements OnInit {
 
       // load week data
       if(dateType == "week"){
+        let weekTotalData = [];
         console.log("test if inside?");
-        dateRange.forEach(week => {
-          console.log("forEach is ok?" + week);
-        });
+        for(let weekday of dateRange.first){
+          console.log("is ok day? :" + weekday);
+        }
       }
     })
     .catch((error) => {
