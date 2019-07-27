@@ -19,7 +19,7 @@ import 'rxjs/add/operator/toPromise';
 
 declare global {
   interface Date {
-      getWeek () : object
+      getWeek ()
       // getWeek ()
   }
 }
@@ -43,7 +43,7 @@ Date.prototype.getWeek = function()
     let weekOJ={
       'first': null,
       'second': null,
-      'thrid': null,
+      'third': null,
       'fourth': null
     };
 
@@ -68,7 +68,7 @@ Date.prototype.getWeek = function()
         }
         if(days <= 21 && days > 14){
           fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
-          weekOJ.thrid.push(fullMonthDays);
+          weekOJ.third.push(fullMonthDays);
           days++;
         }
         if(days > 21){
@@ -96,7 +96,7 @@ Date.prototype.getWeek = function()
         }
         if(days <= 21 && days > 14){
           fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
-          weekOJ.thrid.push(fullMonthDays);
+          weekOJ.third.push(fullMonthDays);
           days++;
         }
         if(days > 21){
@@ -126,7 +126,7 @@ Date.prototype.getWeek = function()
           }
           if(days <= 21 && days > 14){
             fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
-            weekOJ.thrid.push(fullMonthDays);
+            weekOJ.third.push(fullMonthDays);
             days++;
           }
           if(days <= 29 && days > 21){
@@ -152,7 +152,7 @@ Date.prototype.getWeek = function()
           }
           if(days <= 21 && days > 14){
             fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
-            weekOJ.thrid.push(fullMonthDays);
+            weekOJ.third.push(fullMonthDays);
             days++;
           }
           if(days <= 28 && days > 21){
@@ -166,6 +166,12 @@ Date.prototype.getWeek = function()
         }
       }
     }
+
+    console.log("weekOJ first:" + weekOJ.first);
+    console.log("weekOJ second:" + weekOJ.second);
+    console.log("weekOJ third:" + weekOJ.third);
+    console.log("weekOJ fourth:" + weekOJ.fourth);
+
     return weekOJ;
 }
 
@@ -240,10 +246,10 @@ export class UserComponent implements OnInit {
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
 
       let date = new Date().getWeek();
-      console.log("first:" + date.first);
-      console.log("second:" + date.second);
-      console.log("third:" + date.third);
-      console.log("fourth:" + date.fourth);
+      console.log("outside first:" + date.first);
+      console.log("outside second:" + date.second);
+      console.log("outside third:" + date.third);
+      console.log("outside fourth:" + date.fourth);
 
       if (res=='perDay')
       {
