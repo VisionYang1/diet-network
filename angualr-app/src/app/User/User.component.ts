@@ -397,7 +397,7 @@ export class UserComponent implements OnInit {
       console.log("user fruit id:" + userFruitID);
       for(let transaction of tempList){
         if(transaction.fruitInc == userFruitID){
-          console.log("test fruit transaction date:" + transaction.slice(0,11))
+          console.log("test fruit transaction date:" + transaction.toString().slice(0,11))
           userAllFruitTransaction.push(transaction);
         }
       }
@@ -405,7 +405,7 @@ export class UserComponent implements OnInit {
       //get given day transaction
       for(let day of dateRange){
         for(let fruitTransaction of userAllFruitTransaction){
-          console.log("test fruit transaction date:" + fruitTransaction.slice(0,11))
+          console.log("test fruit transaction date inside day:" + fruitTransaction.slice(0,11))
           // if(day == fruitTransaction){
 
           // }
