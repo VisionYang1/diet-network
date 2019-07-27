@@ -41,10 +41,10 @@ Date.prototype.getWeek = function()
 {
 
     let weekOJ={
-      'first': null,
-      'second': null,
-      'third': null,
-      'fourth': null
+      'first': [],
+      'second': [],
+      'third': [],
+      'fourth': []
     };
 
     var today = new Date(this.setHours(0, 0, 0, 0));
