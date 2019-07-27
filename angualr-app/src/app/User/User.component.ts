@@ -195,12 +195,12 @@ export class UserComponent implements OnInit {
 
   private dayArray: Array<any> = [];
   private dayArray2: Array<any> = [];
-  private weekOJ={
-    'first': null,
-    'second': null,
-    'thrid': null,
-    'fourth': null
-  };
+  // private weekOJ={
+  //   'first': null,
+  //   'second': null,
+  //   'thrid': null,
+  //   'fourth': null
+  // };
   private monthArray;
 
   private dayFruitData;
