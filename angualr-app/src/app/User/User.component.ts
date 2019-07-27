@@ -589,13 +589,16 @@ export class UserComponent implements OnInit {
       if(dateType == "week"){
 
         let weekTotalData = [];
+        let firstWeek = 0;
+        let secondWeek = 0;
+        let thirdWeek = 0;
+        let fourthWeek = 0;
 
         // caculate first week data
         for(let weekday of dateRange.first){
 
           //caculate per day all data
           let perDayData = 0;
-          let perWeek = 0;
           for(let fruitTransaction of userAllFruitTransaction){
             
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
@@ -604,20 +607,15 @@ export class UserComponent implements OnInit {
             }
           }
 
-          perWeek = perWeek + perDayData;
-
-          if(perWeek){
-            weekTotalData.push(perWeek);
-          }else{
-            weekTotalData.push(0);
-          }
+          firstWeek = firstWeek + perDayData;
         }
+
+        weekTotalData.push(firstWeek);
 
         for(let weekday of dateRange.second){
 
           //caculate per day all data
           let perDayData = 0;
-          let perWeek = 0;
           for(let fruitTransaction of userAllFruitTransaction){
             
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
@@ -626,20 +624,15 @@ export class UserComponent implements OnInit {
             }
           }
 
-          perWeek = perWeek + perDayData;
-
-          if(perWeek){
-            weekTotalData.push(perWeek);
-          }else{
-            weekTotalData.push(0);
-          }
+          secondWeek = secondWeek + perDayData;
         }
+
+        weekTotalData.push(secondWeek);
 
         for(let weekday of dateRange.third){
 
           //caculate per day all data
           let perDayData = 0;
-          let perWeek = 0;
           for(let fruitTransaction of userAllFruitTransaction){
             
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
@@ -647,20 +640,16 @@ export class UserComponent implements OnInit {
               perDayData = perDayData + fruitTransaction.fruitValue;
             }
           }
-          perWeek = perWeek + perDayData;
 
-          if(perWeek){
-            weekTotalData.push(perWeek);
-          }else{
-            weekTotalData.push(0);
-          }
+          thirdWeek = thirdWeek + perDayData;
         }
+
+        weekTotalData.push(thirdWeek);
 
         for(let weekday of dateRange.fourth){
 
           //caculate per day all data
           let perDayData = 0;
-          let perWeek = 0;
           for(let fruitTransaction of userAllFruitTransaction){
             
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
@@ -668,14 +657,12 @@ export class UserComponent implements OnInit {
               perDayData = perDayData + fruitTransaction.fruitValue;
             }
           }
-          perWeek = perWeek + perDayData;
 
-          if(perWeek){
-            weekTotalData.push(perWeek);
-          }else{
-            weekTotalData.push(0);
-          }
+          fourthWeek = fourthWeek + perDayData;
         }
+
+        weekTotalData.push(fourthWeek);
+        
         this.weekFruitData = weekTotalData;
         console.log("test week array data:" + weekTotalData);
       }
