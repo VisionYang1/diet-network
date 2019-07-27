@@ -17,6 +17,29 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { UserService } from './User.service';
 import 'rxjs/add/operator/toPromise';
 
+declare global {
+  interface Date {
+      getWeek (start?: number) : [Date, Date]
+      // getWeek ()
+  }
+}
+
+Date.prototype.getWeek = function(start)
+{
+    start = start || 0;
+    var today = new Date(this.setHours(0, 0, 0, 0));
+    console.log("today.getDay():" + today.getDay());
+    var day = today.getDay() - start;
+    var date = today.getDate() - day;
+
+    var StartDate = new Date(today.setDate(date));
+    var EndDate = new Date(today.setDate(date + 6));
+    return [StartDate, EndDate];
+}
+
+let Highcharts = require('highcharts');
+require('highcharts/modules/exporting')(Highcharts);
+
 @Component({
   selector: 'app-user',
   templateUrl: './User.component.html',
@@ -49,10 +72,12 @@ export class UserComponent implements OnInit {
   vegetable = new FormControl('', Validators.required);
   cash = new FormControl('', Validators.required);
   reward = new FormControl('', Validators.required);
+  selectTime = new FormControl('', Validators.required);
 
 
   constructor(public serviceUser: UserService, fb: FormBuilder) {
     this.myForm = fb.group({
+      selectTime: this.selectTime,
       userID: this.userID,
       firstName: this.firstName,
       lastName: this.lastName,
@@ -64,7 +89,191 @@ export class UserComponent implements OnInit {
   };
 
   ngOnInit(): void {
+
+    this.myForm.get('selectTime').valueChanges.subscribe(res=>{
+      if (res=='perDay')
+      {
+        let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+        let day = "Daliy";
+        // this.loadAllTransaction();
+        var Dates = new Date().getWeek();
+        console.log("week:" + Dates);
+        var today = new Date().toString();
+        console.log("today:" + today.slice(0, 3));
+
+        //get date of array
+        this.loadGraphDate("day");
+        console.log("all day:" + this.dayArray);
+
+        //get fruit data
+        console.log("get user");
+        // let user = this.currentId;
+        console.log("myForm, user ID:" + this.myForm.get('userID').value);
+        this.getFruit(this.myForm);
+
+        //load graph according to fruit data
+        this.loadGraph(day, perDay);
+      }
+  
+      if (res=='perWeek')
+      {
+        let perWeek = ['First Week', 'Second Week', 'Thrid Week', 'Fourth Week'];
+        let week = "Weekly";
+        this.loadGraph(week, perWeek);
+      }
+      if (res=='perMonth')
+      {
+        let perMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let month = "Monthly";
+        this.loadGraph(month, perMonth);
+      }
+    });
+
     this.loadAll();
+  }
+
+  loadGraph(title,time): void {
+    Highcharts.chart('container', {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: title + ' Average Intake of Fruit and Vegetable'
+      },
+      subtitle: {
+        text: ''
+      },
+      xAxis: {
+        categories: time,
+        crosshair: true
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Grams (g)'
+        }
+      },
+      tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+          '<td style="padding:0"><b>{point.y:.1f} g</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+      },
+      plotOptions: {
+        column: {
+          pointPadding: 0.2,
+          borderWidth: 0
+        }
+      },
+      series: [{
+        name: 'Fruit',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+    
+      }, {
+        name: 'Vegetable',
+        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+    
+      }, {
+        name: 'London',
+        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+    
+      }, {
+        name: 'Berlin',
+        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+    
+      }]
+    });
+  }
+
+  loadGraphDate(type?:string): any {
+    if(type == "day"){
+      let today = new Date().toString();
+      switch(today.slice(0,3)){
+        case "Mon":
+          this.dayArray = this.getRangeDate(6, this.dayArray, "more");
+          break;
+        case "Tue":
+          this.dayArray = this.getRangeDate(-1,this.dayArray, "more");
+          // this.dayArray.splice(1,1);
+          this.dayArray2 = this.getRangeDate(5,this.dayArray2, "more");
+          this.dayArray = this.dayArray.concat(this.dayArray2);
+          break;
+        case "Wed":
+          this.dayArray = this.getRangeDate(-2,this.dayArray, "more");
+          // this.dayArray.splice(2,1);
+          this.dayArray2 = this.getRangeDate(4,this.dayArray2, "more");
+          this.dayArray = this.dayArray.concat(this.dayArray2);
+            break;
+        case "Thu":
+          this.dayArray = this.getRangeDate(-3,this.dayArray, "more");
+          // this.dayArray.splice(3,1);
+          this.dayArray2 = this.getRangeDate(3,this.dayArray2, "more");
+          this.dayArray = this.dayArray.concat(this.dayArray2);
+            break;
+        case "Fri":
+          this.dayArray = this.getRangeDate(-4,this.dayArray, "more");
+          // this.dayArray.splice(4,1);
+          this.dayArray2 = this.getRangeDate(2,this.dayArray2, "more");
+          this.dayArray = this.dayArray.concat(this.dayArray2);
+            break;
+        case "Sat":
+          this.dayArray = this.getRangeDate(-5,this.dayArray, "more");
+          // this.dayArray.splice(5,1);
+          this.dayArray2 = this.getRangeDate(1,this.dayArray2, "more");
+          this.dayArray = this.dayArray.concat(this.dayArray2);
+            break;
+        case "Sun":
+          this.dayArray = this.getRangeDate(-6,this.dayArray, "more");
+            break;
+      }
+    }
+  }
+
+  getRangeDate( range: number, arr: Array<any>, type?: string) {
+
+    const formatDate = ( time: any ) => {
+      // 格式化日期，获取今天的日期
+      const Dates = new Date( time );
+      const year: number = Dates.getFullYear();
+      const month: any = ( Dates.getMonth() + 1 ) < 10 ? '0' + ( Dates.getMonth() + 1 ) : ( Dates.getMonth() + 1 );
+      const day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate();
+      return year + '-' + month + '-' + day;
+    };
+
+    const now = formatDate( new Date().getTime() ); // 当前时间
+    const resultArr: Array<any> = [];
+    let changeDate: string;
+    if ( range ) {
+      if ( type ) {
+        if ( type === 'one' ) {
+          changeDate = formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * range ) );
+          console.log( changeDate );
+        }
+        if ( type === 'more' ) {
+          if ( range < 0 ) {
+            for ( let i = Math.abs( range ); i >= 0; i-- ) {
+              resultArr.push( formatDate( new Date().getTime() + ( -1000 * 3600 * 24 * i ) ) );
+              arr = resultArr;
+              console.log( resultArr );
+              console.log( arr );
+            }
+          } else {
+            for ( let i = 1; i <= range; i++ ) {
+              resultArr.push( formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * i ) ) );
+              arr = resultArr;
+              console.log( resultArr );
+              console.log( arr );
+            }
+          }
+          return arr;
+        }
+      } else {
+        changeDate = formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * range ) );
+        console.log( changeDate );
+      }
+    }
   }
 
   loadAll(): Promise<any> {
@@ -161,6 +370,51 @@ export class UserComponent implements OnInit {
         this.errorMessage = error;
       }
     });
+  }
+
+  getFruit(form: any): Promise<any> {
+
+
+    //retrieve all users in the tempList array
+    let tempList = [];
+    let userAllTransaction = [];
+
+    // call transaction
+    return this.serviceUser.getAllFruitTransactions()
+    .toPromise()
+    .then((allTransactions) => {
+      
+      this.errorMessage = null;
+
+      allTransactions.forEach(transaction => {
+        tempList.push(transaction);
+      });
+
+      // get the given user's transaction
+      for(let transaction of tempList){
+        if(transaction.appleInc == "resource:org.diet.network.Apples#AP_1"){
+          userAllTransaction.push(transaction);
+        }
+      }
+
+
+
+      // this.getRangeDate(-6, "more");
+      console.log("all transaction : " + tempList[0].appleInc);
+      // let time = tempList[0].timestamp.split("T", 2);
+      console.log("all transaction : " + userAllTransaction[0].appleInc);
+    })
+    .catch((error) => {
+      if(error == 'Server error'){
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if(error == '404 - Not Found'){
+      this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else{
+          this.errorMessage = error;
+      }
+  });
   }
 
 	/**
