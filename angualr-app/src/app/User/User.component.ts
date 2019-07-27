@@ -241,22 +241,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    let day = "Daliy";
-
-    //get date of array
-    this.loadGraphDate("day");
-    // console.log("all day:" + this.dayArray);
-
-    // console.log("myForm, user ID:" + this.myForm.get('userID').value);
-    
-    // get given day data
-    this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
-
-    //load graph according to fruit data
-    this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
-
-
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
 
       if (res=='perDay')
@@ -603,14 +587,83 @@ export class UserComponent implements OnInit {
 
       // load week data
       if(dateType == "week"){
+
         let weekTotalData = [];
-        console.log("test if inside?");
+
+        // caculate first week data
         for(let weekday of dateRange.first){
-          console.log("is ok day1? :" + weekday);
+
+          //caculate per day all data
+          let perDayData = 0;
+          for(let fruitTransaction of userAllFruitTransaction){
+            
+            if(weekday == fruitTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + weekday);
+              perDayData = perDayData + fruitTransaction.fruitValue;
+            }
+          }
+          if(perDayData){
+            weekTotalData.push(perDayData);
+          }else{
+            weekTotalData.push(0);
+          }
         }
+
         for(let weekday of dateRange.second){
-          console.log("is ok day2? :" + weekday);
+
+          //caculate per day all data
+          let perDayData = 0;
+          for(let fruitTransaction of userAllFruitTransaction){
+            
+            if(weekday == fruitTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + weekday);
+              perDayData = perDayData + fruitTransaction.fruitValue;
+            }
+          }
+          if(perDayData){
+            weekTotalData.push(perDayData);
+          }else{
+            weekTotalData.push(0);
+          }
         }
+
+        for(let weekday of dateRange.third){
+
+          //caculate per day all data
+          let perDayData = 0;
+          for(let fruitTransaction of userAllFruitTransaction){
+            
+            if(weekday == fruitTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + weekday);
+              perDayData = perDayData + fruitTransaction.fruitValue;
+            }
+          }
+          if(perDayData){
+            weekTotalData.push(perDayData);
+          }else{
+            weekTotalData.push(0);
+          }
+        }
+
+        for(let weekday of dateRange.fourth){
+
+          //caculate per day all data
+          let perDayData = 0;
+          for(let fruitTransaction of userAllFruitTransaction){
+            
+            if(weekday == fruitTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + weekday);
+              perDayData = perDayData + fruitTransaction.fruitValue;
+            }
+          }
+          if(perDayData){
+            weekTotalData.push(perDayData);
+          }else{
+            weekTotalData.push(0);
+          }
+        }
+        this.weekFruitData = weekTotalData;
+        console.log("test week array data:" + weekTotalData);
       }
     })
     .catch((error) => {
