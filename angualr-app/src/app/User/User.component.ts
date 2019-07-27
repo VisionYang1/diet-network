@@ -429,7 +429,7 @@ export class UserComponent implements OnInit {
         }
         // console.log("test day array:" + day);
       }
-      this.dayData = dayTotalData;
+      this.dayFruitData = dayTotalData;
       console.log("test day array data:" + dayTotalData);
 
       // this.getRangeDate(-6, "more");
