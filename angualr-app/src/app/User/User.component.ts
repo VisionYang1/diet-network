@@ -396,6 +396,7 @@ export class UserComponent implements OnInit {
       let userFruitID = "resource:org.diet.network.Fruit#" + form.get('userID').value;
       for(let transaction of tempList){
         if(transaction.fruitInc == userFruitID){
+          console.log("test fruit transaction date:" + transaction.slice(0,11))
           userAllFruitTransaction.push(transaction);
         }
       }
