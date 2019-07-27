@@ -19,7 +19,7 @@ import 'rxjs/add/operator/toPromise';
 
 declare global {
   interface Date {
-      getWeek ()
+      getWeek () : object
       // getWeek ()
   }
 }
