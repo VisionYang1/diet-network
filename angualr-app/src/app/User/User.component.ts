@@ -593,7 +593,10 @@ export class UserComponent implements OnInit {
         let weekTotalData = [];
         console.log("test if inside?");
         for(let weekday of dateRange.first){
-          console.log("is ok day? :" + weekday);
+          console.log("is ok day1? :" + weekday);
+        }
+        for(let weekday of dateRange.second){
+          console.log("is ok day2? :" + weekday);
         }
       }
     })
