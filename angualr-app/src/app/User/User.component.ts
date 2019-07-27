@@ -594,6 +594,8 @@ export class UserComponent implements OnInit {
         let thirdWeek = 0;
         let fourthWeek = 0;
 
+        console.log("week begin");
+
         // caculate first week data
         for(let weekday of dateRange.first){
 
