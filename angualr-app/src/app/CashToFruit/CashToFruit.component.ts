@@ -437,25 +437,27 @@ export class CashToFruitComponent implements OnInit {
               this.transactionID = result.transactionId;
 
 
-              var splitted_buyerID = this.sellerFruitAsset.split("#", 2);
-              var buyerID = String(splitted_fruitID[1]);
+              var splitted_buyerID = this.transactionBuyerID.split("#", 2);
+              var buyerID = String(splitted_buyerID[0]);
+              var buyerType = String(splitted_buyerID[0]);
 
-              // if(){
+              if(buyerType == "org.diet.network.User"){
+                //give randomly reward
+                let max = 0, min = 10;
+                let range = max - min;
+                let ranValue = min + Math.round(Math.random() * range);
+                if(ranValue == 3 || ranValue == 4 || ranValue == 5 || ranValue == 7 || ranValue == 8){
 
-              // }
+                  this.rewardOJ = {
+                    $class: "org.diet.network.RewardsInc",
+                    'rewardsRate': 1,
+                    'rewardsInc': "org.diet.network.Rewards#" + buyerID
+                  }
+                  // this.serviceCashToFruit.addReward();
+                }
+              }
 
-              // //give randomly reward
-              // let max = 0, min = 10;
-              // let range = max - min;
-              // let ranValue = min + Math.round(Math.random() * range);
-              // if(ranValue == 3 || ranValue == 4 || ranValue == 5 || ranValue == 7 || ranValue == 8){
-
-              //   this.rewardOJ = {
-              //     'rewardsRate': 1,
-              //     'rewardsInc': 
-              //   }
-              //   this.serviceCashToFruit.addReward();
-              // }
+  
               console.log(result)
             })
             .catch((error) => {

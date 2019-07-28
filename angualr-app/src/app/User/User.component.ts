@@ -651,9 +651,11 @@ export class UserComponent implements OnInit {
     let buyerID =  "org.diet.network.Market#asfsaf";
 
     let split = buyerID.split("#", 2);
+    let bsplit = String(split[1]);
     let fsplit = String(split[0]);
 
     console.log("f split:" + fsplit);
+    console.log("f split:" + bsplit);
 
     this.loadGraphDate("day");
     this.loadGraphDate("week");
