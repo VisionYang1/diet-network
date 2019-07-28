@@ -412,6 +412,7 @@ Date.prototype.getAllMonth = function()
               monthOJ.Dec.push(fullMonthDays);
             }
           }
+          judge = false;
           break;
       }
     }
