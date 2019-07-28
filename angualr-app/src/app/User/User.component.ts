@@ -654,7 +654,7 @@ export class UserComponent implements OnInit {
           //caculate per day all data
           let perDayData = 0;
           for(let fruitTransaction of userAllFruitTransaction){
-            
+            console.log("fourth weekday:" + weekday + ", transaction:" + fruitTransaction.timestamp.slice(0,10));
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
               console.log("successful day if" + weekday);
               perDayData = perDayData + fruitTransaction.fruitValue;
