@@ -418,6 +418,7 @@ Date.prototype.getAllMonth = function()
               monthOJ.Dec.push(fullMonthDays);
             }
           }
+          months++;
           judge = false;
           break;
       }
@@ -556,6 +557,7 @@ Date.prototype.getAllMonth = function()
               monthOJ.Dec.push(fullMonthDays);
             }
           }
+          months++;
           judge = false;
           break;
       }
