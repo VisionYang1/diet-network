@@ -732,7 +732,7 @@ export class UserComponent implements OnInit {
     this.loadAll();
   }
 
-  caculateIntake(data, time?: string, type?: string) {
+  caculateIntake(data, time?: string, type?: string): any {
     if(type == "fruit"){
       if(time == "day"){
         let fruitDiff = 0;
@@ -842,7 +842,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  loadGraphDate(type?:string): any {
+  loadGraphDate(type?:string): void {
     if(type == "day"){
       let today = new Date().toString();
       switch(today.slice(0,3)){
