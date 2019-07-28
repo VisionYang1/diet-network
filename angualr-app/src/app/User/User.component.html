@@ -111,10 +111,7 @@
     <div class="modal fade" id="scoreModal" tabindex="-1" role="dialog" aria-labelledby="scoreModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="scoreModalLabel">Get Score</h4>
-          </div>
+
            <form [formGroup]="myForm">
               <div>
                   <select class="pull-right" name="selectScoreTime" formControlName="selectTime">
@@ -132,8 +129,14 @@
 
               <div></div>
             </div>
-
-            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="scoreModalLabel">Get Score</h4>
+                </div>
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+            
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
