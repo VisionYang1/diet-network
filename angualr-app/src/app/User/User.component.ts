@@ -697,7 +697,16 @@ export class UserComponent implements OnInit {
       }
     }
 
-    console.log("total 1000:" + result);
+    console.log("total 1000:" + "1:" + result.a);
+    console.log("2:" + result.b);
+    console.log("3:" + result.c);
+    console.log("4:" + result.d);
+    console.log("5:" + result.e);
+    console.log("6:" + result.f);
+    console.log("7:" + result.g);
+    console.log("8:" + result.h);
+    console.log("9:" + result.i);
+    console.log("10:" + result.j);
 
     this.loadGraphDate("day");
     this.loadGraphDate("week");
