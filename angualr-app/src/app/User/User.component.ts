@@ -290,10 +290,10 @@ Date.prototype.getAllMonth = function()
         case 1:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Jan.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Jan.push(fullMonthDays);
             }
           }
@@ -301,10 +301,10 @@ Date.prototype.getAllMonth = function()
         case 2:
           for(let i = 1; i <= 29; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Feb.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Feb.push(fullMonthDays);
             }
           }
@@ -312,10 +312,10 @@ Date.prototype.getAllMonth = function()
         case 3:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Mar.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Mar.push(fullMonthDays);
             }
           }
@@ -323,10 +323,10 @@ Date.prototype.getAllMonth = function()
         case 4:
           for(let i = 1; i <= 30; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Apr.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Apr.push(fullMonthDays);
             }
           }
@@ -334,10 +334,10 @@ Date.prototype.getAllMonth = function()
         case 5:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.May.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.May.push(fullMonthDays);
             }
           }
@@ -345,10 +345,10 @@ Date.prototype.getAllMonth = function()
         case 6:
           for(let i = 1; i <= 30; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Jun.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Jun.push(fullMonthDays);
             }
           }
@@ -356,10 +356,10 @@ Date.prototype.getAllMonth = function()
         case 7:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Jul.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Jul.push(fullMonthDays);
             }
           }
@@ -367,10 +367,10 @@ Date.prototype.getAllMonth = function()
         case 8:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Aug.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Aug.push(fullMonthDays);
             }
           }
@@ -378,10 +378,10 @@ Date.prototype.getAllMonth = function()
         case 9:
           for(let i = 1; i <= 30; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Sep.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Sep.push(fullMonthDays);
             }
           }
@@ -389,10 +389,10 @@ Date.prototype.getAllMonth = function()
         case 10:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Oct.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Oct.push(fullMonthDays);
             }
           }
@@ -400,10 +400,10 @@ Date.prototype.getAllMonth = function()
         case 11:
           for(let i = 1; i <= 30; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Nov.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Nov.push(fullMonthDays);
             }
           }
@@ -411,10 +411,10 @@ Date.prototype.getAllMonth = function()
         case 12:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Dec.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Dec.push(fullMonthDays);
             }
           }
@@ -429,10 +429,10 @@ Date.prototype.getAllMonth = function()
         case 1:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Jan.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Jan.push(fullMonthDays);
             }
           }
@@ -440,10 +440,10 @@ Date.prototype.getAllMonth = function()
         case 2:
           for(let i = 1; i <= 29; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Feb.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Feb.push(fullMonthDays);
             }
           }
@@ -451,10 +451,10 @@ Date.prototype.getAllMonth = function()
         case 3:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Mar.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Mar.push(fullMonthDays);
             }
           }
@@ -462,10 +462,10 @@ Date.prototype.getAllMonth = function()
         case 4:
           for(let i = 1; i <= 30; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Apr.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Apr.push(fullMonthDays);
             }
           }
@@ -473,10 +473,10 @@ Date.prototype.getAllMonth = function()
         case 5:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.May.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.May.push(fullMonthDays);
             }
           }
@@ -484,10 +484,10 @@ Date.prototype.getAllMonth = function()
         case 6:
           for(let i = 1; i <= 30; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Jun.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Jun.push(fullMonthDays);
             }
           }
@@ -495,10 +495,10 @@ Date.prototype.getAllMonth = function()
         case 7:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Jul.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Jul.push(fullMonthDays);
             }
           }
@@ -506,10 +506,10 @@ Date.prototype.getAllMonth = function()
         case 8:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Aug.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Aug.push(fullMonthDays);
             }
           }
@@ -517,10 +517,10 @@ Date.prototype.getAllMonth = function()
         case 9:
           for(let i = 1; i <= 30; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Sep.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Sep.push(fullMonthDays);
             }
           }
@@ -528,10 +528,10 @@ Date.prototype.getAllMonth = function()
         case 10:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Oct.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Oct.push(fullMonthDays);
             }
           }
@@ -539,10 +539,10 @@ Date.prototype.getAllMonth = function()
         case 11:
           for(let i = 1; i <= 30; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Nov.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Nov.push(fullMonthDays);
             }
           }
@@ -550,10 +550,10 @@ Date.prototype.getAllMonth = function()
         case 12:
           for(let i = 1; i <= 31; i++){
             if(i < 10){
-              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Dec.push(fullMonthDays);    
             }else{
-              fullMonthDays = fullMonthDays + '0' + months + i;
+              fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + i;
               monthOJ.Dec.push(fullMonthDays);
             }
           }
