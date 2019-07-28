@@ -264,18 +264,18 @@ Date.prototype.getWeek = function()
 Date.prototype.getAllMonth = function()
 {
   let monthOJ = {
-    'Jan': null, 
-    'Feb': null,
-    'Mar': null,
-    'Apr': null,
-    'May': null,
-    'Jun': null,
-    'Jul': null,
-    'Aug': null,
-    'Sep': null,
-    'Oct': null,
-    'Nov': null,
-    'Dec': null
+    'Jan': [], 
+    'Feb': [],
+    'Mar': [],
+    'Apr': [],
+    'May': [],
+    'Jun': [],
+    'Jul': [],
+    'Aug': [],
+    'Sep': [],
+    'Oct': [],
+    'Nov': [],
+    'Dec': []
   }
 
   var today = new Date(this.setHours(0, 0, 0, 0));
