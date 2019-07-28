@@ -683,12 +683,6 @@ export class UserComponent implements OnInit {
             this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
           })
         })
-
-
-
-
-
-
       }
   
       if (res=='perWeek')
@@ -705,14 +699,19 @@ export class UserComponent implements OnInit {
         this.loadGraphDate("week");
 
         // get given day data
-        this.getUserFruitTransaction(this.myForm, this.weekOJ, "week");
-        this.getUserVegetableTransaction(this.myForm, this.weekOJ, "week");
+        this.getUserFruitTransaction(this.myForm, this.weekOJ, "week")
+        .then(() => {
 
-        //caculate the intake
-        // this.needFruit = this.caculateIntake(this.weekFruitData, "week", "fruit");
-        // this.needVegetable = this.caculateIntake(this.weekVegetableData, "week", "vegetable");
+          this.getUserVegetableTransaction(this.myForm, this.weekOJ, "week")
+          .then(() => {
 
-        this.loadGraph(week, perWeek, this.weekFruitData, this.weekVegetableData);
+            //caculate the intake
+            this.caculateIntake(this.weekFruitData, "week", "fruit");
+            this.caculateIntake(this.weekVegetableData, "week", "vegetable");
+
+            this.loadGraph(week, perWeek, this.weekFruitData, this.weekVegetableData);
+          })
+        })
       }
       if (res=='perMonth')
       {
@@ -728,13 +727,19 @@ export class UserComponent implements OnInit {
         this.loadGraphDate("month");
 
         // get given day data
-        this.getUserFruitTransaction(this.myForm, this.monthOJ, "month");
-        this.getUserVegetableTransaction(this.myForm, this.monthOJ, "month");
+        this.getUserFruitTransaction(this.myForm, this.monthOJ, "month")
+        .then(() => {
+          
+          this.getUserVegetableTransaction(this.myForm, this.monthOJ, "month")
+          .then(() => {
 
-        // this.needFruit = this.caculateIntake(this.monthFruitData, "month", "fruit");
-        // this.needVegetable = this.caculateIntake(this.monthVegetableData, "month", "vegetable");
-
-        this.loadGraph(month, perMonth, this.monthFruitData, this.monthVegetableData);
+            this.caculateIntake(this.monthFruitData, "month", "fruit");
+            this.caculateIntake(this.monthVegetableData, "month", "vegetable");
+    
+            this.loadGraph(month, perMonth, this.monthFruitData, this.monthVegetableData);
+          })
+        })
+        
       }
     });
 
@@ -751,7 +756,7 @@ export class UserComponent implements OnInit {
           allFruit = allFruit + fruit;
         }
         fruitDiff = 3500 - allFruit;
-        // this.needFruit = fruitDiff;
+        this.needFruit = fruitDiff;
         return fruitDiff;
       }
       if(time == "week"){
@@ -761,6 +766,7 @@ export class UserComponent implements OnInit {
           allFruit = allFruit + fruit;
         }
         fruitDiff = 14000 - allFruit;
+        this.needFruit = fruitDiff;
         return fruitDiff;
       }
       if(time == "month"){
@@ -770,6 +776,7 @@ export class UserComponent implements OnInit {
           allFruit = allFruit + fruit;
         }
         fruitDiff = 168000 - allFruit;
+        this.needFruit = fruitDiff;
         return fruitDiff;
       }
     }
@@ -781,6 +788,7 @@ export class UserComponent implements OnInit {
           allVegetable = allVegetable + vegetable;
         }
         vegetableDiff = 7000 - allVegetable;
+        this.needVegetable = vegetableDiff;
         return vegetableDiff;
       }
       if(time == "week"){
@@ -790,6 +798,7 @@ export class UserComponent implements OnInit {
           allVegetable = allVegetable + vegetable;
         }
         vegetableDiff = 28000 - allVegetable;
+        this.needVegetable = vegetableDiff;
         return vegetableDiff;
       }
       if(time == "month"){
@@ -799,6 +808,7 @@ export class UserComponent implements OnInit {
           allVegetable = allVegetable + vegetable;
         }
         vegetableDiff = 336000 - allVegetable;
+        this.needVegetable = vegetableDiff;
         return vegetableDiff;
       }
     }
