@@ -117,11 +117,9 @@
           </div>
            <form [formGroup]="myForm">
             <div class="modal-body">
-              This chart records the latest daily, weekly and monthly data.
-
-According to the recommended diet, {{standardFruit}}} g of fruit and {{standardVegetable}}}g of vegetables should be eaten {{perTime}}.
-
-According to the data, you also need to eat {{needFruit}} fruits and {{needVegetable}} vegetables in this {{totalTime}}.
+              <p>This chart records the latest daily, weekly and monthly data.</p>
+              <p>According to the recommended diet, {{standardFruit}}} g of fruit and {{standardVegetable}}}g of vegetables should be eaten {{perTime}}.</p>
+              <p>According to the data, you also need to eat {{needFruit}} fruits and {{needVegetable}} vegetables in this {{totalTime}}.</p>
               <select class="pull-right" name="selectScoreTime" formControlName="selectTime">
                 <option value="perDay">Day</option>
                 <option value="perWeek">Week</option>
