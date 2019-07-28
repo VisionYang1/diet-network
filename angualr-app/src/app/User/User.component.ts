@@ -673,9 +673,9 @@ export class UserComponent implements OnInit {
 
         console.log("begin caculate");
         console.log("data:" + this.dayFruitData);
-        // this.needFruit = this.caculateIntake(this.dayFruitData, "day", "fruit");
-        // console.log("needfruit:" + this.needFruit);
-        // this.needVegetable = this.caculateIntake(this.dayVegetableData, "day", "vegetable");
+        this.caculateIntake(this.dayFruitData, "day", "fruit");
+        console.log("needfruit:" + this.needFruit);
+        this.caculateIntake(this.dayVegetableData, "day", "vegetable");
 
         //load graph according to fruit data
         this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
@@ -742,6 +742,7 @@ export class UserComponent implements OnInit {
           allFruit = allFruit + fruit;
         }
         fruitDiff = 3500 - allFruit;
+        this.needFruit = fruitDiff;
         return fruitDiff;
       }
       if(time == "week"){
