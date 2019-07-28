@@ -452,7 +452,7 @@ export class CashToFruitComponent implements OnInit {
                 if(ranValue == 3 || ranValue == 4 || ranValue == 5 || ranValue == 7 || ranValue == 8){
 
                   this.rewardOJ = {
-                    $class: "org.diet.network.RewardsInc",
+                    $class: 'org.diet.network.RewardsInc',
                     'rewardsRate': 1,
                     'rewardsInc': "org.diet.network.Rewards#" + buyerID
                   }

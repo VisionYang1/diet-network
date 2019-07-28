@@ -27,40 +27,54 @@ export class RewardsIncComponent implements OnInit {
 
   myForm: FormGroup;
 
+  private allUsers;
+
+  private successTransaction;
+  private transactionID;
+
+  private user;
+
   private allTransactions;
   private Transaction;
   private currentId;
   private errorMessage;
 
-  rewardsRate = new FormControl('', Validators.required);
-  rewardsDec = new FormControl('', Validators.required);
-  transactionId = new FormControl('', Validators.required);
-  timestamp = new FormControl('', Validators.required);
+  private rewardsRate = 1;
 
+  // rewardsRate = new FormControl('', Validators.required);
+  // rewardsDec = new FormControl('', Validators.required);
+  // transactionId = new FormControl('', Validators.required);
+  // timestamp = new FormControl('', Validators.required);
+
+  formUserID = new FormControl('', Validators.required);
 
   constructor(private serviceRewardsInc: RewardsIncService, fb: FormBuilder) {
     this.myForm = fb.group({
-      rewardsRate: this.rewardsRate,
-      rewardsDec: this.rewardsDec,
-      transactionId: this.transactionId,
-      timestamp: this.timestamp
+      formUserID: this.formUserID
+
+      // rewardsRate: this.rewardsRate,
+      // rewardsDec: this.rewardsDec,
+      // transactionId: this.transactionId,
+      // timestamp: this.timestamp
     });
   };
 
   ngOnInit(): void {
+    this.successTransaction = false;
     this.loadAll();
   }
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.serviceRewardsInc.getAll()
+    return this.serviceRewardsInc.getAllUsers()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
-      result.forEach(transaction => {
-        tempList.push(transaction);
+      //get all users
+      result.forEach(user => {
+        tempList.push(user);
       });
-      this.allTransactions = tempList;
+      this.allUsers = tempList;
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -99,31 +113,79 @@ export class RewardsIncComponent implements OnInit {
   }
 
   addTransaction(form: any): Promise<any> {
+    // this.Transaction = {
+    //   $class: 'org.diet.network.RewardsInc',
+    //   'rewardsRate': this.rewardsRate.value,
+    //   'rewardsDec': this.rewardsDec.value,
+    //   'transactionId': this.transactionId.value,
+    //   'timestamp': this.timestamp.value
+    // };
+
+    // this.myForm.setValue({
+    //   'rewardsRate': null,
+    //   'rewardsDec': null,
+    //   'transactionId': null,
+    //   'timestamp': null
+    // });
+
+    //get the given user
+    for(let user of this.allUsers){
+      if(user.userID == this.formUserID.value){
+        this.user = user;
+      }
+    }
+
+    var splitted_rewardID = this.user.reward.split("#", 2);
+    var rewardID = String(splitted_rewardID[1]);
+
+    console.log("id:"+this.user.reward);
+
     this.Transaction = {
       $class: 'org.diet.network.RewardsInc',
-      'rewardsRate': this.rewardsRate.value,
-      'rewardsDec': this.rewardsDec.value,
-      'transactionId': this.transactionId.value,
-      'timestamp': this.timestamp.value
-    };
+      'rewardsRate': this.rewardsRate,
+      'rewardsInc': this.user.reward
+    }
 
-    this.myForm.setValue({
-      'rewardsRate': null,
-      'rewardsDec': null,
-      'transactionId': null,
-      'timestamp': null
-    });
-
-    return this.serviceRewardsInc.addTransaction(this.Transaction)
+    return this.serviceRewardsInc.getReward(rewardID)
     .toPromise()
-    .then(() => {
+    .then((result) => {
       this.errorMessage = null;
-      this.myForm.setValue({
-        'rewardsRate': null,
-        'rewardsDec': null,
-        'transactionId': null,
-        'timestamp': null
-      });
+      // this.myForm.setValue({
+      //   'rewardsRate': null,
+      //   'rewardsDec': null,
+      //   'transactionId': null,
+      //   'timestamp': null
+      // });
+
+      if(result.value){
+        if((result.value - this.rewardsRate) < 0){
+          this.errorMessage = "Insufficient Reward!";
+          return false;
+        }
+        return true;
+      }
+    })
+    .then((checkReward) => {
+      if(checkReward){
+
+        this.serviceRewardsInc.addTransaction(this.Transaction)
+        .toPromise()
+        .then((result) => {
+          this.errorMessage = null;
+          this.transactionID = result.transactionId;
+          console.log(result)
+        })
+        .catch((error) => {
+          if (error === 'Server error') {
+            this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+          } else {
+            this.errorMessage = error;
+          }
+        })
+        .then(() => {
+          this.successTransaction = true;
+        })
+      }
     })
     .catch((error) => {
       if (error === 'Server error') {
