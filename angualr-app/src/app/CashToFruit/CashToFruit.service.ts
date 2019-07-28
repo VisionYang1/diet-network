@@ -95,7 +95,7 @@ export class CashToFruitService {
 
   // add the reward transaction
   public addReward(itemToAdd: any): Observable<RewardsInc> {
-    return this.dataService.add(this.REWARDSINC, itemToAdd);
+    return this.rewardsIncService.add(this.REWARDSINC, itemToAdd);
   }
 }
 
