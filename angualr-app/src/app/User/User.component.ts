@@ -422,6 +422,144 @@ Date.prototype.getAllMonth = function()
           break;
       }
     }
+  }else{
+    while(judge){
+      switch(months){
+        case 1:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Jan.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Jan.push(fullMonthDays);
+            }
+          }
+          break;
+        case 2:
+          for(let i = 1; i <= 29; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Feb.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Feb.push(fullMonthDays);
+            }
+          }
+          break;
+        case 3:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Mar.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Mar.push(fullMonthDays);
+            }
+          }
+          break;
+        case 4:
+          for(let i = 1; i <= 30; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Apr.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Apr.push(fullMonthDays);
+            }
+          }
+          break;
+        case 5:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.May.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.May.push(fullMonthDays);
+            }
+          }
+          break;
+        case 6:
+          for(let i = 1; i <= 30; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Jun.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Jun.push(fullMonthDays);
+            }
+          }
+          break;
+        case 7:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Jul.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Jul.push(fullMonthDays);
+            }
+          }
+          break;
+        case 8:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Aug.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Aug.push(fullMonthDays);
+            }
+          }
+          break;
+        case 9:
+          for(let i = 1; i <= 30; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Sep.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Sep.push(fullMonthDays);
+            }
+          }
+          break;
+        case 10:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Oct.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Oct.push(fullMonthDays);
+            }
+          }
+          break;
+        case 11:
+          for(let i = 1; i <= 30; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Nov.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Nov.push(fullMonthDays);
+            }
+          }
+          break;
+        case 12:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Dec.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Dec.push(fullMonthDays);
+            }
+          }
+          judge = false;
+          break;
+      }
+    }
   }
 
   console.log('Jan' + monthOJ.Jan, 
