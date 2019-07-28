@@ -270,6 +270,7 @@ export class UserComponent implements OnInit {
         // get week date of array
         this.loadGraphDate("week");
 
+        console.log("outside week oj:"+ this.weekOJ.first)
         // get given day data
         this.getUserFruitTransaction(this.myForm, this.weekOJ, "week");
 
