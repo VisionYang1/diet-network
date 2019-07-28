@@ -599,7 +599,7 @@ export class UserComponent implements OnInit {
 
         // caculate first week data
         for(let weekday of dateRange.first){
-
+          console.log("first is comming");
           //caculate per day all data
           let perDayData = 0;
           for(let fruitTransaction of userAllFruitTransaction){
@@ -616,7 +616,7 @@ export class UserComponent implements OnInit {
         weekTotalData.push(firstWeek);
 
         for(let weekday of dateRange.second){
-
+          console.log("second is comming");
           //caculate per day all data
           let perDayData = 0;
           for(let fruitTransaction of userAllFruitTransaction){
@@ -633,7 +633,7 @@ export class UserComponent implements OnInit {
         weekTotalData.push(secondWeek);
 
         for(let weekday of dateRange.third){
-
+          console.log("third is comming");
           //caculate per day all data
           let perDayData = 0;
           for(let fruitTransaction of userAllFruitTransaction){
@@ -650,7 +650,7 @@ export class UserComponent implements OnInit {
         weekTotalData.push(thirdWeek);
 
         for(let weekday of dateRange.fourth){
-
+          console.log("fourth is comming");
           //caculate per day all data
           let perDayData = 0;
           for(let fruitTransaction of userAllFruitTransaction){
