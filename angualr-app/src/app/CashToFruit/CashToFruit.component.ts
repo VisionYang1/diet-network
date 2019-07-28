@@ -465,6 +465,13 @@ export class CashToFruitComponent implements OnInit {
 
                     this.rewardTransactionID = result.transactionId;
                   })
+                  .catch((error) => {
+                    if (error === 'Server error') {
+                      this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+                    } else {
+                      this.errorMessage = error;
+                    }
+                  })
                   .then(() => {
                     this.successRewardTransaction = true;
                   })
