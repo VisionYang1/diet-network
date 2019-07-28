@@ -671,11 +671,11 @@ export class UserComponent implements OnInit {
         this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
         this.getUserVegetableTransaction(this.myForm, this.dayArray, "day");
 
-        console.log("begin caculate");
-        console.log("data:" + this.dayFruitData);
-        this.needFruit = this.caculateIntake(this.dayFruitData, "day", "fruit");
-        console.log("needfruit:" + this.needFruit);
-        this.needVegetable = this.caculateIntake(this.dayVegetableData, "day", "vegetable");
+        // console.log("begin caculate");
+        // console.log("data:" + this.dayFruitData);
+        // this.needFruit = this.caculateIntake(this.dayFruitData, "day", "fruit");
+        // console.log("needfruit:" + this.needFruit);
+        // this.needVegetable = this.caculateIntake(this.dayVegetableData, "day", "vegetable");
 
         //load graph according to fruit data
         this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
