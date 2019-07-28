@@ -659,6 +659,10 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.loadGraphDate("day");
+    this.loadGraphDate("week");
+    this.loadGraphDate("month");
+
     this.myForm.get('selectTime').valueChanges.subscribe(res=>{
 
       if (res=='perDay')
