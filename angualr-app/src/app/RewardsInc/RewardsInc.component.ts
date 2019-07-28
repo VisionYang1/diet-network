@@ -197,12 +197,12 @@ export class RewardsIncComponent implements OnInit {
   }
 
   updateTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'org.diet.network.RewardsInc',
-      'rewardsRate': this.rewardsRate.value,
-      'rewardsDec': this.rewardsDec.value,
-      'timestamp': this.timestamp.value
-    };
+    // this.Transaction = {
+    //   $class: 'org.diet.network.RewardsInc',
+    //   'rewardsRate': this.rewardsRate.value,
+    //   'rewardsDec': this.rewardsDec.value,
+    //   'timestamp': this.timestamp.value
+    // };
 
     return this.serviceRewardsInc.updateTransaction(form.get('transactionId').value, this.Transaction)
     .toPromise()
