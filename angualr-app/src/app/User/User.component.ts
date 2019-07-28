@@ -65,6 +65,7 @@ Date.prototype.getWeek = function()
         if(days <= 14 && days > 7){
           if(days < 10){
             fullMonthDays = today.getFullYear() + "-" + '0' + (today.getMonth()+1) + "-" + '0' + days;
+            days++;
           }else{
             fullMonthDays = today.getFullYear() + "-" + '0' + (today.getMonth()+1) + "-" + days;
             weekOJ.second.push(fullMonthDays);
@@ -97,6 +98,7 @@ Date.prototype.getWeek = function()
         if(days <= 14 && days > 7){
           if(days < 10){
             fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + '0' + days;
+            days++;
           }else{
             fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
             weekOJ.second.push(fullMonthDays);
@@ -129,6 +131,7 @@ Date.prototype.getWeek = function()
         if(days <= 14 && days > 7){
           if(days < 10){
             fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + '0' + days;
+            days++;
           }else{
             fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
             weekOJ.second.push(fullMonthDays);
@@ -160,6 +163,7 @@ Date.prototype.getWeek = function()
         if(days <= 14 && days > 7){
           if(days < 10){
             fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
+            days++;
           }else{
             fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
             weekOJ.second.push(fullMonthDays);
@@ -194,6 +198,7 @@ Date.prototype.getWeek = function()
           if(days <= 14 && days > 7){
             if(days < 10){
               fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
+              days++;
             }else{
               fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
               weekOJ.second.push(fullMonthDays);
@@ -224,6 +229,7 @@ Date.prototype.getWeek = function()
           if(days <= 14 && days > 7){
             if(days < 10){
               fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
+              days++;
             }else{
               fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
               weekOJ.second.push(fullMonthDays);
