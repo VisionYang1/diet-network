@@ -700,8 +700,8 @@ export class UserComponent implements OnInit {
         this.getUserVegetableTransaction(this.myForm, this.weekOJ, "week");
 
         //caculate the intake
-        this.needFruit = this.caculateIntake(this.weekFruitData, "week", "fruit");
-        this.needVegetable = this.caculateIntake(this.weekVegetableData, "week", "vegetable");
+        // this.needFruit = this.caculateIntake(this.weekFruitData, "week", "fruit");
+        // this.needVegetable = this.caculateIntake(this.weekVegetableData, "week", "vegetable");
 
         this.loadGraph(week, perWeek, this.weekFruitData, this.weekVegetableData);
       }
@@ -722,8 +722,8 @@ export class UserComponent implements OnInit {
         this.getUserFruitTransaction(this.myForm, this.monthOJ, "month");
         this.getUserVegetableTransaction(this.myForm, this.monthOJ, "month");
 
-        this.needFruit = this.caculateIntake(this.monthFruitData, "month", "fruit");
-        this.needVegetable = this.caculateIntake(this.monthVegetableData, "month", "vegetable");
+        // this.needFruit = this.caculateIntake(this.monthFruitData, "month", "fruit");
+        // this.needVegetable = this.caculateIntake(this.monthVegetableData, "month", "vegetable");
 
         this.loadGraph(month, perMonth, this.monthFruitData, this.monthVegetableData);
       }
