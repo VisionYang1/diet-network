@@ -575,6 +575,13 @@ export class UserComponent implements OnInit {
 
   myForm: FormGroup;
 
+  private standardFruit;
+  private standardVegetable;
+  private needFruit;
+  private needVegetable;
+  private perTime;
+  private totalTime;
+
   private allParticipants;
   private participant;
   private currentId;
@@ -652,6 +659,11 @@ export class UserComponent implements OnInit {
         let perDay = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
         let day = "Daliy";
 
+        this.standardFruit = 500;
+        this.standardVegetable = 1000;
+        this.perTime = "every day";
+        this.totalTime = "week";
+
         //get date of array
         this.loadGraphDate("day");
         // console.log("all day:" + this.dayArray);
@@ -672,6 +684,11 @@ export class UserComponent implements OnInit {
         let perWeek = ['First Week', 'Second Week', 'Thrid Week', 'Fourth Week'];
         let week = "Weekly";
 
+        this.standardFruit = 3500;
+        this.standardVegetable = 7000;
+        this.perTime = "every week";
+        this.totalTime = "month";
+
         // get week date of array
         this.loadGraphDate("week");
 
@@ -686,6 +703,11 @@ export class UserComponent implements OnInit {
       {
         let perMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         let month = "Monthly";
+
+        this.standardFruit = 14000;
+        this.standardVegetable = 28000;
+        this.perTime = "every month";
+        this.totalTime = "year";
 
         // get month date of array
         this.loadGraphDate("month");

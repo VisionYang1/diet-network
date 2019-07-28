@@ -117,7 +117,11 @@
           </div>
            <form [formGroup]="myForm">
             <div class="modal-body">
-              Are you sure you want to diagm this participant?
+              This chart records the latest daily, weekly and monthly data.
+
+According to the recommended diet, {{standardFruit}}} g of fruit and {{standardVegetable}}}g of vegetables should be eaten {{perTime}}.
+
+According to the data, you also need to eat {{needFruit}} fruits and {{needVegetable}} vegetables in this {{totalTime}}.
               <select class="pull-right" name="selectScoreTime" formControlName="selectTime">
                 <option value="perDay">Day</option>
                 <option value="perWeek">Week</option>
