@@ -20,6 +20,7 @@ import 'rxjs/add/operator/toPromise';
 declare global {
   interface Date {
       getWeek ()
+      getAllMonth ()
       // getWeek ()
   }
 }
@@ -54,17 +55,21 @@ Date.prototype.getWeek = function()
     var judge = true;
     var month = today.getMonth() + 1;
 
-    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
+    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8){
       while(judge){
         if(days <= 7 && days > 0){
-          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
           weekOJ.first.push(fullMonthDays);
           days++;
         }
         if(days <= 14 && days > 7){
-          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
-          weekOJ.second.push(fullMonthDays);
-          days++;
+          if(days < 10){
+            fullMonthDays = today.getFullYear() + "-" + '0' + (today.getMonth()+1) + "-" + '0' + days;
+          }else{
+            fullMonthDays = today.getFullYear() + "-" + '0' + (today.getMonth()+1) + "-" + days;
+            weekOJ.second.push(fullMonthDays);
+            days++;
+          }
         }
         if(days <= 21 && days > 14){
           fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
@@ -85,14 +90,18 @@ Date.prototype.getWeek = function()
     if(month == 10 || month == 12){
       while(judge){
         if(days <= 7 && days > 0){
-          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + '0' + days;
           weekOJ.first.push(fullMonthDays);
           days++;
         }
         if(days <= 14 && days > 7){
-          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
-          weekOJ.second.push(fullMonthDays);
-          days++;
+          if(days < 10){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + '0' + days;
+          }else{
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.second.push(fullMonthDays);
+            days++;
+          }
         }
         if(days <= 21 && days > 14){
           fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
@@ -113,14 +122,18 @@ Date.prototype.getWeek = function()
     if(month == 11){
       while(judge){
         if(days <= 7 && days > 0){
-          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + '0' + days;
           weekOJ.first.push(fullMonthDays);
           days++;
         }
         if(days <= 14 && days > 7){
-          fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
-          weekOJ.second.push(fullMonthDays);
-          days++;
+          if(days < 10){
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + '0' + days;
+          }else{
+            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            weekOJ.second.push(fullMonthDays);
+            days++;
+          }
         }
         if(days <= 21 && days > 14){
           fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
@@ -137,17 +150,21 @@ Date.prototype.getWeek = function()
         }
       }
     }
-    if(month == 4 || month == 6 || month == 9 || month == 11){
+    if(month == 4 || month == 6 || month == 9){
       while(judge){
         if(days <= 7 && days > 0){
-          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
           weekOJ.first.push(fullMonthDays);
           days++;
         }
         if(days <= 14 && days > 7){
-          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
-          weekOJ.second.push(fullMonthDays);
-          days++;
+          if(days < 10){
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
+          }else{
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+            weekOJ.second.push(fullMonthDays);
+            days++;
+          }
         }
         if(days <= 21 && days > 14){
           fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
@@ -170,14 +187,18 @@ Date.prototype.getWeek = function()
       if(((today.getFullYear()%4==0)&&(today.getFullYear()%100!=0))||(today.getFullYear()%400==0)){
         while(judge){
           if(days <= 7 && days > 0){
-            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
             weekOJ.first.push(fullMonthDays);
             days++;
           }
           if(days <= 14 && days > 7){
-            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
-            weekOJ.second.push(fullMonthDays);
-            days++;
+            if(days < 10){
+              fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
+            }else{
+              fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+              weekOJ.second.push(fullMonthDays);
+              days++;
+            }
           }
           if(days <= 21 && days > 14){
             fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
@@ -196,14 +217,18 @@ Date.prototype.getWeek = function()
       }else{
         while(judge){
           if(days <= 7 && days > 0){
-            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
             weekOJ.first.push(fullMonthDays);
             days++;
           }
           if(days <= 14 && days > 7){
-            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
-            weekOJ.second.push(fullMonthDays);
-            days++;
+            if(days < 10){
+              fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + '0' + days;
+            }else{
+              fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+              weekOJ.second.push(fullMonthDays);
+              days++;
+            }
           }
           if(days <= 21 && days > 14){
             fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
@@ -228,6 +253,184 @@ Date.prototype.getWeek = function()
     console.log("weekOJ fourth:" + weekOJ.fourth);
 
     return weekOJ;
+}
+
+Date.prototype.getAllMonth = function()
+{
+  let monthOJ = {
+    'Jan': null, 
+    'Feb': null,
+    'Mar': null,
+    'Apr': null,
+    'May': null,
+    'Jun': null,
+    'Jul': null,
+    'Aug': null,
+    'Sep': null,
+    'Oct': null,
+    'Nov': null,
+    'Dec': null
+  }
+
+  var today = new Date(this.setHours(0, 0, 0, 0));
+  console.log("today.getDate():" + today.getFullYear());
+  var fullMonthDays = today.getFullYear() + "-";
+  var days = 1;
+  var months = 1;
+  var judge = true;
+  if(((today.getFullYear()%4==0)&&(today.getFullYear()%100!=0))||(today.getFullYear()%400==0)){
+    while(judge){
+      switch(months){
+        case 1:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Jan.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Jan.push(fullMonthDays);
+            }
+          }
+          break;
+        case 2:
+          for(let i = 1; i <= 29; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Feb.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Feb.push(fullMonthDays);
+            }
+          }
+          break;
+        case 3:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Mar.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Mar.push(fullMonthDays);
+            }
+          }
+          break;
+        case 4:
+          for(let i = 1; i <= 30; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Apr.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Apr.push(fullMonthDays);
+            }
+          }
+          break;
+        case 5:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.May.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.May.push(fullMonthDays);
+            }
+          }
+          break;
+        case 6:
+          for(let i = 1; i <= 30; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Jun.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Jun.push(fullMonthDays);
+            }
+          }
+          break;
+        case 7:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Jul.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Jul.push(fullMonthDays);
+            }
+          }
+          break;
+        case 8:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Aug.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Aug.push(fullMonthDays);
+            }
+          }
+          break;
+        case 9:
+          for(let i = 1; i <= 30; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Sep.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Sep.push(fullMonthDays);
+            }
+          }
+          break;
+        case 10:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Oct.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Oct.push(fullMonthDays);
+            }
+          }
+          break;
+        case 11:
+          for(let i = 1; i <= 30; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Nov.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Nov.push(fullMonthDays);
+            }
+          }
+          break;
+        case 12:
+          for(let i = 1; i <= 31; i++){
+            if(i < 10){
+              fullMonthDays = fullMonthDays + '0' + months + '0' + i;
+              monthOJ.Dec.push(fullMonthDays);    
+            }else{
+              fullMonthDays = fullMonthDays + '0' + months + i;
+              monthOJ.Dec.push(fullMonthDays);
+            }
+          }
+          break;
+      }
+    }
+  }
+
+  console.log('Jan' + monthOJ.Jan, 
+  'Feb' + monthOJ.Feb,
+  'Mar' + monthOJ.Mar,
+  'Apr' + monthOJ.Apr,
+  'May' + monthOJ.May,
+  'Jun' + monthOJ.Jun,
+  'Jul' + monthOJ.Jul,
+  'Aug' + monthOJ.Aug,
+  'Sep' + monthOJ.Sep,
+  'Oct' + monthOJ.Oct,
+  'Nov' + monthOJ.Nov,
+  'Dec' + monthOJ.Dec)
+
+  return monthOJ;
 }
 
 let Highcharts = require('highcharts');
@@ -256,7 +459,20 @@ export class UserComponent implements OnInit {
     'thrid': null,
     'fourth': null
   };
-  private monthArray;
+  private monthOJ = {
+    'Jan': null, 
+    'Feb': null,
+    'Mar': null,
+    'Apr': null,
+    'May': null,
+    'Jun': null,
+    'Jul': null,
+    'Aug': null,
+    'Sep': null,
+    'Oct': null,
+    'Nov': null,
+    'Dec': null
+  }
 
   private dayFruitData;
   private weekFruitData;
@@ -335,6 +551,14 @@ export class UserComponent implements OnInit {
       {
         let perMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         let month = "Monthly";
+
+        // get month date of array
+        this.loadGraphDate("month");
+
+        console.log("outside month oj:"+ this.monthOJ.Feb)
+        // get given day data
+        this.getUserFruitTransaction(this.myForm, this.monthOJ, "month");
+
         this.loadGraph(month, perMonth, this.monthFruitData, this.monthVegetableData);
       }
     });
@@ -435,7 +659,7 @@ export class UserComponent implements OnInit {
       this.weekOJ = new Date().getWeek();
     }
     else if(type == "month"){
-
+      this.monthOJ = new Date().getAllMonth();
     }
   }
 
@@ -650,11 +874,8 @@ export class UserComponent implements OnInit {
         let thirdWeek = 0;
         let fourthWeek = 0;
 
-        console.log("week begin");
-
         // caculate first week data
         for(let weekday of dateRange.first){
-          console.log("first is comming");
           //caculate per day all data
           let perDayData = 0;
           for(let fruitTransaction of userAllFruitTransaction){
@@ -671,7 +892,6 @@ export class UserComponent implements OnInit {
         weekTotalData.push(firstWeek);
 
         for(let weekday of dateRange.second){
-          console.log("second is comming");
           //caculate per day all data
           let perDayData = 0;
           for(let fruitTransaction of userAllFruitTransaction){
@@ -688,7 +908,6 @@ export class UserComponent implements OnInit {
         weekTotalData.push(secondWeek);
 
         for(let weekday of dateRange.third){
-          console.log("third is comming");
           //caculate per day all data
           let perDayData = 0;
           for(let fruitTransaction of userAllFruitTransaction){
@@ -705,11 +924,10 @@ export class UserComponent implements OnInit {
         weekTotalData.push(thirdWeek);
 
         for(let weekday of dateRange.fourth){
-          console.log("fourth is comming");
           //caculate per day all data
           let perDayData = 0;
           for(let fruitTransaction of userAllFruitTransaction){
-            console.log("fourth weekday:" + weekday + ", transaction:" + fruitTransaction.timestamp.slice(0,10));
+      
             if(weekday == fruitTransaction.timestamp.slice(0,10)){
               console.log("successful day if" + weekday);
               perDayData = perDayData + fruitTransaction.fruitValue;
