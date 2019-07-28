@@ -57,6 +57,34 @@ Date.prototype.getWeek = function()
     if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
       while(judge){
         if(days <= 7 && days > 0){
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          weekOJ.first.push(fullMonthDays);
+          days++;
+        }
+        if(days <= 14 && days > 7){
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          weekOJ.second.push(fullMonthDays);
+          days++;
+        }
+        if(days <= 21 && days > 14){
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          weekOJ.third.push(fullMonthDays);
+          days++;
+        }
+        if(days > 21){
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          weekOJ.fourth.push(fullMonthDays);
+          days++;
+        }
+        if(days == 32){
+          judge = false;
+        }
+      }
+    }
+
+    if(month == 10 || month == 12){
+      while(judge){
+        if(days <= 7 && days > 0){
           fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
           weekOJ.first.push(fullMonthDays);
           days++;
@@ -82,7 +110,7 @@ Date.prototype.getWeek = function()
       }
     }
 
-    if(month == 4 || month == 6 || month == 9 || month == 11){
+    if(month == 11){
       while(judge){
         if(days <= 7 && days > 0){
           fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
@@ -109,28 +137,55 @@ Date.prototype.getWeek = function()
         }
       }
     }
+    if(month == 4 || month == 6 || month == 9 || month == 11){
+      while(judge){
+        if(days <= 7 && days > 0){
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          weekOJ.first.push(fullMonthDays);
+          days++;
+        }
+        if(days <= 14 && days > 7){
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          weekOJ.second.push(fullMonthDays);
+          days++;
+        }
+        if(days <= 21 && days > 14){
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          weekOJ.third.push(fullMonthDays);
+          days++;
+        }
+        if(days > 21){
+          fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
+          weekOJ.fourth.push(fullMonthDays);
+          days++;
+        }
+        if(days == 31){
+          judge = false;
+        }
+      }
+    }
 
     // judge February
     if((today.getMonth() + 1) == 2){
       if(((today.getFullYear()%4==0)&&(today.getFullYear()%100!=0))||(today.getFullYear()%400==0)){
         while(judge){
           if(days <= 7 && days > 0){
-            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
             weekOJ.first.push(fullMonthDays);
             days++;
           }
           if(days <= 14 && days > 7){
-            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
             weekOJ.second.push(fullMonthDays);
             days++;
           }
           if(days <= 21 && days > 14){
-            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
             weekOJ.third.push(fullMonthDays);
             days++;
           }
           if(days <= 29 && days > 21){
-            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
             weekOJ.fourth.push(fullMonthDays);
             days++;
           }
@@ -141,22 +196,22 @@ Date.prototype.getWeek = function()
       }else{
         while(judge){
           if(days <= 7 && days > 0){
-            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
             weekOJ.first.push(fullMonthDays);
             days++;
           }
           if(days <= 14 && days > 7){
-            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
             weekOJ.second.push(fullMonthDays);
             days++;
           }
           if(days <= 21 && days > 14){
-            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
             weekOJ.third.push(fullMonthDays);
             days++;
           }
           if(days <= 28 && days > 21){
-            fullMonthDays = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + days;
+            fullMonthDays = today.getFullYear() + "-" + "0" + (today.getMonth()+1) + "-" + days;
             weekOJ.fourth.push(fullMonthDays);
             days++;
           }
