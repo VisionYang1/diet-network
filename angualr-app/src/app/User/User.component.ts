@@ -736,6 +736,7 @@ export class UserComponent implements OnInit {
         let fruitDiff = 0;
         let allFruit = 0;
         for(let fruit of fruitData){
+          console.log("caculate inside fruit:" + fruit);
           allFruit = allFruit + fruit;
         }
         fruitDiff = 3500 - allFruit;
