@@ -40,6 +40,7 @@ export class CashToFruitComponent implements OnInit {
   private currentId;
   private errorMessage;
   private successTransaction;
+  private rewardOJ;
 
   private allBuyers;
   private allSellers;
@@ -434,6 +435,27 @@ export class CashToFruitComponent implements OnInit {
             .then((result) => {
               this.errorMessage = null;
               this.transactionID = result.transactionId;
+
+
+              var splitted_buyerID = this.sellerFruitAsset.split("#", 2);
+              var buyerID = String(splitted_fruitID[1]);
+
+              // if(){
+
+              // }
+
+              // //give randomly reward
+              // let max = 0, min = 10;
+              // let range = max - min;
+              // let ranValue = min + Math.round(Math.random() * range);
+              // if(ranValue == 3 || ranValue == 4 || ranValue == 5 || ranValue == 7 || ranValue == 8){
+
+              //   this.rewardOJ = {
+              //     'rewardsRate': 1,
+              //     'rewardsInc': 
+              //   }
+              //   this.serviceCashToFruit.addReward();
+              // }
               console.log(result)
             })
             .catch((error) => {

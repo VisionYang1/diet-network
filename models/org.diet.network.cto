@@ -110,5 +110,5 @@ transaction RewardsDec {
 
 transaction RewardsInc {
   o Double rewardsRate
-  --> Rewards rewardsDec
+  --> Rewards rewardsInc
 }
