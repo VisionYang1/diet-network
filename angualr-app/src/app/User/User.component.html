@@ -116,6 +116,13 @@
             <h4 class="modal-title" id="scoreModalLabel">Get Score</h4>
           </div>
            <form [formGroup]="myForm">
+              <div>
+                  <select class="pull-right" name="selectScoreTime" formControlName="selectTime">
+                    <option value="perDay">Day</option>
+                    <option value="perWeek">Week</option>
+                    <option value="perMonth">Month</option>
+                  </select>
+              </div>
             <div class="modal-body">
               <div>
                   <p>This chart records the latest daily, weekly and monthly data.</p>
@@ -125,13 +132,7 @@
 
               <div></div>
             </div>
-            <div>
-                <select class="pull-right" name="selectScoreTime" formControlName="selectTime">
-                  <option value="perDay">Day</option>
-                  <option value="perWeek">Week</option>
-                  <option value="perMonth">Month</option>
-                </select>
-            </div>
+
             <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
