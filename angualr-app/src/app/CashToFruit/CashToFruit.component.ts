@@ -457,6 +457,7 @@ export class CashToFruitComponent implements OnInit {
                     'rewardsInc': "org.diet.network.Rewards#" + buyerID
                   }
                   this.serviceCashToFruit.addReward(this.rewardOJ)
+                  .toPromise()
                   .then((result) => {
                     this.errorMessage = null;
 
