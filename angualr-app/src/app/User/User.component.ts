@@ -751,7 +751,7 @@ export class UserComponent implements OnInit {
           allFruit = allFruit + fruit;
         }
         fruitDiff = 3500 - allFruit;
-        this.needFruit = fruitDiff;
+        // this.needFruit = fruitDiff;
         return fruitDiff;
       }
       if(time == "week"){
