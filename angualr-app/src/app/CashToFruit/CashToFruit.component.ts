@@ -41,6 +41,8 @@ export class CashToFruitComponent implements OnInit {
   private errorMessage;
   private successTransaction;
   private rewardOJ;
+  private rewardTransactionID;
+  private successRewardTransaction;
 
   private allBuyers;
   private allSellers;
@@ -122,7 +124,8 @@ export class CashToFruitComponent implements OnInit {
           this.loadAllSuppliers();
         }
     });
-  
+
+      this.successRewardTransaction = false;
       this.successTransaction = false;
   }
 
@@ -453,7 +456,15 @@ export class CashToFruitComponent implements OnInit {
                     'rewardsRate': 1,
                     'rewardsInc': "org.diet.network.Rewards#" + buyerID
                   }
-                  // this.serviceCashToFruit.addReward();
+                  this.serviceCashToFruit.addReward(this.rewardOJ)
+                  .then((result) => {
+                    this.errorMessage = null;
+
+                    this.rewardTransactionID = result.transactionId;
+                  })
+                  .then(() => {
+                    this.successRewardTransaction = true;
+                  })
                 }
               }
 

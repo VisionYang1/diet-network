@@ -70,6 +70,11 @@
       <p><strong>Transaction ID:</strong> {{transactionID}}</p>
   </div>
 
+  <div *ngIf="successRewardTransaction" class="alert alert-success" role="alert">
+      <strong>Congratulations! You are received a reward!</strong>
+      <p><strong>Transaction ID:</strong> {{rewardTransactionID}}</p>
+  </div>
+
   <div class="row">
     <div class="col-md-12">
         <h1 class="transaction-title" id='transactionName'>CashToFruit</h1>
