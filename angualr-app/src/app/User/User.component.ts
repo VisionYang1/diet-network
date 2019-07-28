@@ -648,6 +648,57 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
+    let max = 0, min = 10;
+    let range = max - min;
+    let result = {
+      'a': 0,
+      'b': 0,
+      'c': 0,
+      'd': 0,
+      'e': 0,
+      'f': 0,
+      'g': 0,
+      'h': 0,
+      'i': 0,
+      'j': 0
+    }
+
+    for(let i = 0; i < 1000; i ++){
+      let ranValue = min + Math.round(Math.random() * range);
+      if(ranValue == 1){
+        result.a++;
+      }
+      if(ranValue == 2){
+        result.b++;
+      }
+      if(ranValue == 3){
+        result.c++;
+      }
+      if(ranValue == 4){
+        result.d++;
+      }
+      if(ranValue == 5){
+        result.e++;
+      }
+      if(ranValue == 6){
+        result.f++;
+      }
+      if(ranValue == 7){
+        result.g++;
+      }
+      if(ranValue == 8){
+        result.h++;
+      }
+      if(ranValue == 9){
+        result.i++;
+      }
+      if(ranValue == 10){
+        result.j++;
+      }
+    }
+
+    console.log("total 1000:" + result);
+
     this.loadGraphDate("day");
     this.loadGraphDate("week");
     this.loadGraphDate("month");
