@@ -253,11 +253,6 @@ Date.prototype.getWeek = function()
       }
     }
 
-    console.log("weekOJ first:" + weekOJ.first);
-    console.log("weekOJ second:" + weekOJ.second);
-    console.log("weekOJ third:" + weekOJ.third);
-    console.log("weekOJ fourth:" + weekOJ.fourth);
-
     return weekOJ;
 }
 
@@ -564,19 +559,6 @@ Date.prototype.getAllMonth = function()
     }
   }
 
-  console.log('Jan' + monthOJ.Jan, 
-  'Feb' + monthOJ.Feb,
-  'Mar' + monthOJ.Mar,
-  'Apr' + monthOJ.Apr,
-  'May' + monthOJ.May,
-  'Jun' + monthOJ.Jun,
-  'Jul' + monthOJ.Jul,
-  'Aug' + monthOJ.Aug,
-  'Sep' + monthOJ.Sep,
-  'Oct' + monthOJ.Oct,
-  'Nov' + monthOJ.Nov,
-  'Dec' + monthOJ.Dec)
-
   return monthOJ;
 }
 
@@ -812,10 +794,6 @@ export class UserComponent implements OnInit {
     else if(type == "month"){
       this.monthOJ = new Date().getAllMonth();
     }
-  }
-
-  getAllDaysInMonth(){
-    
   }
 
   getRangeDate( range: number, arr: Array<any>, type?: string) {
@@ -1305,6 +1283,380 @@ export class UserComponent implements OnInit {
             if(monthDay == fruitTransaction.timestamp.slice(0,10)){
               console.log("successful day if" + monthDay);
               perDayData = perDayData + fruitTransaction.fruitValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        this.monthFruitData = monthTotalData;
+        console.log("test month array data:" + monthTotalData);
+
+      }
+
+    })
+    .catch((error) => {
+      if(error == 'Server error'){
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if(error == '404 - Not Found'){
+      this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else{
+          this.errorMessage = error;
+      }
+  });
+  }
+
+  getUserVegetableTransaction(form: any, dateRange, dateType?: string): Promise<any> {
+
+
+    //retrieve all users in the tempList array
+    let tempList = [];
+    let userAllVegetableTransaction = [];
+
+    // call transaction
+    return this.serviceUser.getAllVegetableTransactions()
+    .toPromise()
+    .then((allVegetableTransactions) => {
+      
+      this.errorMessage = null;
+
+      allVegetableTransactions.forEach(transaction => {
+        tempList.push(transaction);
+      });
+
+      let len = 0;
+      // get the given user's fruit transaction
+      let userVegetableID = "resource:org.diet.network.Vegetable#VE_" + form.get('userID').value;
+      console.log("user fruit id:" + userVegetableID);
+      for(let transaction of tempList){
+        if(transaction.vegetableInc == userVegetableID){
+          len++;
+          // console.log("test fruit transaction date:" + transaction.toString().slice(0,11))
+          userAllVegetableTransaction.push(transaction);
+        }
+      }
+
+      console.log("len :" + len);
+
+      // load per day data
+      if(dateType == "day"){
+        let dayTotalData = [];
+        //get given day transaction
+        for(let day of dateRange){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            console.log("test fruit transaction date inside day:" + vegetableTransaction.timestamp.slice(0,10))
+            if(day == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + day);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+          if(perDayData){
+            dayTotalData.push(perDayData);
+          }else{
+            dayTotalData.push(0);
+          }
+          // console.log("test day array:" + day);
+        }
+        this.dayVegetableData = dayTotalData;
+        console.log("test day array data:" + dayTotalData);
+      }
+
+      // load week data
+      if(dateType == "week"){
+
+        let weekTotalData = [];
+        let firstWeek = 0;
+        let secondWeek = 0;
+        let thirdWeek = 0;
+        let fourthWeek = 0;
+
+        // caculate first week data
+        for(let weekday of dateRange.first){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(weekday == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + weekday);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          firstWeek = firstWeek + perDayData;
+        }
+
+        weekTotalData.push(firstWeek);
+
+        for(let weekday of dateRange.second){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(weekday == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + weekday);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          secondWeek = secondWeek + perDayData;
+        }
+
+        weekTotalData.push(secondWeek);
+
+        for(let weekday of dateRange.third){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(weekday == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + weekday);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          thirdWeek = thirdWeek + perDayData;
+        }
+
+        weekTotalData.push(thirdWeek);
+
+        for(let weekday of dateRange.fourth){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+      
+            if(weekday == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + weekday);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          fourthWeek = fourthWeek + perDayData;
+        }
+
+        weekTotalData.push(fourthWeek);
+        
+        this.weekFruitData = weekTotalData;
+        console.log("test week array data:" + weekTotalData);
+      }
+
+      // load month data
+      if(dateType == "month"){
+        let monthTotalData = [];
+        let perMonth = 0;
+        // caculate first week data
+        for(let monthDay of dateRange.Jan){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.Feb){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.Mar){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.Apr){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.May){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.Jun){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+        
+        // caculate first week data
+        for(let monthDay of dateRange.Jul){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.Aug){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.Sep){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.Oct){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.Nov){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
+            }
+          }
+
+          perMonth = perMonth + perDayData;
+        }
+
+        monthTotalData.push(perMonth);
+        perMonth = 0;
+
+        // caculate first week data
+        for(let monthDay of dateRange.Dec){
+          //caculate per day all data
+          let perDayData = 0;
+          for(let vegetableTransaction of userAllVegetableTransaction){
+            
+            if(monthDay == vegetableTransaction.timestamp.slice(0,10)){
+              console.log("successful day if" + monthDay);
+              perDayData = perDayData + vegetableTransaction.vegetableValue;
             }
           }
 
