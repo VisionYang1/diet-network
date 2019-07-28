@@ -668,17 +668,26 @@ export class UserComponent implements OnInit {
         this.loadGraphDate("day");
         
         // get given day data
-        this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
-        this.getUserVegetableTransaction(this.myForm, this.dayArray, "day");
+        this.getUserFruitTransaction(this.myForm, this.dayArray, "day")
+        .then(() => {
 
-        console.log("begin caculate");
-        console.log("data:" + this.dayFruitData);
-        this.caculateIntake(this.dayFruitData, "day", "fruit");
-        console.log("needfruit:" + this.needFruit);
-        this.caculateIntake(this.dayVegetableData, "day", "vegetable");
+          this.getUserVegetableTransaction(this.myForm, this.dayArray, "day")
+          .then(() => {
+            console.log("begin caculate");
+            console.log("data:" + this.dayFruitData);
+            this.caculateIntake(this.dayFruitData, "day", "fruit");
+            console.log("needfruit:" + this.needFruit);
+            this.caculateIntake(this.dayVegetableData, "day", "vegetable");
 
-        //load graph according to fruit data
-        this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
+            //load graph according to fruit data
+            this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
+          })
+        })
+
+
+
+
+
 
       }
   
