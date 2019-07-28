@@ -730,12 +730,12 @@ export class UserComponent implements OnInit {
     this.loadAll();
   }
 
-  caculateIntake(fruitData,vegetableData,time?: string, type?: string) {
+  caculateIntake(Data, time?: string, type?: string) {
     if(type == "fruit"){
       if(time == "day"){
         let fruitDiff = 0;
         let allFruit = 0;
-        for(let fruit of fruitData){
+        for(let fruit of Data){
           console.log("caculate inside fruit:" + fruit);
           allFruit = allFruit + fruit;
         }
@@ -745,7 +745,7 @@ export class UserComponent implements OnInit {
       if(time == "week"){
         let fruitDiff = 0;
         let allFruit = 0;
-        for(let fruit of fruitData){
+        for(let fruit of Data){
           allFruit = allFruit + fruit;
         }
         fruitDiff = 14000 - allFruit;
@@ -754,7 +754,7 @@ export class UserComponent implements OnInit {
       if(time == "month"){
         let fruitDiff = 0;
         let allFruit = 0;
-        for(let fruit of fruitData){
+        for(let fruit of Data){
           allFruit = allFruit + fruit;
         }
         fruitDiff = 168000 - allFruit;
@@ -765,7 +765,7 @@ export class UserComponent implements OnInit {
       if(time == "day"){
         let vegetableDiff = 0;
         let allVegetable = 0;
-        for(let vegetable of vegetableData){
+        for(let vegetable of Data){
           allVegetable = allVegetable + vegetable;
         }
         vegetableDiff = 7000 - allVegetable;
@@ -774,7 +774,7 @@ export class UserComponent implements OnInit {
       if(time == "week"){
         let vegetableDiff = 0;
         let allVegetable = 0;
-        for(let vegetable of vegetableData){
+        for(let vegetable of Data){
           allVegetable = allVegetable + vegetable;
         }
         vegetableDiff = 28000 - allVegetable;
@@ -783,7 +783,7 @@ export class UserComponent implements OnInit {
       if(time == "month"){
         let vegetableDiff = 0;
         let allVegetable = 0;
-        for(let vegetable of vegetableData){
+        for(let vegetable of Data){
           allVegetable = allVegetable + vegetable;
         }
         vegetableDiff = 336000 - allVegetable;
