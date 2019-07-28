@@ -672,6 +672,7 @@ export class UserComponent implements OnInit {
         this.getUserVegetableTransaction(this.myForm, this.dayArray, "day");
 
         this.needFruit = this.caculateIntake(this.dayFruitData, "day", "fruit");
+        console.log("needfruit:" + this.needFruit);
         this.needVegetable = this.caculateIntake(this.dayVegetableData, "day", "vegetable");
 
         //load graph according to fruit data
