@@ -671,8 +671,8 @@ export class UserComponent implements OnInit {
         this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
         this.getUserVegetableTransaction(this.myForm, this.dayArray, "day");
 
-        // console.log("begin caculate");
-        // console.log("data:" + this.dayFruitData);
+        console.log("begin caculate");
+        console.log("data:" + this.dayFruitData);
         // this.needFruit = this.caculateIntake(this.dayFruitData, "day", "fruit");
         // console.log("needfruit:" + this.needFruit);
         // this.needVegetable = this.caculateIntake(this.dayVegetableData, "day", "vegetable");
