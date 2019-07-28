@@ -666,13 +666,13 @@ export class UserComponent implements OnInit {
 
         //get date of array
         this.loadGraphDate("day");
-        // console.log("all day:" + this.dayArray);
-
-        // console.log("myForm, user ID:" + this.myForm.get('userID').value);
         
         // get given day data
         this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
         this.getUserVegetableTransaction(this.myForm, this.dayArray, "day");
+
+        this.needFruit = this.caculateIntake(this.dayFruitData, "day", "fruit");
+        this.needVegetable = this.caculateIntake(this.dayVegetableData, "day", "vegetable");
 
         //load graph according to fruit data
         this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
@@ -692,10 +692,13 @@ export class UserComponent implements OnInit {
         // get week date of array
         this.loadGraphDate("week");
 
-        console.log("outside week oj:"+ this.weekOJ.first)
         // get given day data
         this.getUserFruitTransaction(this.myForm, this.weekOJ, "week");
         this.getUserVegetableTransaction(this.myForm, this.weekOJ, "week");
+
+        //caculate the intake
+        this.needFruit = this.caculateIntake(this.weekFruitData, "week", "fruit");
+        this.needVegetable = this.caculateIntake(this.weekVegetableData, "week", "vegetable");
 
         this.loadGraph(week, perWeek, this.weekFruitData, this.weekVegetableData);
       }
@@ -712,16 +715,79 @@ export class UserComponent implements OnInit {
         // get month date of array
         this.loadGraphDate("month");
 
-        console.log("outside month oj:"+ this.monthOJ.Feb)
         // get given day data
         this.getUserFruitTransaction(this.myForm, this.monthOJ, "month");
         this.getUserVegetableTransaction(this.myForm, this.monthOJ, "month");
+
+        this.needFruit = this.caculateIntake(this.monthFruitData, "month", "fruit");
+        this.needVegetable = this.caculateIntake(this.monthVegetableData, "month", "vegetable");
 
         this.loadGraph(month, perMonth, this.monthFruitData, this.monthVegetableData);
       }
     });
 
     this.loadAll();
+  }
+
+  caculateIntake(fruitData,vegetableData,time?: string, type?: string) {
+    if(type == "fruit"){
+      if(time == "day"){
+        let fruitDiff = 0;
+        let allFruit = 0;
+        for(let fruit of fruitData){
+          allFruit = allFruit + fruit;
+        }
+        fruitDiff = 3500 - allFruit;
+        return fruitDiff;
+      }
+      if(time == "week"){
+        let fruitDiff = 0;
+        let allFruit = 0;
+        for(let fruit of fruitData){
+          allFruit = allFruit + fruit;
+        }
+        fruitDiff = 14000 - allFruit;
+        return fruitDiff;
+      }
+      if(time == "month"){
+        let fruitDiff = 0;
+        let allFruit = 0;
+        for(let fruit of fruitData){
+          allFruit = allFruit + fruit;
+        }
+        fruitDiff = 168000 - allFruit;
+        return fruitDiff;
+      }
+    }
+    if(type == "vegetable"){
+      if(time == "day"){
+        let vegetableDiff = 0;
+        let allVegetable = 0;
+        for(let vegetable of vegetableData){
+          allVegetable = allVegetable + vegetable;
+        }
+        vegetableDiff = 7000 - allVegetable;
+        return vegetableDiff;
+      }
+      if(time == "week"){
+        let vegetableDiff = 0;
+        let allVegetable = 0;
+        for(let vegetable of vegetableData){
+          allVegetable = allVegetable + vegetable;
+        }
+        vegetableDiff = 28000 - allVegetable;
+        return vegetableDiff;
+      }
+      if(time == "month"){
+        let vegetableDiff = 0;
+        let allVegetable = 0;
+        for(let vegetable of vegetableData){
+          allVegetable = allVegetable + vegetable;
+        }
+        vegetableDiff = 336000 - allVegetable;
+        return vegetableDiff;
+      }
+    }
   }
 
   loadGraph(title, time, fruitData, vegetableData): void {
