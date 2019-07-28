@@ -438,7 +438,7 @@ Date.prototype.getAllMonth = function()
           }
           break;
         case 2:
-          for(let i = 1; i <= 29; i++){
+          for(let i = 1; i <= 28; i++){
             if(i < 10){
               fullMonthDays = today.getFullYear() + "-" + '0' + months + "-" + '0' + i;
               monthOJ.Feb.push(fullMonthDays);    
