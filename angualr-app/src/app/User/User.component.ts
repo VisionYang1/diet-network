@@ -660,6 +660,7 @@ export class UserComponent implements OnInit {
         
         // get given day data
         this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
+        this.getUserVegetableTransaction(this.myForm, this.dayArray, "day");
 
         //load graph according to fruit data
         this.loadGraph(day, perDay, this.dayFruitData, this.dayVegetableData);
@@ -677,6 +678,7 @@ export class UserComponent implements OnInit {
         console.log("outside week oj:"+ this.weekOJ.first)
         // get given day data
         this.getUserFruitTransaction(this.myForm, this.weekOJ, "week");
+        this.getUserVegetableTransaction(this.myForm, this.weekOJ, "week");
 
         this.loadGraph(week, perWeek, this.weekFruitData, this.weekVegetableData);
       }
@@ -691,6 +693,7 @@ export class UserComponent implements OnInit {
         console.log("outside month oj:"+ this.monthOJ.Feb)
         // get given day data
         this.getUserFruitTransaction(this.myForm, this.monthOJ, "month");
+        this.getUserVegetableTransaction(this.myForm, this.monthOJ, "month");
 
         this.loadGraph(month, perMonth, this.monthFruitData, this.monthVegetableData);
       }
@@ -1442,7 +1445,7 @@ export class UserComponent implements OnInit {
 
         weekTotalData.push(fourthWeek);
         
-        this.weekFruitData = weekTotalData;
+        this.weekVegetableData = weekTotalData;
         console.log("test week array data:" + weekTotalData);
       }
 
@@ -1666,7 +1669,7 @@ export class UserComponent implements OnInit {
         monthTotalData.push(perMonth);
         perMonth = 0;
 
-        this.monthFruitData = monthTotalData;
+        this.monthVegetableData = monthTotalData;
         console.log("test month array data:" + monthTotalData);
 
       }
