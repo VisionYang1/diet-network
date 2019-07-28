@@ -671,6 +671,7 @@ export class UserComponent implements OnInit {
         this.getUserFruitTransaction(this.myForm, this.dayArray, "day");
         this.getUserVegetableTransaction(this.myForm, this.dayArray, "day");
 
+        console.log("begin caculate");
         this.needFruit = this.caculateIntake(this.dayFruitData, "day", "fruit");
         console.log("needfruit:" + this.needFruit);
         this.needVegetable = this.caculateIntake(this.dayVegetableData, "day", "vegetable");
@@ -730,12 +731,12 @@ export class UserComponent implements OnInit {
     this.loadAll();
   }
 
-  caculateIntake(Data, time?: string, type?: string) {
+  caculateIntake(data, time?: string, type?: string) {
     if(type == "fruit"){
       if(time == "day"){
         let fruitDiff = 0;
         let allFruit = 0;
-        for(let fruit of Data){
+        for(let fruit of data){
           console.log("caculate inside fruit:" + fruit);
           allFruit = allFruit + fruit;
         }
@@ -745,7 +746,7 @@ export class UserComponent implements OnInit {
       if(time == "week"){
         let fruitDiff = 0;
         let allFruit = 0;
-        for(let fruit of Data){
+        for(let fruit of data){
           allFruit = allFruit + fruit;
         }
         fruitDiff = 14000 - allFruit;
@@ -754,7 +755,7 @@ export class UserComponent implements OnInit {
       if(time == "month"){
         let fruitDiff = 0;
         let allFruit = 0;
-        for(let fruit of Data){
+        for(let fruit of data){
           allFruit = allFruit + fruit;
         }
         fruitDiff = 168000 - allFruit;
@@ -765,7 +766,7 @@ export class UserComponent implements OnInit {
       if(time == "day"){
         let vegetableDiff = 0;
         let allVegetable = 0;
-        for(let vegetable of Data){
+        for(let vegetable of data){
           allVegetable = allVegetable + vegetable;
         }
         vegetableDiff = 7000 - allVegetable;
@@ -774,7 +775,7 @@ export class UserComponent implements OnInit {
       if(time == "week"){
         let vegetableDiff = 0;
         let allVegetable = 0;
-        for(let vegetable of Data){
+        for(let vegetable of data){
           allVegetable = allVegetable + vegetable;
         }
         vegetableDiff = 28000 - allVegetable;
@@ -783,7 +784,7 @@ export class UserComponent implements OnInit {
       if(time == "month"){
         let vegetableDiff = 0;
         let allVegetable = 0;
-        for(let vegetable of Data){
+        for(let vegetable of data){
           allVegetable = allVegetable + vegetable;
         }
         vegetableDiff = 336000 - allVegetable;
