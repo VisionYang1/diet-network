@@ -453,6 +453,7 @@ export class CashToFruitComponent implements OnInit {
                 let ranValue = min + Math.round(Math.random() * range);
                 if(ranValue == 3 || ranValue == 4 || ranValue == 5 || ranValue == 7 || ranValue == 8){
 
+                  console.log("bingo!!!!");
                   this.rewardOJ = {
                     $class: "org.diet.network.RewardsInc",
                     'rewardsRate': 1,
