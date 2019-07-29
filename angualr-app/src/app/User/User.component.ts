@@ -648,15 +648,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let buyerID =  "org.diet.network.Market#asfsaf";
-
-    let split = buyerID.split("#", 2);
-    let bsplit = String(split[1]);
-    let fsplit = String(split[0]);
-
-    console.log("f split:" + fsplit);
-    console.log("f split:" + bsplit);
-
     this.loadGraphDate("day");
     this.loadGraphDate("week");
     this.loadGraphDate("month");
@@ -894,27 +885,32 @@ export class UserComponent implements OnInit {
           // this.dayArray.splice(2,1);
           this.dayArray2 = this.getRangeDate(4,this.dayArray2, "more");
           this.dayArray = this.dayArray.concat(this.dayArray2);
+          console.log("after:" + this.dayArray);
             break;
         case "Thu":
           this.dayArray = this.getRangeDate(-3,this.dayArray, "more");
           // this.dayArray.splice(3,1);
           this.dayArray2 = this.getRangeDate(3,this.dayArray2, "more");
           this.dayArray = this.dayArray.concat(this.dayArray2);
+          console.log("after:" + this.dayArray);
             break;
         case "Fri":
           this.dayArray = this.getRangeDate(-4,this.dayArray, "more");
           // this.dayArray.splice(4,1);
           this.dayArray2 = this.getRangeDate(2,this.dayArray2, "more");
           this.dayArray = this.dayArray.concat(this.dayArray2);
+          console.log("after:" + this.dayArray);
             break;
         case "Sat":
           this.dayArray = this.getRangeDate(-5,this.dayArray, "more");
           // this.dayArray.splice(5,1);
           this.dayArray2 = this.getRangeDate(1,this.dayArray2, "more");
           this.dayArray = this.dayArray.concat(this.dayArray2);
+          console.log("after:" + this.dayArray);
             break;
         case "Sun":
           this.dayArray = this.getRangeDate(-6,this.dayArray, "more");
+          console.log("after:" + this.dayArray);
             break;
       }
     }
