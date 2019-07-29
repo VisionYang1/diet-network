@@ -880,8 +880,8 @@ export class UserComponent implements OnInit {
           this.dayArray = this.getRangeDate(6, this.dayArray, "more");
           break;
         case "Tue":
-          this.dayArray = this.getRangeDate(-2,this.dayArray, "more");
-          // this.dayArray.splice(1,1);
+          this.dayArray = this.getRangeDate(-1,this.dayArray, "more");
+          this.dayArray.splice(1,1);
           this.dayArray2 = this.getRangeDate(5,this.dayArray2, "more");
           this.dayArray = this.dayArray.concat(this.dayArray2);
           break;
