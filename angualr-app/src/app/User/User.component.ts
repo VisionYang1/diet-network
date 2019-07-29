@@ -884,6 +884,7 @@ export class UserComponent implements OnInit {
           this.dayArray = this.dayArray.pop();
           this.dayArray2 = this.getRangeDate(5,this.dayArray2, "more");
           console.log("day2 before union:" + this.dayArray2);
+          console.log("day1:" + this.dayArray);
           this.dayArray = this.dayArray2.concat(this.dayArray);
           console.log("after:" + this.dayArray);
           break;
