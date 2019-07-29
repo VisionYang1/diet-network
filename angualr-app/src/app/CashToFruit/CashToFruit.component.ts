@@ -645,6 +645,8 @@ export class CashToFruitComponent implements OnInit {
   }
 
   resetForm(): void {
+    this.successRewardTransaction = false;
+    this.successTransaction = false;
     this.myForm.setValue({
       'action': 'fromMarket',
       'formBuyerID': null,
