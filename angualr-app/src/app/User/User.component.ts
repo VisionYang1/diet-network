@@ -1103,7 +1103,7 @@ export class UserComponent implements OnInit {
           for(let fruitTransaction of userAllFruitTransaction){
             console.log("test fruit transaction date inside day:" + fruitTransaction.timestamp.slice(0,10))
             if(day == fruitTransaction.timestamp.slice(0,10)){
-              console.log("successful day if" + day);
+              console.log("successful daily if" + day);
               perDayData = perDayData + fruitTransaction.fruitValue;
             }
           }
