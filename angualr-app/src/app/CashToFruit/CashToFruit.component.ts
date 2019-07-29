@@ -441,10 +441,10 @@ export class CashToFruitComponent implements OnInit {
 
 
               var splitted_buyerID = this.transactionBuyerID.split("#", 2);
-              var buyerID = String(splitted_buyerID[0]);
+              var buyerID = String(splitted_buyerID[1]);
               var buyerType = String(splitted_buyerID[0]);
 
-              console.log("buyerID reward:" + "org.diet.network.Rewards#" + buyerID);
+              console.log("buyerID reward:" + "org.diet.network.Rewards#RW_" + buyerID);
 
               if(buyerType == "org.diet.network.User"){
                 //give randomly reward
