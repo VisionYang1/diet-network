@@ -451,7 +451,7 @@ export class CashToFruitComponent implements OnInit {
                 let max = 0, min = 10;
                 let range = max - min;
                 let ranValue = min + Math.round(Math.random() * range);
-                if(ranValue == 3 || ranValue == 4 || ranValue == 5 || ranValue == 7 || ranValue == 8){
+                if(ranValue == 3 || ranValue == 4 || ranValue == 5 || ranValue == 7 || ranValue == 8 || ranValue == 9 || ranValue == 10 || ranValue == 6 || ranValue == 1 || ranValue == 2){
 
                   console.log("bingo!!!!");
                   this.rewardOJ = {
