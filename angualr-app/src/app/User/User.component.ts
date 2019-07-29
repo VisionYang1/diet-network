@@ -883,7 +883,7 @@ export class UserComponent implements OnInit {
           this.dayArray = this.getRangeDate(-1,this.dayArray, "more");
           this.dayArray = this.dayArray.splice(1,1);
           this.dayArray2 = this.getRangeDate(5,this.dayArray2, "more");
-          this.dayArray = this.dayArray.concat(this.dayArray2);
+          this.dayArray = this.dayArray2.concat(this.dayArray);
           break;
         case "Wed":
           this.dayArray = this.getRangeDate(-2,this.dayArray, "more");
