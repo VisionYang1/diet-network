@@ -881,7 +881,7 @@ export class UserComponent implements OnInit {
           break;
         case "Tue":
           this.dayArray = this.getRangeDate(-1,this.dayArray, "more");
-          this.dayArray = this.dayArray.pop();
+          this.dayArray = this.dayArray.slice(0,1);
           this.dayArray2 = this.getRangeDate(5,this.dayArray2, "more");
           console.log("day2 before union:" + this.dayArray2);
           console.log("day1:" + this.dayArray);
