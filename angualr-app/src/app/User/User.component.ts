@@ -878,6 +878,7 @@ export class UserComponent implements OnInit {
           // let date = new Date();
           // this.dayArray.push(date.getFullYear + "-" + (date.getMonth()+1 + "-" )) 
           this.dayArray = this.getRangeDate(6, this.dayArray, "more");
+          console.log("day1:" + this.dayArray);
           break;
         case "Tue":
           this.dayArray = this.getRangeDate(-1,this.dayArray, "more");
