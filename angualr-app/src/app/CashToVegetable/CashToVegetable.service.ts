@@ -23,6 +23,7 @@ import { Supplier } from '../org.diet.network';
 import { Cash } from '../org.diet.network';
 import { Fruit } from '../org.diet.network';
 import { Vegetable } from '../org.diet.network';
+import { RewardsInc } from '../org.diet.network';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
@@ -36,9 +37,10 @@ export class CashToVegetableService {
   private CASH: string = 'Cash';
   private FRUIT: string = 'Fruit';
   private VEGETABLE: string = 'Vegetable';
+  private REWARDSINC: string = 'RewardsInc';
 
   constructor(private dataService: DataService<CashToVegetable>, private cashService: DataService<Cash>, private fruitService: DataService<Fruit>, private vegetableService: DataService<Vegetable>
-    , private userService: DataService<User>, private marketService: DataService<Market>, private supplierService: DataService<Supplier>) {
+    , private userService: DataService<User>, private marketService: DataService<Market>, private supplierService: DataService<Supplier>, private rewardsIncService: DataService<RewardsInc>) {
   };
 
   public getAll(): Observable<CashToVegetable[]> {
@@ -89,6 +91,11 @@ export class CashToVegetableService {
   // get vegetable by id
   public getVegetable(id: any): Observable<Vegetable> {
     return this.vegetableService.getSingle(this.VEGETABLE, id);
+  }
+
+  // add the reward transaction
+  public addReward(itemToAdd: any): Observable<RewardsInc> {
+    return this.rewardsIncService.add(this.REWARDSINC, itemToAdd);
   }
 }
 

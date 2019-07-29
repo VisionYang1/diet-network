@@ -867,48 +867,39 @@ export class UserComponent implements OnInit {
       switch(today.slice(0,3)){
         case "Mon":
           this.dayArray = this.getRangeDate(6, this.dayArray, "more");
-          console.log("!!!!!!!day1:" + this.dayArray);
           break;
         case "Tue":
           this.dayArray = this.getRangeDate(-1,this.dayArray, "more");
           this.dayArray = this.dayArray.slice(0,1);
           this.dayArray2 = this.getRangeDate(5,this.dayArray2, "more");
-          console.log("day2 before union:" + this.dayArray2);
-          console.log("day1:" + this.dayArray);
           this.dayArray = this.dayArray.concat(this.dayArray2);
-          console.log("after:" + this.dayArray);
           break;
         case "Wed":
           this.dayArray = this.getRangeDate(-2,this.dayArray, "more");
           this.dayArray.splice(2,1);
           this.dayArray2 = this.getRangeDate(4,this.dayArray2, "more");
           this.dayArray = this.dayArray.concat(this.dayArray2);
-          console.log("after:" + this.dayArray);
             break;
         case "Thu":
           this.dayArray = this.getRangeDate(-3,this.dayArray, "more");
           this.dayArray.splice(3,1);
           this.dayArray2 = this.getRangeDate(3,this.dayArray2, "more");
           this.dayArray = this.dayArray.concat(this.dayArray2);
-          console.log("after:" + this.dayArray);
             break;
         case "Fri":
           this.dayArray = this.getRangeDate(-4,this.dayArray, "more");
           this.dayArray.splice(4,1);
           this.dayArray2 = this.getRangeDate(2,this.dayArray2, "more");
           this.dayArray = this.dayArray.concat(this.dayArray2);
-          console.log("after:" + this.dayArray);
             break;
         case "Sat":
           this.dayArray = this.getRangeDate(-5,this.dayArray, "more");
           this.dayArray.splice(5,1);
           this.dayArray2 = this.getRangeDate(1,this.dayArray2, "more");
           this.dayArray = this.dayArray.concat(this.dayArray2);
-          console.log("after:" + this.dayArray);
             break;
         case "Sun":
           this.dayArray = this.getRangeDate(-6,this.dayArray, "more");
-          console.log("after:" + this.dayArray);
             break;
       }
     }

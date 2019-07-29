@@ -40,6 +40,9 @@ export class CashToVegetableComponent implements OnInit {
   private currentId;
   private errorMessage;
   private successTransaction;
+  private rewardOJ;
+  private rewardTransactionID;
+  private successRewardTransaction;
 
   private allBuyers;
   private allSellers;
@@ -434,6 +437,46 @@ export class CashToVegetableComponent implements OnInit {
             .then((result) => {
               this.errorMessage = null;
               this.transactionID = result.transactionId;
+
+              var splitted_buyerID = this.transactionBuyerID.split("#", 2);
+              var buyerID = String(splitted_buyerID[1]);
+              var buyerType = String(splitted_buyerID[0]);
+
+              console.log("buyerID reward:" + "org.diet.network.Rewards#RW_" + buyerID);
+
+              if(buyerType == "org.diet.network.User"){
+                //give randomly reward
+                let max = 0, min = 10;
+                let range = max - min;
+                let ranValue = min + Math.round(Math.random() * range);
+                if(ranValue == 3 || ranValue == 4 || ranValue == 5 || ranValue == 7 || ranValue == 8){
+
+                  console.log("bingo!!!!");
+                  this.rewardOJ = {
+                    $class: "org.diet.network.RewardsInc",
+                    'rewardsRate': 1,
+                    'rewardsInc': "org.diet.network.Rewards#RW_" + buyerID
+                  }
+                  this.serviceCashToVegetable.addReward(this.rewardOJ)
+                  .toPromise()
+                  .then((result) => {
+                    this.errorMessage = null;
+
+                    this.rewardTransactionID = result.transactionId;
+                  })
+                  .catch((error) => {
+                    if (error === 'Server error') {
+                      this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+                    } else {
+                      this.errorMessage = error;
+                    }
+                  })
+                  .then(() => {
+                    this.successRewardTransaction = true;
+                  })
+                }
+              }
+
               console.log(result)
             })
             .catch((error) => {
