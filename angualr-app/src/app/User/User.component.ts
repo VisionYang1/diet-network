@@ -875,6 +875,8 @@ export class UserComponent implements OnInit {
       let today = new Date().toString();
       switch(today.slice(0,3)){
         case "Mon":
+          // let date = new Date();
+          // this.dayArray.push(date.getFullYear + "-" + (date.getMonth()+1 + "-" )) 
           this.dayArray = this.getRangeDate(6, this.dayArray, "more");
           break;
         case "Tue":
@@ -949,7 +951,7 @@ export class UserComponent implements OnInit {
               console.log( arr );
             }
           } else {
-            for ( let i = 1; i <= range; i++ ) {
+            for ( let i = 0; i <= range; i++ ) {
               resultArr.push( formatDate( new Date().getTime() + ( 1000 * 3600 * 24 * i ) ) );
               arr = resultArr;
               console.log( resultArr );
