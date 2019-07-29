@@ -301,6 +301,9 @@ export class CashToFruitComponent implements OnInit {
 
   addTransaction(form: any): Promise<any> {
 
+    this.successRewardTransaction = false;
+    this.successTransaction = false;
+
     if(this.marketIsBuyer){
       for (let buyer of this.allBuyers) {
         if(buyer.buyerID == this.formBuyerID.value){
@@ -645,8 +648,6 @@ export class CashToFruitComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.successRewardTransaction = false;
-    this.successTransaction = false;
     this.myForm.setValue({
       'action': 'fromMarket',
       'formBuyerID': null,
