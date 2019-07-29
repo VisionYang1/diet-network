@@ -456,7 +456,7 @@ export class CashToFruitComponent implements OnInit {
                   this.rewardOJ = {
                     $class: "org.diet.network.RewardsInc",
                     'rewardsRate': 1,
-                    'rewardsInc': "org.diet.network.Rewards#" + buyerID
+                    'rewardsInc': "org.diet.network.Rewards#RW_" + buyerID
                   }
                   this.serviceCashToFruit.addReward(this.rewardOJ)
                   .toPromise()
@@ -465,13 +465,13 @@ export class CashToFruitComponent implements OnInit {
 
                     this.rewardTransactionID = result.transactionId;
                   })
-                  .catch((error) => {
-                    if (error === 'Server error') {
-                      this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-                    } else {
-                      this.errorMessage = error;
-                    }
-                  })
+                  // .catch((error) => {
+                  //   if (error === 'Server error') {
+                  //     this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+                  //   } else {
+                  //     this.errorMessage = error;
+                  //   }
+                  // })
                   .then(() => {
                     this.successRewardTransaction = true;
                   })
