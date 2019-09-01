@@ -40,62 +40,59 @@ export class AllTransactionsComponent {
         });
     }
 
-    //get all transactions
-    loadAllTransactions(): Promise<any> {
+  //get all transactions
+  loadAllTransactions(): Promise<any> {
 
-        console.log("begin! load");
+    //initialize arrays to collect performed and system transactions
+    let tempList = [];
+    let systemList = [];
+    let performedList = [];
 
-        //initialize arrays to collect performed and system transactions
-        let tempList = [];
-        let systemList = [];
-        let performedList = [];
+    //collect all transactions for display
+    return this.serviceTransaction.getTransactions()
+    .toPromise()
+    .then((result) => {
+      
+      //sort the transactions by timestamp
+      result = this.sortByKey(result, 'transactionTimestamp');
+      this.errorMessage = null;
+      
+      //for each transaction, determine whether system transaction
+      result.forEach(transaction => {
+        tempList.push(transaction);
 
-        //collect all transaction for display
-        return this.serviceTransaction.getTransactions()
-        .toPromise()
-        .then((result) => {
+        //split the transactionType string
+        var importClass = transaction["transactionType"];
+        var importClassArray = importClass.split(".");
 
-            //sort the transaction by timestamp
-            result = this.sortByKey(result, 'transactionTimestamp');
-            this.errorMessage = null;
+        //if `hyperledger` string in the transactionType, then add to systemList, otherwise performedList
+        if(importClassArray[1] == 'hyperledger'){
+          systemList.push(transaction);
+        }
+        else {
+          performedList.push(transaction);
+        }
+      });
 
-            //for each transaction, determine whether system transaction
-            result.forEach(transaction => {
-                tempList.push(transaction);
-
-                //split the transactionType string
-                var importClass = transaction["transactionType"];
-                var importClassArray = importClass.split(".");
-
-                //if 'hyperledger' string in the transactionType, then add to systemList, otherwise performedList
-                if(importClassArray[1] == 'hyperledger'){
-                    console.log("system tran: ", transaction);
-                    systemList.push(transaction);
-                }else{
-                    console.log("perform tran: ", transaction);
-                    performedList.push(transaction);
-                }
-            });
-
-            //update object
-            this.systemTransactions = systemList;
-            this.performedTransactions = performedList;
-            this.allTransactions = tempList;
-            console.log(this.allTransactions);
-            console.log(this.performedTransactions);
-            console.log(this.systemTransactions);
-        })
-        .catch((error) => {
-            if(error == 'Server error'){
-                this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-            }
-            else if(error == '404 - Not Found'){
-                this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-            }
-            else{
-                this.errorMessage = error;
-            }
-        })
-    }
+      //update object
+      this.systemTransactions = systemList;
+      this.performedTransactions = performedList;
+      this.allTransactions = tempList;
+      console.log(this.allTransactions)
+      console.log(this.performedTransactions)
+      console.log(this.systemTransactions)
+    })
+    .catch((error) => {
+        if(error == 'Server error'){
+            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if(error == '404 - Not Found'){
+				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else{
+            this.errorMessage = error;
+        }
+    });
+  }
 
 }
