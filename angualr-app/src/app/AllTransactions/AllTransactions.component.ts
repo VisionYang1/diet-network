@@ -12,7 +12,7 @@ import 'rxjs/add/operator/toPromise';
   	providers: [AllTransactionsService]
 })
 
-export class AllTransactionsComponent implements OnInit{
+export class AllTransactionsComponent {
 
     private errorMessage;
     private allTransactions;
