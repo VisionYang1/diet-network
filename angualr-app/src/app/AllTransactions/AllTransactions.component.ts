@@ -25,8 +25,6 @@ export class AllTransactionsComponent implements OnInit {
     };
 
     ngOnInit(): void {
-        
-        console.log("begin! onit");
 
         //call to retrieve transactions
         this.loadAllTransactions();
@@ -53,6 +51,8 @@ export class AllTransactionsComponent implements OnInit {
     .toPromise()
     .then((result) => {
       
+        console.log("all results:", result);
+    
       //sort the transactions by timestamp
       result = this.sortByKey(result, 'transactionTimestamp');
       this.errorMessage = null;
