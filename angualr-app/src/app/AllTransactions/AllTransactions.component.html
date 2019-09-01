@@ -5,7 +5,7 @@
   
   <div class="row">
     <div class="col-md-9">
-        <h1 class="asset-title" id='assetName'>Fruit</h1>
+        <h1 class="asset-title" id='assetName'>Get All Transactions</h1>
     </div>
     <!-- <div class="col-md-3">
       <button (click)="" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAssetModal">
@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let asset of allAssets">
+          <tr *ngFor="let transaction of performedTransactions">
 
             
                 <td class="asset-properties">{{transaction.transactionType}}</td>

@@ -11,7 +11,8 @@ import 'rxjs/add/operator/toPromise';
 	styleUrls: ['./AllTransactions.component.css'],
   	providers: [AllTransactionsService]
 })
-export class AllTransactionsComponent {
+
+export class AllTransactionsComponent implements OnInit{
 
     private errorMessage;
     private allTransactions;
