@@ -65,8 +65,10 @@ export class AllTransactionsComponent {
 
                 //if 'hyperledger' string in the transactionType, then add to systemList, otherwise performedList
                 if(importClassArray[1] == 'hyperledger'){
+                    console.log("system tran: ", transaction);
                     systemList.push(transaction);
                 }else{
+                    console.log("perform tran: ", transaction);
                     performedList.push(transaction);
                 }
             });
