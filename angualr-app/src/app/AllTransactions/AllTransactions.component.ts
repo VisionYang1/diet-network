@@ -26,6 +26,8 @@ export class AllTransactionsComponent {
 
     ngOnit(): void {
         
+        console.log("begin! onit");
+
         //call to retrieve transactions
         this.loadAllTransactions();
     }
@@ -41,7 +43,7 @@ export class AllTransactionsComponent {
     //get all transactions
     loadAllTransactions(): Promise<any> {
 
-        console.log("begin!");
+        console.log("begin! load");
 
         //initialize arrays to collect performed and system transactions
         let tempList = [];
