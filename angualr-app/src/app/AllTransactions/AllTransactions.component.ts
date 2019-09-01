@@ -41,6 +41,8 @@ export class AllTransactionsComponent {
     //get all transactions
     loadAllTransactions(): Promise<any> {
 
+        console.log("begin!");
+
         //initialize arrays to collect performed and system transactions
         let tempList = [];
         let systemList = [];
