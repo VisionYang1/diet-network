@@ -45,6 +45,7 @@ export class AllTransactionsComponent implements OnInit {
     let tempList = [];
     let systemList = [];
     let performedList = [];
+    let timeStamp = [];
 
     //collect all transactions for display
     return this.serviceTransaction.getTransactions()
@@ -64,6 +65,8 @@ export class AllTransactionsComponent implements OnInit {
         //split the transactionType string
         var importClass = transaction["transactionType"];
         var importClassArray = importClass.split(".");
+
+        console.log("importClass: ", importClass);
 
         //if `hyperledger` string in the transactionType, then add to systemList, otherwise performedList
         if(importClassArray[1] == 'hyperledger'){
