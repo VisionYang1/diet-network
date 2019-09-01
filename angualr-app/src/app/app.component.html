@@ -15,7 +15,7 @@
     <div class="container-fluid">
       <div class="navbar-header">
         <p class="network-name">diet-network@0.0.1.bna</p>
-        <p class="navbar-brand">angualr-app</p>
+        <p class="navbar-brand">Diet-network</p>
       </div>
       <ul class="nav navbar-nav">
         <li class="dropdown active">
@@ -48,16 +48,25 @@
         <a class="dropdown-toggle" data-toggle="dropdown">Transactions</a>
         <ul class="dropdown-menu scrollable-menu">
           
-          <li><a [routerLink]="['/CashToFruit']">CashToFruit</a></li>
+          <li><a [routerLink]="['/CashToFruit']">Buy Fruit</a></li>
           
-          <li><a [routerLink]="['/CashToVegetable']">CashToVegetable</a></li>
+          <li><a [routerLink]="['/CashToVegetable']">Buy Vegetable</a></li>
           
-          <li><a [routerLink]="['/RewardsDec']">RewardsDec</a></li>
+          <li><a [routerLink]="['/RewardsDec']">Exchange</a></li>
           
-          <li><a [routerLink]="['/RewardsInc']">RewardsInc</a></li>
+          <!-- <li><a [routerLink]="['/RewardsInc']">RewardsInc</a></li> -->
           
         </ul>
     </li>
+    <li class="dropdown active">
+      <a class="dropdown-toggle" data-toggle="dropdown">GetTransactions</a>
+      <ul class="dropdown-menu scrollable-menu">
+        
+        <li><a [routerLink]="['/AllTransactions']">GetAllTransactions</a></li>
+        
+        
+      </ul>
+  </li>
       </ul>
     </div>
   </nav>

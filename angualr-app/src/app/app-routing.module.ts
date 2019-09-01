@@ -30,6 +30,7 @@ import { CashToFruitComponent } from './CashToFruit/CashToFruit.component';
 import { CashToVegetableComponent } from './CashToVegetable/CashToVegetable.component';
 import { RewardsDecComponent } from './RewardsDec/RewardsDec.component';
 import { RewardsIncComponent } from './RewardsInc/RewardsInc.component';
+import { AllTransactionsComponent } from './AllTransactions/AllTransactions.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'CashToVegetable', component: CashToVegetableComponent },
   { path: 'RewardsDec', component: RewardsDecComponent },
   { path: 'RewardsInc', component: RewardsIncComponent },
+  { path: 'Alltransactions', component: AlltransactionsComponent },
   { path: '**', redirectTo: '' }
 ];
 
