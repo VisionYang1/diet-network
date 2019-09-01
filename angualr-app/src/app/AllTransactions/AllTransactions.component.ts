@@ -45,7 +45,8 @@ export class AllTransactionsComponent implements OnInit {
     let tempList = [];
     let systemList = [];
     let performedList = [];
-    let timeStamp = [];
+    let performedTimeStamp = [];
+    let systemTimeStamp = [];
 
     //collect all transactions for display
     return this.serviceTransaction.getTransactions()
@@ -68,11 +69,14 @@ export class AllTransactionsComponent implements OnInit {
 
         //if `hyperledger` string in the transactionType, then add to systemList, otherwise performedList
         if(importClassArray[1] == 'hyperledger'){
+            systemTimeStamp.push(transaction["transactionTimestamp"]);
           systemList.push(transaction);
         }
         else {
+            performedTimeStamp.push(transaction["transactionTimestamp"]);
           performedList.push(transaction);
         }
+
       });
 
       //update object

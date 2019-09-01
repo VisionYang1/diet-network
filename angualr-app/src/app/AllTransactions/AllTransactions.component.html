@@ -22,10 +22,12 @@
             
                 <th class="info">Transaction ID</th>
 
+                <th class="info">Transaction TimeStamp</th>
+
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let transaction of performedTransactions">
+          <tr *ngFor="let transaction of performedTransactions", *ngFor="let timeStamp of performedTimeStamp">
 
             
                 <td class="asset-properties">{{transaction.transactionType}}</td>
@@ -50,11 +52,13 @@
                     <th class="info">Transaction Type</th>
                 
                     <th class="info">Transaction ID</th>
-    
+
+                    <th class="info">Transaction TimeStamp</th>
+
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let transaction of systemTransactions">
+              <tr *ngFor="let transaction of systemTransactions", *ngFor="let timeStamp of systemTimeStamp">
     
                 
                     <td class="asset-properties">{{transaction.transactionType}}</td>
