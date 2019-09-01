@@ -46,7 +46,7 @@ const routes: Routes = [
   { path: 'CashToVegetable', component: CashToVegetableComponent },
   { path: 'RewardsDec', component: RewardsDecComponent },
   { path: 'RewardsInc', component: RewardsIncComponent },
-  { path: 'Alltransactions', component: AllTransactionsComponent },
+  { path: 'AllTransactions', component: AllTransactionsComponent },
   { path: '**', redirectTo: '' }
 ];
 
