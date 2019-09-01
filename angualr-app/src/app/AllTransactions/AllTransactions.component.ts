@@ -12,7 +12,7 @@ import 'rxjs/add/operator/toPromise';
   	providers: [AllTransactionsService]
 })
 
-export class AllTransactionsComponent {
+export class AllTransactionsComponent implements OnInit {
 
     private errorMessage;
     private allTransactions;
@@ -24,7 +24,7 @@ export class AllTransactionsComponent {
   
     };
 
-    ngOnit(): void {
+    ngOnInit(): void {
         
         console.log("begin! onit");
 
