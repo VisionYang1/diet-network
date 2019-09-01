@@ -55,7 +55,7 @@ export class AllTransactionsComponent {
             this.errorMessage = null;
 
             //for each transaction, determine whether system transaction
-            result.foreach(transaction => {
+            result.forEach(transaction => {
                 tempList.push(transaction);
 
                 //split the transactionType string
