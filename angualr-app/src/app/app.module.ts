@@ -35,6 +35,8 @@ import { CashToVegetableComponent } from './CashToVegetable/CashToVegetable.comp
 import { RewardsDecComponent } from './RewardsDec/RewardsDec.component';
 import { RewardsIncComponent } from './RewardsInc/RewardsInc.component';
 
+import { AllTransactionsComponent } from './AllTransactions/AllTransactions.component';
+
   @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,8 @@ import { RewardsIncComponent } from './RewardsInc/RewardsInc.component';
     CashToFruitComponent,
     CashToVegetableComponent,
     RewardsDecComponent,
-    RewardsIncComponent
+    RewardsIncComponent,
+    AllTransactionsComponent
   ],
   imports: [
     BrowserModule,
