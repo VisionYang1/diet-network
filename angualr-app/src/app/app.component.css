@@ -26,8 +26,7 @@
 .navbar-header {
     margin-top: 40px;
     margin-bottom: 30px;
-    background-image: url("title background.jpg");
-    background-size: cover;
+    background-image: url("titlebackground.jpg");
 }
 
 .navbar-brand {
