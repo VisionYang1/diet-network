@@ -14,7 +14,7 @@
 
 .jumbotron {
     /* color: darkblue; */
-    text-align: middle;
+    text-align: center;
     background-image: url("ba.jpg");
     background-size: cover;
 }
