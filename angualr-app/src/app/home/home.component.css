@@ -12,14 +12,12 @@
  * limitations under the License.
  */
 
-/* .jumbotron {
-    color:white;
-} */
-
-.aaa {
+.jumbotron {
+    color:black;
     background-image: url("banner.png");
     background-size: cover;
 }
+
 
 body {
     background-color: red;
