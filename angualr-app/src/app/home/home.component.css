@@ -13,6 +13,7 @@
  */
 
 .jumbotron {
+    color: goldenrod;
     background-image: url("banner.png");
     background-size: cover;
 }
