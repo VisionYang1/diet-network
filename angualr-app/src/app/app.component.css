@@ -11,18 +11,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+
 .container-fluid {
     display: grid;
     margin-left: 72px;
     padding-left: 0px;
-    /* background-image: url("titlebackground.png");
-    background-size: cover; */
+
 }
 
 .navbar {
     border-radius: 0px;
     background: #F3F3F3;
     border: none;
+    background-image: url("titlebackground.png");
+    background-size: cover;
 }
 
 .navbar-header {
