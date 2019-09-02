@@ -13,8 +13,8 @@
  */
 
 .jumbotron {
-    color: darkblue;
-    background-image: url("food-processing-fruit-vegetable-863x444px.png");
+    /* color: darkblue; */
+    background-image: url("ba.jpg");
     background-size: cover;
 }
 
