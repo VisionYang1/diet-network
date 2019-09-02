@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-.container {
+.jumbotron {
     background-image: url("banner.png");
     background-size: cover;
 }
